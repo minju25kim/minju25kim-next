@@ -6,4 +6,3 @@
 - fly.io
 - tailwind
 - shadcn/ui
-- 
