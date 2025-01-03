@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <main>
-        check deployment here
+        Home
     </main>
   );
 }
