@@ -1,7 +1,10 @@
 export default function Home() {
   return (
     <main>
-      Home check this change
+      <h1>
+        Home
+      </h1>
+
     </main>
   );
 }
