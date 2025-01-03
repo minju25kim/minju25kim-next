@@ -4,4 +4,6 @@
 - typescript
 - nextjs
 - fly.io
+- tailwind
+- shadcn/ui
 - 
