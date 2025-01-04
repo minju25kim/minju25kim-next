@@ -1,7 +1,11 @@
-export default function Home() {
+import Title from "@/components/Title";
+
+function Home() {
   return (
-    <main>
-        Home
-    </main>
+    <>
+      <Title title="Minju Kim" />
+    </>
   );
 }
+
+export default Home;

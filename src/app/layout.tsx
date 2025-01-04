@@ -3,6 +3,8 @@ import "./globals.css";
 import { geistSans, geistMono } from '@/ui/fonts';
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import AppSidebar from "@/components/Sidebar"
+import Container from "@/components/Container"
+import Footer from "@/components/Footer"
 
 export const metadata: Metadata = {
   title: {
@@ -13,12 +15,7 @@ export const metadata: Metadata = {
   // metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
 };
 
-function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  // const thisYear = new Date().getFullYear()
+function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html suppressHydrationWarning lang="en">
       <head>
@@ -27,14 +24,12 @@ function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SidebarProvider>
           <AppSidebar />
-          <main>
-            <SidebarTrigger />
+          <SidebarTrigger />
+          <Container>
             {children}
-          </main>
-          {/* <footer>
-            {thisYear} @minju25kim
-          </footer> */}
+          </Container>
         </SidebarProvider>
+        <Footer />
       </body>
     </html>
   );

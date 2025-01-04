@@ -1,3 +1,4 @@
+import Title from '@/components/Title';
 
 type Props = {
     title: string;
@@ -8,9 +9,9 @@ type Props = {
 export function PostHeader({ title, date }: Props) {
     const dateString = new Date(date).toISOString().split('T')[0].replace(/-/g, '/');
     return (
-        <>
-            <h1>{title}</h1>
-            <span>{dateString}</span>
-        </>
+        <div className="mb-4">
+            <Title title={title} />
+            <span className="text-sm text-muted-foreground">{dateString} | 0 views</span>
+        </div>
     )
 }

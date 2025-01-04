@@ -6,5 +6,5 @@ excerpt: ""
 # ogImage:
 #   url: "/assets/blog/hello-world/cover.jpg"
 ---
-hi this is review of the 2024 12/31 interview.
 
+## Review of December 31st interview.

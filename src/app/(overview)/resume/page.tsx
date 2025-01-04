@@ -1,15 +1,14 @@
-// import Image from "next/image";
+import Title from "@/components/Title";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "resume"
+  title: "Resume"
 };
 export default function Page() {
   return (
-
-      <main>
-        resume
-      </main>
+    <div>
+      <Title title="Resume" />
+    </div>
 
   );
 }
