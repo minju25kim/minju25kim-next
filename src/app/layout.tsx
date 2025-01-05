@@ -28,7 +28,7 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
       <body className={`${pretendard.className} antialiased`}>
         <SidebarProvider defaultOpen={defaultOpen}>
           <AppSidebar />
-          <SidebarTrigger className="sticky" />
+          <SidebarTrigger className="fixed" />
           <Container>
             {children}
           </Container>

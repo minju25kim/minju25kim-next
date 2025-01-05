@@ -19,24 +19,14 @@ function Home() {
   return (
     <>
       <AppBreadCrumb />
-      <div className="flex justify-between items-center flex-col gap-2 sm:flex-row  mb-4">
-        <div>
-          <Title title="Minju Kim" />
-          <p className="text-center sm:text-justify"><a href="https://maps.app.goo.gl/RsnpuVuQdiM7z8eL9">Seoul, South Korea</a></p>
-          <div className="flex flex-row flex-wrap justify-center sm:justify-start">
-            {links.map((link) => (
-              <Link key={link.title} href={link.url}><link.icon /></Link>
-            ))}
-          </div>
+      <div className="flex flex-col items-center sm:items-start mb-4">
+        <Title title="Minju Kim" />
+        <p className="text-center sm:text-justify"><a href="https://maps.app.goo.gl/RsnpuVuQdiM7z8eL9">Seoul, South Korea</a></p>
+        <div className="flex flex-row flex-wrap justify-center sm:justify-start">
+          {links.map((link) => (
+            <Link key={link.title} href={link.url}><link.icon /></Link>
+          ))}
         </div>
-        <Image
-          src="/image/profile.png"
-          width={100}
-          height={100}
-          className="border border-black border-opacity-50 rounded-full w-24 h-24"
-          alt="Profile of minju25kim"
-          priority
-        />
       </div>
       <div className="flex flex-col ">
         <SecondaryTitle title="Hi, I&apos;m Minju Kim, 1 year experienced frontend developer." />

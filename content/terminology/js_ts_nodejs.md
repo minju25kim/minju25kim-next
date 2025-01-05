@@ -12,7 +12,7 @@ excerpt: ""
 hugo new --kind terminology terminology/title_you_want.md
 -->
 
-# js란 무엇인가?
+## js란 무엇인가?
 
 ## ECMA script는 무엇인가?
 
