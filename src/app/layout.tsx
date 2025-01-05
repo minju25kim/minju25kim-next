@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { geistSans, geistMono } from '@/ui/fonts';
+import { pretendard } from '@/ui/fonts';
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import AppSidebar from "@/components/Sidebar"
+import Container from "@/components/Container"
+import Footer from "@/components/Footer"
+import { cookies } from "next/headers"
 
 export const metadata: Metadata = {
   title: {
@@ -13,28 +16,24 @@ export const metadata: Metadata = {
   // metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
 };
 
-function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  // const thisYear = new Date().getFullYear()
+async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const cookieStore = await cookies()
+  const defaultOpen = cookieStore.get("sidebar:state")?.value === "true"
+
   return (
     <html suppressHydrationWarning lang="en">
       <head>
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <SidebarProvider>
+      <body className={`${pretendard.className} antialiased`}>
+        <SidebarProvider defaultOpen={defaultOpen}>
           <AppSidebar />
-          <main>
-            <SidebarTrigger />
+          <SidebarTrigger className="sticky" />
+          <Container>
             {children}
-          </main>
-          {/* <footer>
-            {thisYear} @minju25kim
-          </footer> */}
+          </Container>
         </SidebarProvider>
+        <Footer />
       </body>
     </html>
   );

@@ -1,15 +1,16 @@
-// import Image from "next/image";
+import AppBreadCrumb from "@/components/BreadCrumb";
+import Title from "@/components/PrimaryTitle";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "resume"
+  title: "Resume"
 };
 export default function Page() {
   return (
-
-      <main>
-        resume
-      </main>
+    <>
+      <AppBreadCrumb directory="resume" />
+      <Title title="Resume" />
+    </>
 
   );
 }

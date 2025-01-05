@@ -1,27 +1,22 @@
-import { getAllPosts } from "@/lib/api";
-import Link from "next/link";
+import { getAllPostsDirectory } from "@/lib/api";
 import { Metadata } from "next";
+import Title from "@/components/PrimaryTitle";
+import Table from '@/components/Table';
+import AppBreadCrumb from "@/components/BreadCrumb";
 
 export const metadata: Metadata = {
-  title: "Terminology ",
+  title: "Terminology",
   // description: 'The official minju25kim website.',
 };
 
 export default function Page() {
-  const allPosts = getAllPosts("terminology");
+  const allPosts = getAllPostsDirectory("terminology");
 
   return (
-    <main>
-      Terminology
-      {allPosts.map((post) => {
-        return (
-          <div key={post.slug}>
-            <Link href={`/terminology/${post.slug}`} key={post.slug}>
-              {post.title}
-            </Link>
-          </div>
-        );
-      })}
-    </main>
+    <>
+      <AppBreadCrumb directory="terminology" />
+      <Title title="Terminology" />
+      <Table directory="terminology" allPosts={allPosts} />
+    </>
   );
 }

@@ -4,6 +4,6 @@ type Props = {
 
 export function PostBody({ content }: Props) {
   return (
-    <div dangerouslySetInnerHTML={{ __html: content }} />
+    <div dangerouslySetInnerHTML={{ __html: content }}  />
   );
 }

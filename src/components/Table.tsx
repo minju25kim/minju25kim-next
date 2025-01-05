@@ -1,0 +1,56 @@
+import Link from "next/link";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
+
+interface TableProps {
+    directory: string;
+    allPosts: Post[];
+}
+
+type Post = {
+    content: string;
+    title: string;
+    excerpt: string;
+    slug: string;
+    date: string;
+}
+
+function AppTable({directory, allPosts }: TableProps) {
+    const dateString = (date: string) => new Date(date).toISOString().split('T')[0].replace(/-/g, '/');
+
+    return (
+        <Table>
+            <TableHeader>
+                <TableRow>
+                    <TableHead>Subject</TableHead>
+                    <TableHead className="w-[100px] text-center">Date</TableHead>
+                    <TableHead className="w-[100px] text-center">Views</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {allPosts.map((post: Post) => {
+                    return (
+                        <TableRow key={post.slug}>
+                            <TableCell className="font-medium">
+                                <Link href={`/${directory}/${post.slug}`} key={post.slug}>
+                                    {post.title}
+                                </Link>
+                            </TableCell>
+                            <TableCell className="text-center">{dateString(post.date)}</TableCell>
+                            <TableCell className="text-center">0</TableCell>
+                        </TableRow>
+                    )
+                })}
+            </TableBody>
+        </Table>
+
+    )
+}
+
+export default AppTable;

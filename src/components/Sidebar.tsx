@@ -10,6 +10,8 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarRail,
+    SidebarClose
 } from "@/components/ui/sidebar"
 import Link from "next/link";
 
@@ -29,6 +31,7 @@ function AppSidebar() {
                     <SidebarHeader>
                         Minju25kim
                     </SidebarHeader>
+                    <SidebarClose className="absolute right-0 top-0" />
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (
@@ -45,6 +48,7 @@ function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
+            <SidebarRail />
         </Sidebar>
     )
 }

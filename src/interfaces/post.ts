@@ -1,4 +1,5 @@
 export type Post = {
+    dir: string;
     slug: string;
     title: string;
     date: string;

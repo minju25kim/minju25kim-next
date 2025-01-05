@@ -1,6 +1,7 @@
 ---
-date: "2025-01-03T16:41:49+09:00"
-title: '12 05 Interview'
+date: "2025-01-05T18:00:49+09:00"
+dir: "til"
+title: 'December 31st Interview Review'
 excerpt: ""
 # coverImage: "/assets/blog/hello-world/cover.jpg"
 # ogImage:
