@@ -1,4 +1,5 @@
-import Title from "@/components/Title";
+import AppBreadCrumb from "@/components/BreadCrumb";
+import Title from "@/components/PrimaryTitle";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,9 +7,10 @@ export const metadata: Metadata = {
 };
 export default function Page() {
   return (
-    <div>
+    <>
+      <AppBreadCrumb directory="resume" />
       <Title title="Resume" />
-    </div>
+    </>
 
   );
 }

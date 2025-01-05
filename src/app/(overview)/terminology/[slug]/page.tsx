@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllPosts, getPostBySlug } from "@/lib/api";
+import { getAllPostsDirectory, getPostBySlug } from "@/lib/api";
 import markdownToHtml from "@/lib/markdownToHtml";
 import { PostHeader } from "@/components/PostHeader";
 import { PostBody } from "@/components/PostBody";
@@ -32,7 +32,7 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const posts = getAllPosts("terminology");
+  const posts = getAllPostsDirectory("terminology");
 
   return posts.map((post) => ({
     slug: post.slug,

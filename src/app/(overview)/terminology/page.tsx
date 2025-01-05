@@ -1,7 +1,8 @@
-import { getAllPosts } from "@/lib/api";
+import { getAllPostsDirectory } from "@/lib/api";
 import { Metadata } from "next";
-import Title from "@/components/Title";
+import Title from "@/components/PrimaryTitle";
 import Table from '@/components/Table';
+import AppBreadCrumb from "@/components/BreadCrumb";
 
 export const metadata: Metadata = {
   title: "Terminology",
@@ -9,10 +10,11 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  const allPosts = getAllPosts("terminology");
+  const allPosts = getAllPostsDirectory("terminology");
 
   return (
     <>
+      <AppBreadCrumb directory="terminology" />
       <Title title="Terminology" />
       <Table directory="terminology" allPosts={allPosts} />
     </>
