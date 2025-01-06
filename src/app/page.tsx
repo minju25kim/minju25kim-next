@@ -1,6 +1,5 @@
 import AppBreadCrumb from "@/components/BreadCrumb";
 import Title from "@/components/PrimaryTitle";
-import Image from 'next/image';
 import Link from "next/link";
 import { Github, Linkedin, Twitter, Mail } from "lucide-react";
 import { getAllPosts } from '@/lib/api'
@@ -38,7 +37,7 @@ function Home() {
           <li>Docker, github-actions</li>
         </ul>
       </div>
-      <div className="flex flex-col ">
+      <div className="flex flex-col">
         <SecondaryTitle title="Latest posts" />
         {
           allPosts.map((item) => (
