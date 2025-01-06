@@ -1,7 +1,6 @@
 import { Post } from "@/interfaces/post";
 import fs from "fs";
 import matter from "gray-matter";
-import { notFound } from "next/navigation";
 import { join } from "path";
 
 const postsDirectory = (dir: string) => join(process.cwd(), `content/${dir}`);
@@ -11,16 +10,11 @@ export function getPostSlugs(dir: string) {
 }
 
 export function getPostBySlug(dir: string, slug: string) {
-    try {
-        const realSlug = slug.replace(/\.md$/, "");
-        const fullPath = join(postsDirectory(dir), `${realSlug}.md`);
-        const fileContents = fs.readFileSync(fullPath, "utf8");
-        const { data, content } = matter(fileContents);
-        return { ...data, slug: realSlug, content, dir } as Post;
-    } catch (e) {
-        console.log(e)
-        notFound()
-    }
+    const realSlug = slug.replace(/\.mdx$/, "");
+    const fullPath = join(postsDirectory(dir), `${realSlug}.mdx`);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const { data, content } = matter(fileContents);
+    return { ...data, slug: realSlug, content, dir } as Post;
 }
 
 export function getAllPostsDirectory(dir: string): Post[] {
