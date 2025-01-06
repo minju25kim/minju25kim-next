@@ -1,0 +1,40 @@
+---
+date: "2025-01-06T21:14:02+09:00"
+dir: "til"
+title: "December 5th Interview"
+excerpt: ""
+# coverImage: "/assets/blog/hello-world/cover.jpg"
+# ogImage:
+#   url: "/assets/blog/hello-world/cover.jpg"
+---
+
+
+- clojure는 무엇인가
+- hoisting은 무엇인가 
+- 스크린 보여주고 나한테 질문함 console log 어떤순서로 출력 되냐고 물어봄
+````
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Timeout");
+}, 1000);
+
+Promise.resolve().then(() => {
+  console.log("Promise");
+});
+
+console.log("End");
+````
+
+````
+"Start"
+"End"
+"Promise"
+"Timeout"
+````
+- Null == undefined 그리고 null === undefined 결과
+- Null == false 에 대해서도 물어봄
+- Js 와 nodejs 에서 비동기처리를 어떻게 하는 지 물어봄.
+- Callbackhell 그리고 promise가 뭔지 async/await 등 왜 비동기를 사용하는지?
+- Nextjs serverside props 그리고 useEffect에 관해 물어봄.
+- ISR 그리고 initial props에 대해 물어봄
