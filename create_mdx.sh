@@ -17,4 +17,4 @@ mv "content/$DIR_NAME/$TITLE.md" "content/$DIR_NAME/$TITLE.mdx"
 echo "Created new TIL at content/$DIR_NAME/$TITLE.mdx"
 
 
-# ./create_mdx.sh directory title
+# ./create_mdx.sh $1 $2

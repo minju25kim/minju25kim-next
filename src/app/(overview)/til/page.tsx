@@ -1,8 +1,16 @@
 import { getAllPostsDirectory } from "@/lib/api";
 import Title from "@/components/PrimaryTitle";
-import Table from '@/components/Table';
-import type { Metadata } from "next";
 import AppBreadCrumb from '@/components/BreadCrumb';
+import type { Metadata } from "next";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
+import Table from '@/components/Table';
+import CalendarDemo from "@/components/Calendar";
+import { Post } from "@/interfaces/post";
 
 export const metadata: Metadata = {
   title: "TIL",
@@ -13,9 +21,30 @@ export default function Page() {
 
   return (
     <>
-      <AppBreadCrumb directory="til"/>
+      <AppBreadCrumb directory="til" />
       <Title title="TIL" />
-      <Table directory="til" allPosts={allPosts} />
+      <AppTabs allPosts={allPosts} />
     </>
+  );
+}
+
+type AppTabsProps = {
+  allPosts: Post[]
+};
+
+export function AppTabs({ allPosts }: AppTabsProps) {
+  return (
+    <Tabs defaultValue="table" className="w-full">
+      <TabsList className="grid w-full grid-cols-2">
+        <TabsTrigger value="table">Table</TabsTrigger>
+        <TabsTrigger value="calendar">Calendar</TabsTrigger>
+      </TabsList>
+      <TabsContent value="table">
+        <Table directory="til" allPosts={allPosts} />
+      </TabsContent>
+      <TabsContent value="calendar">
+        <CalendarDemo />
+      </TabsContent>
+    </Tabs>
   );
 }

@@ -13,6 +13,13 @@ export const metadata: Metadata = {
     default: 'minju25kim',
   },
   description: 'The official minju25kim website.',
+  openGraph: {
+    title: {
+      template: '%s | minju25kim',
+      default: 'minju25kim',
+    },
+    images: [],
+  },
   // metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
 };
 
@@ -26,7 +33,7 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
       </head>
       <body className={`${pretendard.className} antialiased`}>
-        <SidebarProvider defaultOpen={defaultOpen}>
+        <SidebarProvider defaultOpen={defaultOpen} >
           <AppSidebar />
           <SidebarTrigger className="fixed" />
           <Container>
