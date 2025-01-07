@@ -34,7 +34,7 @@ type AppTabsProps = {
   allPosts: Post[]
 };
 
-export function AppTabs({ allPosts }: AppTabsProps) {
+function AppTabs({ allPosts }: AppTabsProps) {
   return (
     <Tabs defaultValue="table" className="w-full">
       <TabsList className="grid w-full grid-cols-2">
