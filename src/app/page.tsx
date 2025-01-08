@@ -1,9 +1,9 @@
-import AppBreadCrumb from "@/components/BreadCrumb";
-import Title from "@/components/PrimaryTitle";
+import AppBreadCrumb from "@/components/AppComponents/BreadCrumb";
+import Title from "@/components/AppComponents/PrimaryTitle";
 import Link from "next/link";
 import { GitHubIcon, LinkedInIcon, TwitterIcon } from "@/components/icons";
 import { getAllPosts } from '@/lib/api'
-import SecondaryTitle from "@/components/SecondaryTitle";
+import SecondaryTitle from "@/components/AppComponents/SecondaryTitle";
 import { GlobeIcon, MailIcon } from "lucide-react";
 import { Button } from "@/components/ui/button"
 
@@ -24,7 +24,7 @@ function Home() {
         <Title title="Minju Kim" />
         <a
           href="https://www.google.com/maps/place/seoul"
-          className="inline-flex gap-x-1.5 align-baseline leading-none hover:underline max-w-md items-center text-pretty font-mono text-xs text-muted-foreground"
+          className="inline-flex gap-x-1.5 align-baseline leading-none hover:underline max-w-md items-center text-pretty text-xs text-muted-foreground"
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -7,8 +7,8 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Post } from '@/interfaces/post'
-// import { getAllPosts } from '@/lib/api';
 import Link from "next/link";
+import Keywords from "./Keywords";
 
 interface CardProps {
     directory: string;
@@ -20,14 +20,12 @@ export default function AppCard({ directory, allPosts }: CardProps) {
     const dateString = (date: string) => new Date(date).toISOString().split('T')[0].replace(/-/g, '/');
 
     return (
-        <div
-            className="grid gap-4 flex-col md:grid-cols-2 lg:grid-cols-3"
-        >
+        <div className="grid gap-4 flex-col md:grid-cols-2 lg:grid-cols-3">
             {allPosts.map((post: Post) => (
-                <Card key={post.slug} className="sm:aspect-square">
+                <Card key={post.slug}>
                     <Link href={`/${directory}/${post.slug}`}>
                         <CardHeader>
-                            <CardTitle>
+                            <CardTitle className="truncate whitespace-nowrap overflow-hidden text-ellipsis">
                                 {post.title}
                             </CardTitle>
                             <CardDescription>
@@ -35,7 +33,7 @@ export default function AppCard({ directory, allPosts }: CardProps) {
                             </CardDescription>
                         </CardHeader>
                         <CardFooter>
-                            <p>{post.content}</p>
+                            <Keywords keywords={post.keywords} />
                         </CardFooter>
                     </Link>
                 </Card>

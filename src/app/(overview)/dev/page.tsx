@@ -1,5 +1,5 @@
-import AppBreadCrumb from "@/components/BreadCrumb";
-import Title from "@/components/PrimaryTitle";
+import AppBreadCrumb from "@/components/AppComponents/BreadCrumb";
+import Title from "@/components/AppComponents/PrimaryTitle";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

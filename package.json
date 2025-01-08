@@ -35,9 +35,11 @@
     "next-mdx-remote": "^5.0.0",
     "next-themes": "^0.4.4",
     "react": "^18.3.1",
+    "react-calendar": "^5.1.0",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
+    "react-router-dom": "^7.1.1",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-code-titles": "^1.2.0",
     "rehype-prism-plus": "^2.0.0",
@@ -54,11 +56,17 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.20",
+    "cz-emoji-conventional": "^1.1.0",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-emoji-conventional"
+    }
   },
   "packageManager": "npm@10.9.2+sha512.8ab88f10f224a0c614cb717a7f7c30499014f77134120e9c1f0211ea3cf3397592cbe483feb38e0c4b3be1c54e347292c76a1b5edb94a3289d5448484ab8ac81"
 }

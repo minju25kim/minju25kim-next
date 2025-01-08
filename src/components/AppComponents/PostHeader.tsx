@@ -1,4 +1,4 @@
-import PostTitle from '@/components/SecondaryTitle';
+import PostTitle from '@/components/AppComponents/SecondaryTitle';
 
 type Props = {
     title: string;

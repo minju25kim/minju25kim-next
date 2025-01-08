@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { pretendard } from '@/ui/fonts';
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import AppSidebar from "@/components/Sidebar"
-import Container from "@/components/Container"
-import Footer from "@/components/Footer"
+import AppSidebar from "@/components/AppComponents/Sidebar"
+import Container from "@/components/AppComponents/Container"
+import Footer from "@/components/AppComponents/Footer"
 import { cookies } from "next/headers"
 
 export const metadata: Metadata = {
@@ -14,12 +14,17 @@ export const metadata: Metadata = {
   },
   description: 'The official minju25kim website.',
   openGraph: {
+    type: 'website',
     title: {
       template: '%s | minju25kim',
       default: 'minju25kim',
     },
-    images: [],
+    images: ['opengraph-image.png'],
   },
+  twitter: {
+    images: ['opengraph-image.png'],
+    card: 'summary_large_image'
+  }
   // metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
 };
 

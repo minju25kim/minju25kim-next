@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAllPostsDirectory, getPostBySlug } from "@/lib/api";
 import markdownToHtml from "@/lib/markdownToHtml";
-import { PostHeader } from "@/components/PostHeader";
-import { PostBody } from "@/components/PostBody";
-import AppBreadCrumb from "@/components/BreadCrumb";
+import { PostHeader } from "@/components/AppComponents/PostHeader";
+import { PostBody } from "@/components/AppComponents/PostBody";
+import AppBreadCrumb from "@/components/AppComponents/BreadCrumb";
 
 type Params = {
   params: Promise<{

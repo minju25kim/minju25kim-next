@@ -1,8 +1,8 @@
 import { getAllPostsDirectory } from "@/lib/api";
 import { Metadata } from "next";
-import Title from "@/components/PrimaryTitle";
-import Table from '@/components/Table';
-import AppBreadCrumb from "@/components/BreadCrumb";
+import Title from "@/components/AppComponents/PrimaryTitle";
+import Table from '@/components/AppComponents/Table';
+import AppBreadCrumb from "@/components/AppComponents/BreadCrumb";
 import { Post } from "@/interfaces/post";
 import {
   Tabs,
@@ -11,11 +11,11 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs";
 // import Table from '@/components/Table';
-import AppCard from "@/components/Card";
+import AppCard from "@/components/AppComponents/Card";
 
 export const metadata: Metadata = {
   title: "Terminology",
-  // description: 'The official minju25kim website.',
+  description: 'Terminology summaries.',
 };
 
 export default function Page() {
