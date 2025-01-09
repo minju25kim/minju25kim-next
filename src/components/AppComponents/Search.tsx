@@ -22,7 +22,7 @@ export default function Search() {
     }, [])
 
     return (
-        <div className="flex items-center w-full max-w-xs space-x-2 rounded-md border border-gray-300 bg-gray-50 dark:bg-gray-900 px-1 py-1 h-6">
+        <div className="flex items-center w-full sm:max-w-sm rounded-md border border-gray-300 bg-gray-50 dark:bg-gray-900 px-1 py-1 h-6">
             <SearchIcon className="h-4 w-4" />
             <Input ref={inputRef} type="search" placeholder="Search" className="w-full border-0 h-4 font-light" />
         </div>

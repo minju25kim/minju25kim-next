@@ -32,8 +32,9 @@ function DirectorySlug() {
 function AppTab({ views, allPosts = [] }: AppTabsProps) {
     // console.log(DirectorySlug())
     const { directory } = DirectorySlug();
+    const defaultValue = directory === 'resume' ? "kor" : "table";
     return (
-        <Tabs defaultValue="table" className="w-full">
+        <Tabs defaultValue={defaultValue} className="w-full">
             <TabsList className="grid w-full grid-cols-2">
                 {views.map((view: string) => {
                     return (

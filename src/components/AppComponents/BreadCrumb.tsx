@@ -15,7 +15,7 @@ function AppBreadCrumb() {
         .filter((segment) => segment.length > 0);
 
     return (
-        <Breadcrumb className="px-1">
+        <Breadcrumb className="">
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink href="/">~</BreadcrumbLink>

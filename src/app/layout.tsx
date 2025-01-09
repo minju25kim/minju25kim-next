@@ -6,6 +6,7 @@ import AppSidebar from "@/components/AppComponents/Sidebar"
 import Container from "@/components/AppComponents/Container"
 import Footer from "@/components/AppComponents/Footer"
 import { cookies } from "next/headers"
+import Header from "@/components/AppComponents/Header";
 
 export const metadata: Metadata = {
   title: {
@@ -38,14 +39,17 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
       </head>
       <body className={`${pretendard.className} antialiased`}>
-        <SidebarProvider defaultOpen={defaultOpen} >
-          <AppSidebar />
+        <SidebarProvider defaultOpen={defaultOpen}>
           <SidebarTrigger className="fixed" />
-          <Container>
-            {children}
-          </Container>
+          <AppSidebar />
+          <div className="container mx-auto max-w-7xl grid grid-rows-[auto_1fr_auto] gap-4 min-h-screen w-full pt-12 px-4">
+            <Header />
+            <Container>
+              {children}
+            </Container>
+            <Footer />
+          </div>
         </SidebarProvider>
-        <Footer />
       </body>
     </html>
   );

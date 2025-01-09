@@ -6,9 +6,9 @@ export default function Page() {
   const allPosts = getAllPostsDirectory("til");
 
   return (
-    <>
+    <div className="w-full">
       <Title title="TIL" />
       <AppTab views={["table", "calendar"]} allPosts={allPosts} />
-    </>
+    </div>
   );
 }

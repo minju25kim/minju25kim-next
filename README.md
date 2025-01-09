@@ -1,8 +1,11 @@
 # minju25kim-next
 
-## tech stack
+## Tech stack
 - typescript
 - nextjs
 - fly.io
 - tailwind
 - shadcn/ui
+
+## Schedule
+- Deploy on Sundays
