@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "TIL",
-  description: 'Today I Learn.',
+  title: "Resume",
 };
 
 function Layout({ children }: Readonly<{ children: React.ReactNode }>) {

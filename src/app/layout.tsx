@@ -24,8 +24,8 @@ export const metadata: Metadata = {
   twitter: {
     images: ['opengraph-image.png'],
     card: 'summary_large_image'
-  }
-  // metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
+  },
+  metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
 };
 
 async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

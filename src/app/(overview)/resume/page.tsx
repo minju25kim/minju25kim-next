@@ -1,15 +1,12 @@
-import AppBreadCrumb from "@/components/AppComponents/BreadCrumb";
 import Title from "@/components/AppComponents/PrimaryTitle";
-import type { Metadata } from "next";
+import AppTab from "@/components/AppComponents/Tab";
 
-export const metadata: Metadata = {
-  title: "Resume"
-};
+
 export default function Page() {
   return (
     <>
-      <AppBreadCrumb directory="resume" />
       <Title title="Resume" />
+      <AppTab views={["kor", "eng"]} />
     </>
 
   );

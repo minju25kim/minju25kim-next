@@ -3443,36 +3443,6 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 423.7421005435375,
-			"y": -403.1824024478854,
-			"rotation": 0,
-			"isLocked": false,
-			"opacity": 1,
-			"meta": {},
-			"id": "shape:9kCsDT146C50B6e5DE9fA",
-			"type": "geo",
-			"props": {
-				"w": 163.0450206144726,
-				"h": 163.0450206144726,
-				"geo": "ellipse",
-				"color": "black",
-				"labelColor": "black",
-				"fill": "none",
-				"dash": "solid",
-				"size": "s",
-				"font": "mono",
-				"text": "",
-				"align": "middle",
-				"verticalAlign": "middle",
-				"growY": 0,
-				"url": "",
-				"scale": 1
-			},
-			"parentId": "page:page",
-			"index": "aiA3X",
-			"typeName": "shape"
-		},
-		{
 			"x": -363.4566630503931,
 			"y": 8.068696424063546,
 			"rotation": 0,
@@ -3821,8 +3791,8 @@
 			"typeName": "shape"
 		},
 		{
-			"x": -2762.12552542726,
-			"y": -818.7052155144088,
+			"x": -2555.563025427261,
+			"y": -630.3849030144083,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,
@@ -3830,8 +3800,8 @@
 			"id": "shape:7A16HRDv5vbn2Ub2AxO_p",
 			"type": "geo",
 			"props": {
-				"w": 8973.387589164236,
-				"h": 6835.429687499999,
+				"w": 7467.606339164237,
+				"h": 6647.109374999999,
 				"geo": "rectangle",
 				"color": "black",
 				"labelColor": "black",
@@ -4293,80 +4263,6 @@
 			"typeName": "shape"
 		},
 		{
-			"id": "pointer:pointer",
-			"typeName": "pointer",
-			"x": 4077.6141394775295,
-			"y": 4976.449487321028,
-			"lastActivityTimestamp": 1736168427607,
-			"meta": {}
-		},
-		{
-			"followingUserId": null,
-			"opacityForNextShape": 1,
-			"stylesForNextShape": {},
-			"brush": null,
-			"scribbles": [],
-			"cursor": {
-				"type": "default",
-				"rotation": 0
-			},
-			"isFocusMode": false,
-			"exportBackground": true,
-			"isDebugMode": false,
-			"isToolLocked": false,
-			"screenBounds": {
-				"x": 0,
-				"y": 0,
-				"w": 1050,
-				"h": 514
-			},
-			"insets": [
-				false,
-				false,
-				true,
-				false
-			],
-			"zoomBrush": null,
-			"isGridMode": false,
-			"isPenMode": false,
-			"chatMessage": "",
-			"isChatting": false,
-			"highlightedUserIds": [],
-			"isFocused": true,
-			"devicePixelRatio": 2,
-			"isCoarsePointer": false,
-			"isHoveringCanvas": true,
-			"openMenus": [],
-			"isChangingStyle": false,
-			"isReadonly": false,
-			"meta": {},
-			"duplicateProps": null,
-			"id": "instance:instance",
-			"currentPageId": "page:page",
-			"typeName": "instance"
-		},
-		{
-			"editingShapeId": null,
-			"croppingShapeId": null,
-			"selectedShapeIds": [],
-			"hoveredShapeId": null,
-			"erasingShapeIds": [],
-			"hintingShapeIds": [],
-			"focusedGroupId": null,
-			"meta": {},
-			"id": "instance_page_state:page:page",
-			"pageId": "page:page",
-			"typeName": "instance_page_state"
-		},
-		{
-			"x": -2329.6780966409874,
-			"y": -4546.711225607443,
-			"z": 0.4064883425865964,
-			"meta": {},
-			"id": "camera:page:page",
-			"typeName": "camera"
-		},
-		{
 			"x": 3865.6328988361206,
 			"y": 4891.02379963854,
 			"rotation": 0,
@@ -4418,6 +4314,80 @@
 			"parentId": "page:page",
 			"index": "aF8lJArn",
 			"typeName": "shape"
+		},
+		{
+			"id": "pointer:pointer",
+			"typeName": "pointer",
+			"x": 445.4306720601851,
+			"y": -254.7100696628679,
+			"lastActivityTimestamp": 1736336153992,
+			"meta": {}
+		},
+		{
+			"followingUserId": null,
+			"opacityForNextShape": 1,
+			"stylesForNextShape": {},
+			"brush": null,
+			"scribbles": [],
+			"cursor": {
+				"type": "default",
+				"rotation": 0
+			},
+			"isFocusMode": false,
+			"exportBackground": true,
+			"isDebugMode": false,
+			"isToolLocked": false,
+			"screenBounds": {
+				"x": 0,
+				"y": 0,
+				"w": 1091,
+				"h": 514
+			},
+			"insets": [
+				false,
+				false,
+				true,
+				false
+			],
+			"zoomBrush": null,
+			"isGridMode": false,
+			"isPenMode": false,
+			"chatMessage": "",
+			"isChatting": false,
+			"highlightedUserIds": [],
+			"isFocused": true,
+			"devicePixelRatio": 2,
+			"isCoarsePointer": false,
+			"isHoveringCanvas": true,
+			"openMenus": [],
+			"isChangingStyle": false,
+			"isReadonly": false,
+			"meta": {},
+			"duplicateProps": null,
+			"id": "instance:instance",
+			"currentPageId": "page:page",
+			"typeName": "instance"
+		},
+		{
+			"editingShapeId": null,
+			"croppingShapeId": null,
+			"selectedShapeIds": [],
+			"hoveredShapeId": null,
+			"erasingShapeIds": [],
+			"hintingShapeIds": [],
+			"focusedGroupId": null,
+			"meta": {},
+			"id": "instance_page_state:page:page",
+			"pageId": "page:page",
+			"typeName": "instance_page_state"
+		},
+		{
+			"x": 1201.535633191427,
+			"y": 954.5550886122942,
+			"z": 0.3613746517473979,
+			"meta": {},
+			"id": "camera:page:page",
+			"typeName": "camera"
 		}
 	]
 }

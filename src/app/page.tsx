@@ -1,4 +1,3 @@
-import AppBreadCrumb from "@/components/AppComponents/BreadCrumb";
 import Title from "@/components/AppComponents/PrimaryTitle";
 import Link from "next/link";
 import { GitHubIcon, LinkedInIcon, TwitterIcon } from "@/components/icons";
@@ -19,7 +18,6 @@ function Home() {
   // console.log(allPosts)
   return (
     <>
-      <AppBreadCrumb />
       <div className="flex flex-col items-center sm:items-start mb-4">
         <Title title="Minju Kim" />
         <a
@@ -47,7 +45,7 @@ function Home() {
         </div>
       </div>
       <div className="flex flex-col ">
-        <SecondaryTitle title="Hi, I&apos;m Minju Kim, 1 year experienced frontend developer." />
+        <SecondaryTitle title="Hi, I&apos;m Minju Kim, experienced frontend developer." />
         <ul className="list-disc list-inside">
           <li>Typescript, javascript, nodejs</li>
           <li>HTML, CSS, tailwind, styled-components, MaterialUI</li>

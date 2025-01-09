@@ -4,7 +4,6 @@ import { getAllPostsDirectory, getPostBySlug } from "@/lib/api";
 import markdownToHtml from "@/lib/markdownToHtml";
 import { PostHeader } from "@/components/AppComponents/PostHeader";
 import { PostBody } from "@/components/AppComponents/PostBody";
-import AppBreadCrumb from "@/components/AppComponents/BreadCrumb";
 
 type Params = {
   params: Promise<{
@@ -26,7 +25,7 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
     title,
     openGraph: {
       title,
-      // images: [post.ogImage.url],
+      images: [post.ogImage.url],
     },
   };
 }
@@ -51,7 +50,6 @@ async function Page(props: Params) {
 
   return (
     <>
-      <AppBreadCrumb directory="terminology" slug={params.slug} />
       <PostHeader
         title={post.title}
         coverImage={post.coverImage}
