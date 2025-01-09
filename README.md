@@ -9,3 +9,9 @@
 
 ## Schedule
 - Deploy on Sundays
+
+## add more
+- search function
+- resume archive function
+- dev/zero_to_hero post
+- view count function
