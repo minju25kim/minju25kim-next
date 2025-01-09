@@ -22,7 +22,8 @@ export function getAllPostsDirectory(dir: string): Post[] {
     const posts = slugs
         .map((slug) => getPostBySlug(dir, slug))
         .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
-    return posts;
+    if (posts) return posts;
+    else return []
 }
 
 
