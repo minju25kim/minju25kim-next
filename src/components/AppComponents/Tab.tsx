@@ -6,16 +6,18 @@ import {
     TabsList,
     TabsTrigger,
 } from "@/components/ui/tabs"
-import { Post } from "@/interfaces/post";
+import { Post, Json } from "@/interfaces/Data";
 
 import Table from '@/components/AppComponents/Table';
 import Card from '@/components/AppComponents/Card'
 import Calendar from "@/components/AppComponents//Calendar";
 import { usePathname } from "next/navigation";
+import Resume from "./Resume";
 
 type AppTabsProps = {
     allPosts?: Post[];
-    views: string[]
+    allJsons?: Json[];
+    views: string[];
 };
 
 function DirectorySlug() {
@@ -29,17 +31,16 @@ function DirectorySlug() {
 }
 
 
-function AppTab({ views, allPosts = [] }: AppTabsProps) {
-    // console.log(DirectorySlug())
+function AppTab({ views, allPosts = [], allJsons = [] }: AppTabsProps) {
     const { directory } = DirectorySlug();
     const defaultValue = directory === 'resume' ? "kor" : "table";
+    // console.log(allJsons)
     return (
         <Tabs defaultValue={defaultValue} className="w-full">
             <TabsList className="grid w-full grid-cols-2">
                 {views.map((view: string) => {
                     return (
                         <TabsTrigger value={view} key={view}>{view}</TabsTrigger>
-
                     )
                 })}
             </TabsList>
@@ -56,10 +57,10 @@ function AppTab({ views, allPosts = [] }: AppTabsProps) {
                             <Card directory={directory} allPosts={allPosts} />
                             : null}
                         {view === 'kor' ?
-                            'this will be resume view'
+                            <Resume lang={view} allJsons={allJsons} />
                             : null}
                         {view === 'eng' ?
-                            'this will be resume view'
+                            <Resume lang={view} allJsons={allJsons} />
                             : null}
                     </TabsContent>
                 )
