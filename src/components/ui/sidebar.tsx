@@ -18,6 +18,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+// import { MinjuKimIcon } from "../icons"
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -279,6 +280,7 @@ const SidebarTrigger = React.forwardRef<
       }}
       {...props}
     >
+      {/* <MinjuKimIcon /> */}
       <Menu />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
