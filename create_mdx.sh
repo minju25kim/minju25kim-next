@@ -14,7 +14,7 @@ TITLE=$2
 hugo new --kind "$DIR_NAME" "$DIR_NAME/$TITLE.md"
 mv "content/$DIR_NAME/$TITLE.md" "content/$DIR_NAME/$TITLE.mdx"
 
-echo "Created new TIL at content/$DIR_NAME/$TITLE.mdx"
+echo "Created new $TITLE at content/$DIR_NAME/$TITLE.mdx"
 
 
 # ./create_mdx.sh $1 $2
