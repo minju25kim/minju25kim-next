@@ -1,14 +1,15 @@
 import Title from "@/components/AppComponents/PrimaryTitle";
-import AppTab from "@/components/AppComponents/Tab";
 import { getAllJsons } from "@/lib/api";
+import Resume from "@/components/AppComponents/Resume"
 
 
 export default function Page() {
   const allJsons = getAllJsons();
+  // console.log(allJsons)
   return (
     <>
       <Title title="Resume" />
-      <AppTab views={["kor", "eng"]} allJsons={allJsons} />
+      <Resume allJsons={allJsons} />
     </>
 
   );

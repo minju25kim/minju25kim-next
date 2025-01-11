@@ -12,7 +12,6 @@ import Table from '@/components/AppComponents/Table';
 import Card from '@/components/AppComponents/Card'
 import Calendar from "@/components/AppComponents//Calendar";
 import { usePathname } from "next/navigation";
-import Resume from "./Resume";
 
 type AppTabsProps = {
     allPosts?: Post[];
@@ -31,12 +30,11 @@ function DirectorySlug() {
 }
 
 
-function AppTab({ views, allPosts = [], allJsons = [] }: AppTabsProps) {
+function AppTab({ views, allPosts = [] }: AppTabsProps) {
     const { directory } = DirectorySlug();
-    const defaultValue = directory === 'resume' ? "kor" : "table";
-    // console.log(allJsons)
+
     return (
-        <Tabs defaultValue={defaultValue} className="w-full">
+        <Tabs defaultValue="table" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
                 {views.map((view: string) => {
                     return (
@@ -55,12 +53,6 @@ function AppTab({ views, allPosts = [], allJsons = [] }: AppTabsProps) {
                             : null}
                         {view === 'card' ?
                             <Card directory={directory} allPosts={allPosts} />
-                            : null}
-                        {view === 'kor' ?
-                            <Resume lang={view} allJsons={allJsons} />
-                            : null}
-                        {view === 'eng' ?
-                            <Resume lang={view} allJsons={allJsons} />
                             : null}
                     </TabsContent>
                 )

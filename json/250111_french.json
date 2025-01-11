@@ -1,6 +1,11 @@
 {
-  "lang":"eng",
-  "version":"250111",
+  "meta": {
+    "title": "250111_french",
+    "lang": "french",
+    "version": "250111",
+    "createdTime": "17:59:07"
+  },
+  "resume": {
     "infos": {
       "name": "John Doe",
       "headline": "Frontend Developer",
@@ -133,15 +138,23 @@
           "name": "Backend Development",
           "description": "Designing and implementing server-side logic.",
           "level": 4,
-          "keywords": ["Node.js", "Express.js", "MongoDB", "SQL"]
+          "keywords": [
+            "Node.js",
+            "Express.js",
+            "MongoDB",
+            "SQL"
+          ]
         },
         {
           "name": "DevOps",
           "description": "Streamlining development workflows and deployments.",
           "level": 3,
-          "keywords": ["Docker", "GitHub Actions"]
+          "keywords": [
+            "Docker",
+            "GitHub Actions"
+          ]
         }
       ]
     }
   }
-  
+}

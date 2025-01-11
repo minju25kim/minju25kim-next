@@ -7,12 +7,13 @@ fi
 
 LANG=$1
 DATE=$(date +%y%m%d)
+TIME=$(date +%H:%M:%S)
+TITLE="$DATE"_"$LANG"
+JSON=$(cat archetypes/template.json)
 
-cd json/$LANG
-touch "$DATE.json" | echo "{ \"lang\": \"$LANG\", \"version\": \"$DATE\" }" > $DATE.json
+cd json/
+touch "$TITLE.json" && echo "{ \"meta\" : {\"title\": \"$TITLE\", \"lang\": \"$LANG\", \"version\": \"$DATE\",\"createdTime\": \"$TIME\"}, \"resume\": $JSON }" | jq '.' >"$TITLE.json"
 
-
-echo "Created new $VERSION at json/$LANG/$DATE.json"
-
+echo "Created new $VERSION at json/$TITLE.json"
 
 # ./create_resume.sh eng

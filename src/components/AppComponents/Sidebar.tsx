@@ -17,10 +17,10 @@ import Link from "next/link";
 
 const items = [
     { title: 'Home', url: '/', icon: Home },
-    { title: 'dev', url: '/dev', icon: FolderCode },
-    { title: 'resume', url: '/resume', icon: Paperclip },
-    { title: 'terminology', url: '/terminology', icon: Book },
-    { title: 'til', url: '/til', icon: Calendar },
+    { title: 'Dev', url: '/dev', icon: FolderCode },
+    { title: 'Resume', url: '/resume', icon: Paperclip },
+    { title: 'Terminology', url: '/terminology', icon: Book },
+    { title: 'TIL', url: '/til', icon: Calendar },
 ];
 
 function AppSidebar() {

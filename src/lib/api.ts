@@ -57,18 +57,16 @@ export function getAllJsonsDirectory(dir: string) {
     const slugs = getJsonSlugs(dir);
     const jsons = slugs
         .map((slug) => getJsonBySlug(dir, slug))
-    // console.log(jsons)
     return jsons
 }
 
 export function getAllJsons() {
-    const directories = fs.readdirSync(jsonsDirectory("")).filter((file) => fs.statSync(jsonsDirectory(file)).isDirectory());
+    // const directories = fs.readdirSync(jsonsDirectory("")).filter((file) => fs.statSync(jsonsDirectory(file)).isDirectory());
     let allJsons: Json[] = []
-    directories.forEach((dir) => {
-        const slugs = getJsonSlugs(dir);
-        const jsons = slugs
-            .map((slug) => getJsonBySlug(dir, slug))
-        allJsons = allJsons.concat(jsons)
-    });
+    const slugs = getJsonSlugs("");
+    const jsons = slugs
+        .map((slug) => getJsonBySlug("", slug))
+        .sort((a, b) => JSON.parse(a.fileContents).meta.createdTime > JSON.parse(b.fileContents).meta.createdTime ? -1 : 1)
+    allJsons = allJsons.concat(jsons)
     return allJsons
 }
