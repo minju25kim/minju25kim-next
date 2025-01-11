@@ -5,7 +5,6 @@ import Resume from "@/components/AppComponents/Resume"
 
 export default function Page() {
   const allJsons = getAllJsons();
-  // console.log(allJsons)
   return (
     <>
       <Title title="Resume" />
