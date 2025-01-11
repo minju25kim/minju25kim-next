@@ -22,15 +22,12 @@ function CarouselOrientation({ resumeArray }: { resumeArray: ResumeData[] }) {
             {selectedResume ? (
                 <div className="w-full max-w-screen-md p-8 bg-white shadow-md border" style={{ aspectRatio: '1 / 1.414' }}>
                     <h1 className="text-2xl font-bold">{selectedResume.meta.title}</h1>
-                    {/* <p className="mt-4">{selectedResume.meta.title}</p> */}
                 </div>
             ) : (
                 <div className="w-full max-w-screen-md p-8 bg-white shadow-md border" style={{ aspectRatio: '1 / 1.414' }}>
                     <h1 className="text-2xl font-bold">{resumeArray[0].meta.title}</h1>
-                    {/* <p className="mt-4">{resumeArray[0].meta.title}</p> */}
                 </div>
             )}
-
             <Carousel
                 opts={{
                     align: "start",
