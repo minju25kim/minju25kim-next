@@ -37,6 +37,20 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
     <html suppressHydrationWarning lang="en">
       <head>
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="touch-icon-iphone.png" />
+
+        <meta name="google-site-verification" content="MjAuu-Lc3CGp0xic4er0P409B4fueoITgV8_IAFPQLU" />
+        <meta property="twitter:image" content="/opengraph-image.png" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content="opengraph-image.png" />
+        <meta property="twitter:description" content="Minju25kim dev blog" />
+        <meta property="description" content="Minju25kim dev blog" />
+        <meta property="og:image" content="/opengraph-image.png.png" />
+        <meta property="og:site_name" content="Minju25kim.fly.dev" />
+        <meta property="og:title" content="Minju25kim" />
+        <meta property="og:description" content="Minju25kim dev blog" />
+        <meta property="og:url" content="minju25kim.fly.dev" />
       </head>
       <body className={`${pretendard.className} antialiased`}>
         <SidebarProvider defaultOpen={defaultOpen}>
