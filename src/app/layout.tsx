@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     images: ['opengraph-image.png'],
     card: 'summary_large_image'
   },
-  metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
+  // metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
 };
 
 async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -39,7 +39,7 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         <link rel="apple-touch-icon" href="touch-icon-iphone.png" />
-
+        {/* add safari tab icon */}
         <meta name="google-site-verification" content="MjAuu-Lc3CGp0xic4er0P409B4fueoITgV8_IAFPQLU" />
         <meta property="twitter:image" content="/opengraph-image.png" />
         <meta property="twitter:card" content="summary_large_image" />
