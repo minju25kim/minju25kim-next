@@ -24,7 +24,6 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
     <html suppressHydrationWarning lang="en">
       <head>
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
-        <meta name="google-site-verification" content="btlbG1Z9vCOmyJ-iT2YEkAgRko8iI4rTqz3fWBvmdJM" />
       </head>
       <body className={`${pretendard.className} antialiased`}>
         <SidebarProvider defaultOpen={defaultOpen}>
