@@ -1,16 +1,15 @@
-import AppBreadCrumb from "@/components/BreadCrumb";
-import Title from "@/components/PrimaryTitle";
-import type { Metadata } from "next";
+import Title from "@/components/AppComponents/PrimaryTitle";
+import AppTab from "@/components/AppComponents/Tab";
+import { getAllPostsDirectory } from "@/lib/api";
 
-export const metadata: Metadata = {
-  title: "Dev"
-};
+
 export default function Page() {
-  return (
+  const allPosts = getAllPostsDirectory("dev");
 
+  return (
     <>
-      <AppBreadCrumb directory="dev" />
       <Title title="Dev" />
+      <AppTab views={["table", "card"]} allPosts={allPosts} />
     </>
 
   );

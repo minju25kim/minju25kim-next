@@ -1,18 +1,21 @@
+"use client";
 import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
     BreadcrumbList,
 } from "@/components/ui/breadcrumb"
+import { usePathname } from "next/navigation";
 
-type AppBreadCrumbProps = {
-    directory?: string;
-    slug?: string;
-}
 
-function AppBreadCrumb({ directory, slug }: AppBreadCrumbProps) {
+function AppBreadCrumb() {
+    const pathname = usePathname();
+    const [directory, slug] = pathname
+        .split("/")
+        .filter((segment) => segment.length > 0);
+
     return (
-        <Breadcrumb className="px-1 pt-2">
+        <Breadcrumb className="">
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink href="/">~</BreadcrumbLink>

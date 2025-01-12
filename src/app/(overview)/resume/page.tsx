@@ -1,15 +1,14 @@
-import AppBreadCrumb from "@/components/BreadCrumb";
-import Title from "@/components/PrimaryTitle";
-import type { Metadata } from "next";
+import Title from "@/components/AppComponents/PrimaryTitle";
+import { getAllJsons } from "@/lib/api";
+import Resume from "@/components/AppComponents/Resume"
 
-export const metadata: Metadata = {
-  title: "Resume"
-};
+
 export default function Page() {
+  const allJsons = getAllJsons();
   return (
     <>
-      <AppBreadCrumb directory="resume" />
       <Title title="Resume" />
+      <Resume allJsons={allJsons} />
     </>
 
   );

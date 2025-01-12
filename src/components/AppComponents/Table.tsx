@@ -7,21 +7,14 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { Post } from "@/interfaces/Data";
 
 interface TableProps {
     directory: string;
     allPosts: Post[];
 }
 
-type Post = {
-    content: string;
-    title: string;
-    excerpt: string;
-    slug: string;
-    date: string;
-}
-
-function AppTable({directory, allPosts }: TableProps) {
+function AppTable({ directory, allPosts }: TableProps) {
     const dateString = (date: string) => new Date(date).toISOString().split('T')[0].replace(/-/g, '/');
 
     return (
