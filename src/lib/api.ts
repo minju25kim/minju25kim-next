@@ -1,72 +1,94 @@
-import { Post, Json } from "@/interfaces/Data";
-import fs from "fs";
-import matter from "gray-matter";
-import { join } from "path";
+import { Post } from "@/interfaces/Data";
+// import { join } from "path";
 
-const postsDirectory = (dir: string) => join(process.cwd(), `content/${dir}`);
-
-export function getPostSlugs(dir: string) {
-    return fs.readdirSync(postsDirectory(dir));
+export async function fetchTitle(id: string): Promise<string> {
+  try {
+      const response = await fetch(`http://localhost:3000/content/${id}`);
+      if (!response.ok) {
+          throw new Error("Failed to fetch post");
+      }
+      const post = await response.json();
+      return post.title;
+  } catch (error) {
+      console.error("Error fetching post:", error);
+      throw error;
+    }
 }
 
-export function getPostBySlug(dir: string, slug: string) {
-    const realSlug = slug.replace(/\.md$/, "");
-    const fullPath = join(postsDirectory(dir), `${realSlug}.md`);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const { data, content } = matter(fileContents);
-    return { ...data, slug: realSlug, content, dir } as Post;
+export async function getPostById(id: string): Promise<Post> {
+  try {
+    const response = await fetch(`http://localhost:3000/content/${id}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch post");
+    }
+    const post: Post = await response.json();
+    return post;
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    throw error;
+  }
 }
 
-export function getAllPostsDirectory(dir: string): Post[] {
-    const slugs = getPostSlugs(dir);
-    const posts = slugs
-        .map((slug) => getPostBySlug(dir, slug))
-        .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
-    return posts
-}
-
-
-export function getAllPosts(): Post[] {
-    const directories = fs.readdirSync(postsDirectory("")).filter((file) => fs.statSync(postsDirectory(file)).isDirectory());
-    let allPosts: Post[] = [];
-    directories.forEach((dir) => {
-        const slugs = getPostSlugs(dir);
-        const posts = slugs
-            .map((slug) => getPostBySlug(dir, slug))
-            .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
-        allPosts = allPosts.concat(posts);
+export async function getAllPostsDirectory(dir: string): Promise<Post[]> {
+  try {
+    const response = await fetch(`http://localhost:3000/content/dir/${dir}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch posts");
+    }
+    const posts: Post[] = await response.json();
+    return posts.sort((post1, post2) => {
+      const date1 = new Date(post1.date);
+      const date2 = new Date(post2.date);
+      return date2.getTime() - date1.getTime();
     });
-    return allPosts.sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    throw error;
+  }
 }
 
-const jsonsDirectory = (dir: string) => join(process.cwd(), `json/${dir}`);
-
-export function getJsonSlugs(dir: string) {
-    return fs.readdirSync(jsonsDirectory(dir));
+export async function getAllPosts(): Promise<Post[]> {
+  const response = await fetch("http://localhost:3000/content");
+  const posts: Post[] = await response.json();
+  // console.log(posts);
+  return posts.sort((post1, post2) => {
+    const date1 = new Date(post1.date);
+    const date2 = new Date(post2.date);
+    return date2.getTime() - date1.getTime();
+  });
 }
 
-export function getJsonBySlug(dir: string, slug: string) {
-    const realSlug = slug.replace(/\.json$/, "");
-    const fullPath = join(jsonsDirectory(dir), `${realSlug}.json`);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    return { slug: realSlug, fileContents };
-}
+// const jsonsDirectory = (dir: string) => join(process.cwd(), `json/${dir}`);
 
+// export function getJsonSlugs(dir: string) {
+//   return fs.readdirSync(jsonsDirectory(dir));
+// }
 
-export function getAllJsonsDirectory(dir: string) {
-    const slugs = getJsonSlugs(dir);
-    const jsons = slugs
-        .map((slug) => getJsonBySlug(dir, slug))
-    return jsons
-}
+// export function getJsonBySlug(dir: string, slug: string) {
+//   const realSlug = slug.replace(/\.json$/, "");
+//   const fullPath = join(jsonsDirectory(dir), `${realSlug}.json`);
+//   const fileContents = fs.readFileSync(fullPath, "utf8");
+//   return { slug: realSlug, fileContents };
+// }
 
-export function getAllJsons() {
-    // const directories = fs.readdirSync(jsonsDirectory("")).filter((file) => fs.statSync(jsonsDirectory(file)).isDirectory());
-    let allJsons: Json[] = []
-    const slugs = getJsonSlugs("");
-    const jsons = slugs
-        .map((slug) => getJsonBySlug("", slug))
-        .sort((a, b) => JSON.parse(a.fileContents).meta.createdTime > JSON.parse(b.fileContents).meta.createdTime ? -1 : 1)
-    allJsons = allJsons.concat(jsons)
-    return allJsons
-}
+// export function getAllJsonsDirectory(dir: string) {
+//   const slugs = getJsonSlugs(dir);
+//   const jsons = slugs.map((slug) => getJsonBySlug(dir, slug));
+//   return jsons;
+// }
+
+// export function getAllJsons() {
+//   // const directories = fs.readdirSync(jsonsDirectory("")).filter((file) => fs.statSync(jsonsDirectory(file)).isDirectory());
+//   let allJsons: Json[] = [];
+//   const slugs = getJsonSlugs("");
+//   const jsons = slugs
+//     .map((slug) => getJsonBySlug("", slug))
+//     .sort((a, b) =>
+//       JSON.parse(a.fileContents).meta.createdTime >
+//       JSON.parse(b.fileContents).meta.createdTime
+//         ? -1
+//         : 1
+//     );
+//   allJsons = allJsons.concat(jsons);
+//   return allJsons;
+// }

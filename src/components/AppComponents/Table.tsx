@@ -8,6 +8,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Post } from "@/interfaces/Data";
+import { dateString } from "@/lib/utils";
 
 interface TableProps {
     directory: string;
@@ -15,7 +16,6 @@ interface TableProps {
 }
 
 function AppTable({ directory, allPosts }: TableProps) {
-    const dateString = (date: string) => new Date(date).toISOString().split('T')[0].replace(/-/g, '/');
 
     return (
         <Table>
@@ -29,9 +29,9 @@ function AppTable({ directory, allPosts }: TableProps) {
             <TableBody>
                 {allPosts.map((post: Post) => {
                     return (
-                        <TableRow key={post.slug}>
+                        <TableRow key={post._id}>
                             <TableCell className="font-medium">
-                                <Link href={`/${directory}/${post.slug}`} key={post.slug}>
+                                <Link href={`/${directory}/${post._id}`} key={post._id}>
                                     {post.title}
                                 </Link>
                             </TableCell>

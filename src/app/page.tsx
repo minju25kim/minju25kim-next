@@ -13,8 +13,9 @@ const links = [
   { title: 'email', url: 'mailto:minju25kim@gmail.com', icon: MailIcon },
 ];
 
-function Home() {
-  const allPosts = getAllPosts()
+async function Home() {
+  const allPosts = await getAllPosts()
+
   // console.log(allPosts)
   return (
     <>
@@ -45,7 +46,7 @@ function Home() {
         </div>
       </div>
       <div className="flex flex-col ">
-        <SecondaryTitle title="Hi, I&apos;m Minju Kim, experienced frontend developer." />
+        <SecondaryTitle title="Fullstack Developer" />
         <ul className="list-disc list-inside">
           <li>Typescript, javascript, nodejs</li>
           <li>HTML, CSS, tailwind, styled-components, MaterialUI</li>
@@ -58,7 +59,7 @@ function Home() {
         <SecondaryTitle title="Latest posts" />
         {
           allPosts.map((item) => (
-            <Link key={item.slug} href={`/${item.dir}/${item.slug}`}>
+            <Link key={item._id} href={`/${item.dir}/${item._id}`}>
               {item.title}
             </Link>
           ))

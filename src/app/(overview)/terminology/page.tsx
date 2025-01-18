@@ -3,8 +3,8 @@ import Title from "@/components/AppComponents/PrimaryTitle";
 import AppTab from "@/components/AppComponents/Tab";
 
 
-export default function Page() {
-  const allPosts = getAllPostsDirectory("terminology");
+export default async function Page() {
+  const allPosts = await getAllPostsDirectory("terminology");
 
   return (
     <>

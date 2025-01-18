@@ -56,7 +56,7 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
         <SidebarProvider defaultOpen={defaultOpen}>
           <SidebarTrigger className="fixed" />
           <AppSidebar />
-          <div className="container mx-auto max-w-7xl grid grid-rows-[auto_1fr_auto] gap-4 min-h-screen w-full pt-12 px-4">
+          <div className="container mx-auto max-w-2xl grid grid-rows-[auto_1fr_auto] gap-4 min-h-screen w-full pt-12 px-4">
             <Header />
             <Container>
               {children}

@@ -4,16 +4,29 @@ import {
     BreadcrumbItem,
     BreadcrumbLink,
     BreadcrumbList,
-} from "@/components/ui/breadcrumb"
+} from "@/components/ui/breadcrumb";
 import { usePathname } from "next/navigation";
-
+import { useEffect, useState } from "react";
+import { fetchTitle } from "@/lib/api";
 
 function AppBreadCrumb() {
     const pathname = usePathname();
-    const [directory, slug] = pathname
+    const [directory, id] = pathname
         .split("/")
         .filter((segment) => segment.length > 0);
 
+    const [title, setTitle] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (id) {
+            async function getTitle() {
+                const title = await fetchTitle(id);
+                setTitle(title);
+            }
+            getTitle();
+        }
+    }, [id]);
+    
     return (
         <Breadcrumb className="">
             <BreadcrumbList>
@@ -21,27 +34,24 @@ function AppBreadCrumb() {
                     <BreadcrumbLink href="/">~</BreadcrumbLink>
                 </BreadcrumbItem>
 
-                {
-                    directory &&
+                {directory && (
                     <>
                         /
                         <BreadcrumbItem>
                             <BreadcrumbLink href={`/${directory}`}>{directory}</BreadcrumbLink>
                         </BreadcrumbItem>
-
                     </>
-                }
-                {
-                    slug &&
+                )}
+                {title && (
                     <>
                         /
                         <BreadcrumbItem>
-                            <BreadcrumbLink href={`/${directory}/${slug}`}>{slug}</BreadcrumbLink>
+                            <BreadcrumbLink href={`/${directory}/${id}`}>{title}</BreadcrumbLink>
                         </BreadcrumbItem>
                     </>
-                }
+                )}
             </BreadcrumbList>
-        </Breadcrumb >
+        </Breadcrumb>
     );
 }
 
