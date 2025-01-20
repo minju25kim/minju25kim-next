@@ -1,8 +1,8 @@
 # syntax = docker/dockerfile:1
 
 # Adjust NODE_VERSION as desired
-ARG NODE_VERSION=20.18.0
-FROM node:${NODE_VERSION}-slim as base
+ARG NODE_VERSION=23.6.0
+FROM node:${NODE_VERSION}-slim AS base
 
 LABEL fly_launch_runtime="Next.js"
 
@@ -12,8 +12,9 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV="production"
 
+
 # Throw-away build stage to reduce size of final image
-FROM base as build
+FROM base AS build
 
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
@@ -26,8 +27,11 @@ RUN npm ci --include=dev
 # Copy application code
 COPY . .
 
+RUN --mount=type=secret,id=NEXT_PUBLIC_BACKEND_URL \
+    NEXT_PUBLIC_BACKEND_URL="$(cat /run/secrets/NEXT_PUBLIC_BACKEND_URL)"
+
 # Build application
-RUN npm run build
+RUN npx next build --experimental-build-mode compile
 
 # Remove development dependencies
 RUN npm prune --omit=dev
@@ -38,6 +42,9 @@ FROM base
 
 # Copy built application
 COPY --from=build /app /app
+
+# Entrypoint sets up the container.
+ENTRYPOINT [ "/app/docker-entrypoint.js" ]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
