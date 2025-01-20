@@ -1,18 +1,15 @@
 import type { NextConfig } from "next";
-import { PHASE_PRODUCTION_BUILD } from "next/constants";
-import { config } from "dotenv";
 
 const nextConfig: NextConfig = (phase: string) => {
   console.log(`Current Phase: ${phase}`);
+  const env = {
+    'phase-development': '.env.local',
+    'phase-production-build': '.env.production',
+    'phase-production-server': '.env.production',
+  }[phase];
 
-  if (phase === PHASE_PRODUCTION_BUILD) {
-    config({
-      path: ".env.production",
-    });
-  } else {
-    config({
-      path: ".env.local",
-    });
+  if (env) {
+    require('dotenv').config({ path: `${env}` });
   }
 
   return {

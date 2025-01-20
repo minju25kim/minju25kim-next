@@ -47,6 +47,7 @@ async function Page({ params }: Params) {
   if (!post) {
     return notFound();
   }
+  
   const { title, coverImage, date, author, content } = post
   return (
     <>
