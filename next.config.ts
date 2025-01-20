@@ -18,7 +18,7 @@ const nextConfig: NextConfig = (phase: string) => {
   return {
     pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
     reactStrictMode: true,
-    output: "standalone",
+    // output: "standalone",
   };
 };
 

@@ -1,11 +1,28 @@
 import Title from "@/components/AppComponents/PrimaryTitle";
 import AppTab from "@/components/AppComponents/Tab";
 import { getAllPostsDirectory } from "@/lib/api";
-
+import { Post } from "@/interfaces/Data";
 
 export default async function Page() {
-  const allPosts = await getAllPostsDirectory("dev");
+  let allPosts: Post[] = []
+  async function fetchAllPosts() {
+    try {
+      const allPosts = await getAllPostsDirectory("dev");
+      return allPosts;
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+      // Handle the error as needed, for example, return an empty array or null
+      return [];
+    }
+  }
 
+  // Usage example
+  fetchAllPosts().then(posts => {
+    console.log(posts);
+    allPosts = posts
+  }).catch(error => {
+    console.error("Unexpected error:", error);
+  });
   return (
     <>
       <Title title="Dev" />

@@ -30,11 +30,16 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const posts = await getAllPostsDirectory("terminology");
-
-  return posts.map((post) => ({
-    id: post._id,
-  }));
+  try {
+    const posts = await getAllPostsDirectory("terminology");
+    return posts.map((post) => ({
+      id: post._id,
+    }));
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    // Return an empty array or handle the error as needed
+    return [];
+  }
 }
 
 async function Page(props: Params) {
