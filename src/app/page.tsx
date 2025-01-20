@@ -19,6 +19,7 @@ const links = [
 
 async function Home() {
   const allPosts: Post[] = await getAllPosts()
+  
   return (
     <>
       <div className="flex flex-col items-center md:items-start mb-4">
