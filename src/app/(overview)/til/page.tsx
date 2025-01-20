@@ -6,7 +6,7 @@ export default async function Page() {
   const allPosts = await getAllPostsDirectory("til");
 
   return (
-    <div className="w-full">
+    <div>
       <Title title="TIL" />
       <AppTab views={["table", "calendar"]} allPosts={allPosts} />
     </div>

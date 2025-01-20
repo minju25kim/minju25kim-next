@@ -28,7 +28,7 @@ function AppBreadCrumb() {
     }, [id]);
     
     return (
-        <Breadcrumb className="">
+        <Breadcrumb className="flex justify-center md:justify-start md:pl-2">
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink href="/">~</BreadcrumbLink>

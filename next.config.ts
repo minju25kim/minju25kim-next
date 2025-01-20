@@ -1,22 +1,25 @@
 import type { NextConfig } from "next";
-// import rehypeCodeTitles from 'rehype-code-titles';
-// import rehypePrism from 'rehype-prism-plus';
+import { PHASE_PRODUCTION_BUILD } from "next/constants";
+import { config } from "dotenv";
 
-import createMDX from '@next/mdx'
+const nextConfig: NextConfig = (phase: string) => {
+  console.log(`Current Phase: ${phase}`);
 
-const withMDX = createMDX({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
+  if (phase === PHASE_PRODUCTION_BUILD) {
+    config({
+      path: ".env.production",
+    });
+  } else {
+    config({
+      path: ".env.local",
+    });
   }
-})
 
-const nextConfig: NextConfig = {
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-  reactStrictMode: true,
-  output: "standalone"
+  return {
+    pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+    reactStrictMode: true,
+    output: "standalone",
+  };
 };
 
-export default withMDX(nextConfig);
-
+export default nextConfig;

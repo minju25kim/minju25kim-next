@@ -52,6 +52,9 @@ async function Page(props: Params) {
         title={post.title}
         coverImage={post.coverImage}
         date={post.date}
+        author={post.author}
+        keywords={post.keywords}
+
       />
       <PostBody content={post.content} />
     </>

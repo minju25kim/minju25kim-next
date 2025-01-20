@@ -6,7 +6,9 @@ import AppSidebar from "@/components/AppComponents/Sidebar"
 import Container from "@/components/AppComponents/Container"
 import Footer from "@/components/AppComponents/Footer"
 import { cookies } from "next/headers"
-import Header from "@/components/AppComponents/Header";
+// import Header from "@/components/AppComponents/Header";
+import BreadCrumb from '@/components/AppComponents/BreadCrumb'
+import Search from '@/components/AppComponents/Search'
 
 export const metadata: Metadata = {
   title: {
@@ -39,25 +41,19 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         <link rel="apple-touch-icon" href="touch-icon-iphone.png" />
-        {/* add safari tab icon */}
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="google-site-verification" content="MjAuu-Lc3CGp0xic4er0P409B4fueoITgV8_IAFPQLU" />
-        <meta property="twitter:image" content="/opengraph-image.png" />
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:title" content="opengraph-image.png" />
-        <meta property="twitter:description" content="Minju25kim dev blog" />
-        <meta property="description" content="Minju25kim dev blog" />
-        <meta property="og:image" content="/opengraph-image.png.png" />
-        <meta property="og:site_name" content="Minju25kim.fly.dev" />
-        <meta property="og:title" content="Minju25kim" />
-        <meta property="og:description" content="Minju25kim dev blog" />
-        <meta property="og:url" content="minju25kim.fly.dev" />
       </head>
+
       <body className={`${pretendard.className} antialiased`}>
         <SidebarProvider defaultOpen={defaultOpen}>
-          <SidebarTrigger className="fixed" />
           <AppSidebar />
-          <div className="container mx-auto max-w-2xl grid grid-rows-[auto_1fr_auto] gap-4 min-h-screen w-full pt-12 px-4">
-            <Header />
+          <div className="container mx-auto max-w-2xl grid grid-rows-[auto_auto_1fr_auto] gap-4 min-h-screen w-full p-4">
+            <header className='flex flex-row items-center justify-between w-full'>
+              <SidebarTrigger />
+              <Search />
+            </header>
+            <BreadCrumb />
             <Container>
               {children}
             </Container>
