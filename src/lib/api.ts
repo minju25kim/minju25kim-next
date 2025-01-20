@@ -2,8 +2,6 @@ import { Post } from "@/interfaces/Data";
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-console.log(backendUrl)
-
 export async function fetchTitle(id: string): Promise<string> {
   try {
     const response = await fetch(`${backendUrl}/content/${id}`);

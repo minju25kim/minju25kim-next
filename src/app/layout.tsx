@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     images: ['opengraph-image.png'],
     card: 'summary_large_image'
   },
-  // metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
+  metadataBase: new URL('https://minju25kim.fly.dev/'),
 };
 
 async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
