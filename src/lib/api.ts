@@ -52,8 +52,6 @@ export async function getAllPosts(): Promise<Post[]> {
   try {
     const response = await fetch(`${backendUrl}/content`);
     if (!response.ok) {
-      const text = await response.text();
-      console.error("Error fetching posts: Response not OK", text);
       throw new Error(`Error fetching posts: ${response.statusText}`);
     }
 
