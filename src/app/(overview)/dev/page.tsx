@@ -3,8 +3,8 @@ import AppTab from "@/components/AppComponents/Tab";
 import { getAllPostsDirectory } from "@/lib/api";
 
 
-export default function Page() {
-  const allPosts = getAllPostsDirectory("dev");
+export default async function Page() {
+  const allPosts = await getAllPostsDirectory("dev");
 
   return (
     <>

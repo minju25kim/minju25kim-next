@@ -40,3 +40,5 @@ yarn-error.log*
 next-env.d.ts
 
 .hugo_build.lock
+
+TODO.txt

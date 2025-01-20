@@ -1,6 +1,6 @@
 import {
     Card,
-    // CardContent,
+    CardContent,
     CardDescription,
     CardFooter,
     CardHeader,
@@ -8,22 +8,23 @@ import {
 } from "@/components/ui/card"
 import { Post } from '@/interfaces/Data'
 import Link from "next/link";
+import Image from "next/image";
 import Keywords from "./Keywords";
+import { dateString } from "@/lib/utils";
 
 interface CardProps {
-    directory: string;
+    directory?: string;
     allPosts: Post[];
 }
 
 
 export default function AppCard({ directory, allPosts }: CardProps) {
-    const dateString = (date: string) => new Date(date).toISOString().split('T')[0].replace(/-/g, '/');
-
+const defaultCoverImage = '/opengraph-image.png'
     return (
-        <div className="grid gap-4 flex-col md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
             {allPosts.map((post: Post) => (
-                <Card key={post.slug}>
-                    <Link href={`/${directory}/${post.slug}`}>
+                <Card key={post._id}>
+                    <Link href={`/${directory || post.dir}/${post._id}`}>
                         <CardHeader>
                             <CardTitle className="truncate whitespace-nowrap overflow-hidden text-ellipsis">
                                 {post.title}
@@ -32,6 +33,12 @@ export default function AppCard({ directory, allPosts }: CardProps) {
                                 {dateString(post.date)} | 0 views
                             </CardDescription>
                         </CardHeader>
+                        <CardContent className="flex flex-row justify-center">
+                            {post.coverImage
+                                ? <Image width={100} height={100} alt={post.title} src={post.coverImage} />
+                                : <Image width={100} height={100} alt={post.title} src={defaultCoverImage} />
+                            }
+                        </CardContent>
                         <CardFooter>
                             <Keywords keywords={post.keywords} />
                         </CardFooter>

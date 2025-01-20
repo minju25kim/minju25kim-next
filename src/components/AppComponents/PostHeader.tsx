@@ -1,17 +1,22 @@
 import PostTitle from '@/components/AppComponents/SecondaryTitle';
+import { dateString } from "@/lib/utils";
+import Keywords from '@/components/AppComponents/Keywords'
 
 type Props = {
     title: string;
     coverImage: string;
     date: string;
+    author: string;
+    keywords: string[]
 };
 
-export function PostHeader({ title, date }: Props) {
-    const dateString = new Date(date).toISOString().split('T')[0].replace(/-/g, '/');
+export function PostHeader({ title, date, author, keywords }: Props) {
+    // console.log(keywords)
     return (
         <div className="mb-4">
             <PostTitle title={title} />
-            <span className="text-sm text-muted-foreground">{dateString} | 0 views</span>
+            <div className="text-center md:text-justify text-sm text-muted-foreground">{author} | {dateString(date)} | 0 views</div>
+            <Keywords keywords={keywords} />
         </div>
     )
 }
