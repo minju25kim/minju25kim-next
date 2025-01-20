@@ -49,11 +49,22 @@ export async function getAllPostsDirectory(dir: string): Promise<Post[]> {
 }
 
 export async function getAllPosts(): Promise<Post[]> {
-  const response = await fetch(`${backendUrl}/content`);
-  const posts: Post[] = await response.json();
-  return posts.sort((post1, post2) => {
-    const date1 = new Date(post1.date);
-    const date2 = new Date(post2.date);
-    return date2.getTime() - date1.getTime();
-  });
+  try {
+    const response = await fetch(`${backendUrl}/content`);
+    if (!response.ok) {
+      const text = await response.text();
+      console.error("Error fetching posts: Response not OK", text);
+      throw new Error(`Error fetching posts: ${response.statusText}`);
+    }
+
+    const posts: Post[] = await response.json();
+    return posts.sort((post1, post2) => {
+      const date1 = new Date(post1.date);
+      const date2 = new Date(post2.date);
+      return date2.getTime() - date1.getTime();
+    });
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return [];
+  }
 }
