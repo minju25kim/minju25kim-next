@@ -1,7 +1,7 @@
 import Title from "@/components/AppComponents/PrimaryTitle";
 import AppTab from "@/components/AppComponents/Tab";
 import { getAllPostsDirectory } from "@/lib/api";
-import { Post } from "@/interfaces/Data";
+// import { Post } from "@/interfaces/Data";
 
 export default async function Page() {
   const allPosts = await getAllPostsDirectory("dev");
