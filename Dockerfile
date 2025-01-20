@@ -28,10 +28,11 @@ RUN npm ci --include=dev
 COPY . .
 
 RUN --mount=type=secret,id=NEXT_PUBLIC_BACKEND_URL \
-    NEXT_PUBLIC_BACKEND_URL="$(cat /run/secrets/NEXT_PUBLIC_BACKEND_URL)"
+    NEXT_PUBLIC_BACKEND_URL="$(cat /run/secrets/NEXT_PUBLIC_BACKEND_URL)" \
+    npm run build
 
-# Build application
-RUN npx next build --experimental-build-mode compile
+# # Build application
+# RUN npx next build --experimental-build-mode compile
 
 # Remove development dependencies
 RUN npm prune --omit=dev

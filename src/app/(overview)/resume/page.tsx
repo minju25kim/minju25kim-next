@@ -6,10 +6,10 @@ import Title from "@/components/AppComponents/PrimaryTitle";
 export default function Page() {
   // const allJsons = getAllJsons();
   return (
-    <>
+    <div>
       <Title title="Resume" />
       {/* <Resume allJsons={allJsons} /> */}
-    </>
+    </div>
 
   );
 }

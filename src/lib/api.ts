@@ -14,7 +14,7 @@ export async function fetchTitle(id: string): Promise<string> {
     return post.title;
   } catch (error) {
     console.error("Error fetching post:", error);
-    throw error;
+    return "";
   }
 }
 
@@ -28,7 +28,18 @@ export async function getPostById(id: string): Promise<Post> {
     return post;
   } catch (error) {
     console.error("Error fetching posts:", error);
-    throw error;
+    return {
+      _id: "error",
+      title: "Error fetching post",
+      content: "There was an error connecting to the backend. Please try again later.",
+      author: "System",
+      date: new Date().toISOString(),
+      coverImage: "",
+      keywords: [],
+      ogImage: { url: "" },
+      dir: "unknown",
+      excerpt: "Error occurred while fetching the post."
+    };
   }
 }
 
@@ -46,7 +57,7 @@ export async function getAllPostsDirectory(dir: string): Promise<Post[]> {
     });
   } catch (error) {
     console.error("Error fetching posts:", error);
-    throw error;
+    return [];
   }
 }
 

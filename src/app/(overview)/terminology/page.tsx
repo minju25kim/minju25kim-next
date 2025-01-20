@@ -7,9 +7,9 @@ export default async function Page() {
   const allPosts = await getAllPostsDirectory("terminology");
 
   return (
-    <>
+    <div>
       <Title title="Terminology" />
       <AppTab views={["table", "card"]} allPosts={allPosts} />
-    </>
+    </div>
   );
 }

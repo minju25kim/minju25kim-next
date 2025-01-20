@@ -7,10 +7,10 @@ export default async function Page() {
   const allPosts = await getAllPostsDirectory("dev");
 
   return (
-    <>
+    <div>
       <Title title="Dev" />
       <AppTab views={["table", "card"]} allPosts={allPosts} />
-    </>
+    </div>
 
   );
 }
