@@ -16,7 +16,12 @@ jobs:
     concurrency: deploy-group    
     steps:
       - uses: actions/checkout@v4
+      - name: Create .env.production file
+        run: |
+          echo ${{ secrets.ENV }} > .env.production
+          ls -la
+
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only --build-secret NEXT_PUBLIC_BACKEND_URL=${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
+      - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
