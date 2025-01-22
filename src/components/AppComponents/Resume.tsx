@@ -1,6 +1,8 @@
 'use client'
 import { Resume } from "@/interfaces/Data"
 import React from 'react'
+import { Button } from "../ui/button";
+import { Download } from "lucide-react";
 
 function AppResume({ allResume }: { allResume: Resume[] }) {
     const generatePDF = async (title: string) => {
@@ -46,9 +48,10 @@ function AppResume({ allResume }: { allResume: Resume[] }) {
             const data = resume.data
             return (
                 <div key={meta.title}>
-                    <button id="download-button" onClick={() => { generatePDF(meta.title) }}>Download as PDF</button>
-
-                    <div className="italic text-sm text-muted-foreground mb-2 text-center md:text-start">{meta.lang.toUpperCase()} | {new Date(meta.date).toDateString()}</div>
+                    <div className="flex flex-wrap justify-between items-center">
+                        <Button variant="outline" onClick={() => { generatePDF(meta.title) }}><Download />Download as PDF</Button>
+                        <div className="italic text-sm text-muted-foreground text-center md:text-start">{meta.lang.toUpperCase()} | {new Date(meta.date).toDateString()}</div>
+                    </div>
                     <div className="w-full p-4 shadow-lg bg-white mb-4" id={`${meta.title}`}>
                         <header className="text-center mb-2">
                             <h1 className="text-3xl font-bold">{data.infos.name}</h1>
