@@ -5,7 +5,6 @@ import Resume from "@/components/AppComponents/Resume"
 
 export default async function Page() {
   const allResume =  await getAllResume();
-  console.log(allResume)
   return (
     <div>
       <Title title="Resume" />
