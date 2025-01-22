@@ -6,7 +6,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Post } from '@/interfaces/Data'
+import { Content } from '@/interfaces/Data'
 import Link from "next/link";
 import Image from "next/image";
 import Keywords from "./Keywords";
@@ -14,7 +14,7 @@ import { dateString } from "@/lib/utils";
 
 interface CardProps {
     directory?: string;
-    allPosts: Post[];
+    allPosts: Content[];
 }
 
 
@@ -22,7 +22,7 @@ export default function AppCard({ directory, allPosts }: CardProps) {
 const defaultCoverImage = '/opengraph-image.png'
     return (
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-            {allPosts.map((post: Post) => (
+            {allPosts.map((post: Content) => (
                 <Card key={post._id}>
                     <Link href={`/${directory || post.dir}/${post._id}`}>
                         <CardHeader>

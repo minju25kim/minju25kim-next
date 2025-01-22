@@ -2,12 +2,12 @@
 
 import * as React from "react"
 import { Calendar } from "@/components/ui/calendar"
-import { Post } from "@/interfaces/Data"
+import { Content } from "@/interfaces/Data"
 import Card from "@/components/AppComponents/Card"
 
 interface CalendarProps {
   directory: string;
-  allPosts: Post[];
+  allPosts: Content[];
 }
 
 export default function AppCalendar({ directory, allPosts }: CalendarProps) {

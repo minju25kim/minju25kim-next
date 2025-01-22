@@ -6,7 +6,7 @@ import {
     TabsList,
     TabsTrigger,
 } from "@/components/ui/tabs"
-import { Post, Json } from "@/interfaces/Data";
+import { Content, Json } from "@/interfaces/Data";
 
 import Table from '@/components/AppComponents/Table';
 import Card from '@/components/AppComponents/Card'
@@ -14,7 +14,7 @@ import Calendar from "@/components/AppComponents//Calendar";
 import { usePathname } from "next/navigation";
 
 type AppTabsProps = {
-    allPosts?: Post[];
+    allPosts?: Content[];
     allJsons?: Json[];
     views: string[];
 };

@@ -1,10 +1,10 @@
-import { getAllPostsDirectory } from "@/lib/api";
+import { getAllContentsDirectory } from "@/lib/api";
 import Title from "@/components/AppComponents/PrimaryTitle";
 import AppTab from "@/components/AppComponents/Tab";
-// import { Post } from "@/interfaces/Data";
+// import { Content } from "@/interfaces/Data";
 
 export default async function Page() {
-  const allPosts = await getAllPostsDirectory("terminology");
+  const allPosts = await getAllContentsDirectory("terminology");
 
   return (
     <div>

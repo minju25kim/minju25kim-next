@@ -38,6 +38,10 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
   return (
     <html suppressHydrationWarning lang="en">
       <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="https://minju25kim.fly.dev" />
+
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         <link rel="apple-touch-icon" href="touch-icon-iphone.png" />
@@ -47,8 +51,8 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
 
       <body className={`${pretendard.className} antialiased`}>
         <SidebarProvider defaultOpen={defaultOpen}>
-          <AppSidebar />
-          <div className="container mx-auto max-w-2xl grid grid-rows-[auto_auto_1fr_auto] gap-4 min-h-screen w-full p-4">
+          <AppSidebar/>
+          <div className="mx-auto w-full container max-w-2xl grid grid-rows-[auto_auto_1fr_auto] gap-4 min-h-screen p-4">
             <header className='flex flex-row items-center justify-between w-full'>
               <SidebarTrigger />
               <Search />

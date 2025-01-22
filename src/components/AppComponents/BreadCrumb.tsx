@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { fetchTitle } from "@/lib/api";
+import { fetchContentTitle } from "@/lib/api";
 
 function AppBreadCrumb() {
     const pathname = usePathname();
@@ -20,7 +20,7 @@ function AppBreadCrumb() {
     useEffect(() => {
         if (id) {
             async function getTitle() {
-                const title = await fetchTitle(id);
+                const title = await fetchContentTitle(id);
                 setTitle(title);
             }
             getTitle();

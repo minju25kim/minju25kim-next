@@ -1,12 +1,12 @@
 import Title from "@/components/AppComponents/PrimaryTitle";
 import Link from "next/link";
 import { GitHubIcon, LinkedInIcon, TwitterIcon } from "@/components/icons";
-import { getAllPosts } from '@/lib/api'
+import { getAllContent } from '@/lib/api'
 import SecondaryTitle from "@/components/AppComponents/SecondaryTitle";
 import { GlobeIcon, MailIcon } from "lucide-react";
 import { Button } from "@/components/ui/button"
 import Card from "@/components/AppComponents/Card";
-import { Post } from '@/interfaces/Data'
+import { Content } from '@/interfaces/Data'
 // import AppTab from "@/components/AppComponents/Tab"
 import Badge from "@/components/AppComponents/Badge";
 
@@ -18,8 +18,8 @@ const links = [
 ];
 
 async function Home() {
-  const allPosts: Post[] = await getAllPosts()
-  
+  const allPosts: Content[] = await getAllContent()
+
   return (
     <>
       <div className="flex flex-col items-center md:items-start mb-4">
