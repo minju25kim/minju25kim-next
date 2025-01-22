@@ -5,17 +5,17 @@ import { Content } from "@/interfaces/Data";
 
 
 export default async function Page() {
-  // const allPosts: Content[] = await getAllContentsDirectory("til");
-  let allPosts: Content[] = [];
+  // const allContent: Content[] = await getAllContentsDirectory("til");
+  let allContent: Content[] = [];
   try {
-    allPosts = await getAllContentsDirectory("til");
+    allContent = await getAllContentsDirectory("til");
   } catch (error) {
     console.error("Failed to fetch posts:", error);
   }
   return (
     <div>
       <Title title="TIL" />
-      <AppTab views={["table", "calendar"]} allPosts={allPosts} />
+      <AppTab views={["table", "calendar"]} allContent={allContent} />
     </div>
   );
 } 

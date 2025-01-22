@@ -18,7 +18,7 @@ const links = [
 ];
 
 async function Home() {
-  const allPosts: Content[] = await getAllContent()
+  const allContent: Content[] = await getAllContent()
 
   return (
     <>
@@ -56,8 +56,8 @@ async function Home() {
         {/* <SecondaryTitle title="Featured posts" />
         based on the view count of the post */}
         <SecondaryTitle title="Latest posts" />
-        {/* <AppTab views={["table", "card"]} allPosts={allPosts} /> */}
-        <Card allPosts={allPosts} />
+        {/* <AppTab views={["table", "card"]} allContent={allContent} /> */}
+        <Card allContent={allContent} />
       </div>
     </>
   );

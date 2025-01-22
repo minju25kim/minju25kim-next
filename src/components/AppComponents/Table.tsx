@@ -12,10 +12,10 @@ import { dateString } from "@/lib/utils";
 
 interface TableProps {
     directory: string;
-    allPosts: Content[];
+    allContent: Content[];
 }
 
-function AppTable({ directory, allPosts }: TableProps) {
+function AppTable({ directory, allContent }: TableProps) {
 
     return (
         <Table>
@@ -27,7 +27,7 @@ function AppTable({ directory, allPosts }: TableProps) {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {allPosts.map((post: Content) => {
+                {allContent.map((post: Content) => {
                     return (
                         <TableRow key={post._id}>
                             <TableCell className="font-medium">

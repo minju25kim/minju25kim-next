@@ -14,15 +14,15 @@ import { dateString } from "@/lib/utils";
 
 interface CardProps {
     directory?: string;
-    allPosts: Content[];
+    allContent: Content[];
 }
 
 
-export default function AppCard({ directory, allPosts }: CardProps) {
+export default function AppCard({ directory, allContent }: CardProps) {
 const defaultCoverImage = '/opengraph-image.png'
     return (
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-            {allPosts.map((post: Content) => (
+            {allContent.map((post: Content) => (
                 <Card key={post._id}>
                     <Link href={`/${directory || post.dir}/${post._id}`}>
                         <CardHeader>

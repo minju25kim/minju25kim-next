@@ -6,7 +6,7 @@ import {
     TabsList,
     TabsTrigger,
 } from "@/components/ui/tabs"
-import { Content, Json } from "@/interfaces/Data";
+import { Content } from "@/interfaces/Data";
 
 import Table from '@/components/AppComponents/Table';
 import Card from '@/components/AppComponents/Card'
@@ -14,8 +14,7 @@ import Calendar from "@/components/AppComponents//Calendar";
 import { usePathname } from "next/navigation";
 
 type AppTabsProps = {
-    allPosts?: Content[];
-    allJsons?: Json[];
+    allContent?: Content[];
     views: string[];
 };
 
@@ -30,7 +29,7 @@ function DirectorySlug() {
 }
 
 
-function AppTab({ views, allPosts = [] }: AppTabsProps) {
+function AppTab({ views, allContent = [] }: AppTabsProps) {
     const { directory } = DirectorySlug();
 
     return (
@@ -46,13 +45,13 @@ function AppTab({ views, allPosts = [] }: AppTabsProps) {
                 return (
                     <TabsContent value={view} key={view}>
                         {view === 'table' ?
-                            <Table directory={directory} allPosts={allPosts} />
+                            <Table directory={directory} allContent={allContent} />
                             : null}
                         {view === 'calendar' ?
-                            <Calendar directory={directory} allPosts={allPosts} />
+                            <Calendar directory={directory} allContent={allContent} />
                             : null}
                         {view === 'card' ?
-                            <Card directory={directory} allPosts={allPosts} />
+                            <Card directory={directory} allContent={allContent} />
                             : null}
                     </TabsContent>
                 )
