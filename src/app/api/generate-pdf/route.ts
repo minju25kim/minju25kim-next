@@ -5,7 +5,6 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { htmlContent } = body;
-
     if (!htmlContent) {
       return NextResponse.json(
         { error: "No HTML content provided" },
@@ -37,28 +36,21 @@ export async function POST(request: NextRequest) {
     const page = await browser.newPage();
 
     await page.setViewport({
-      width: 1200, // Increased width
+      width: 1200,
       height: 1000,
       deviceScaleFactor: 1,
     });
 
-    // Force screen media type
     await page.emulateMediaType("screen");
 
-
-    // Wait for network idle to ensure Tailwind is loaded
     await page.setContent(fullHtml, {
       waitUntil: ["domcontentloaded", "networkidle0"],
     });
 
-    // Optional: Add delay to ensure styles are applied
-    // await page.waitForTimeout(1000);
-
     const pdfBuffer = await page.pdf({
       format: "A4",
-      printBackground: true, // Important for background colors
+      printBackground: true,
       margin: {
-        // Adjust margins as needed
         top: "20px",
         right: "20px",
         bottom: "20px",

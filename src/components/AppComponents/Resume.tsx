@@ -1,16 +1,14 @@
 'use client'
 import { Resume } from "@/interfaces/Data"
 import React from 'react'
-// import puppeteer from 'puppeteer';
 
 function AppResume({ allResume }: { allResume: Resume[] }) {
-    const generatePDF = async () => {
+    const generatePDF = async (title: string) => {
         try {
-            const pdfElement = document.querySelector('#pdf-download');
+            const pdfElement = document.getElementById(`${title}`);
             if (!pdfElement) {
                 throw new Error('Element with ID "pdf-download" not found');
             }
-
             const htmlContent = pdfElement.outerHTML;
             const response = await fetch('/api/generate-pdf', {
                 method: 'POST',
@@ -29,7 +27,7 @@ function AppResume({ allResume }: { allResume: Resume[] }) {
 
             const downloadLink = document.createElement("a") as HTMLAnchorElement;
             downloadLink.href = downloadUrl;
-            downloadLink.download = "MinjuKimDevResume.pdf";
+            downloadLink.download = `${title}.pdf`;
 
             document.body.appendChild(downloadLink);
             downloadLink.click();
@@ -48,10 +46,10 @@ function AppResume({ allResume }: { allResume: Resume[] }) {
             const data = resume.data
             return (
                 <div key={meta.title}>
-                    <button id="download-button" onClick={generatePDF}>Download as PDF</button>
+                    <button id="download-button" onClick={() => { generatePDF(meta.title) }}>Download as PDF</button>
 
                     <div className="italic text-sm text-muted-foreground mb-2 text-center md:text-start">{meta.lang.toUpperCase()} | {new Date(meta.date).toDateString()}</div>
-                    <div className="w-full p-4 shadow-lg bg-white mb-4" id="pdf-download">
+                    <div className="w-full p-4 shadow-lg bg-white mb-4" id={`${meta.title}`}>
                         <header className="text-center mb-2">
                             <h1 className="text-3xl font-bold">{data.infos.name}</h1>
                             <div className="text-sm text-muted-foreground flex flex-wrap justify-center gap-2">
@@ -137,7 +135,7 @@ function AppResume({ allResume }: { allResume: Resume[] }) {
                             ))}
                         </section>
                     </div >
-                </div>
+                </div >
             )
         })
     )
