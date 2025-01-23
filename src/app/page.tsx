@@ -55,7 +55,7 @@ async function Home() {
       <div className="flex flex-col mx-auto w-full mt-2">
         {/* <SecondaryTitle title="Featured posts" />
         based on the view count of the post */}
-        <SecondaryTitle title="Latest posts" />
+        <SecondaryTitle title="Latest contents" />
         {/* <AppTab views={["table", "card"]} allContent={allContent} /> */}
         <Card allContent={allContent} />
       </div>
