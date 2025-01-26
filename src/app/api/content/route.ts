@@ -1,10 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+// NextRequest,
+import { NextResponse } from "next/server";
 // import { getContentById } from "@/lib/api";
 import { Content } from "@/interfaces/Data";
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-
-export async function GET(req: NextRequest) {
+// req: NextRequest
+export async function GET() {
     try {
         // Parse the request URL and search parameters
         // const { searchParams } = new URL(req.url);
@@ -35,8 +36,7 @@ export async function GET(req: NextRequest) {
     }
 }
 
-
-export async function getAllContent(): Promise<Content[]> {
+async function getAllContent(): Promise<Content[]> {
     try {
         const response = await fetch(`${backendUrl}/content`);
         if (!response.ok) {
