@@ -15,14 +15,14 @@ const links = [
   { title: 'email', url: 'mailto:minju25kim@gmail.com', icon: MailIcon },
 ];
 
+const API_URL = process.env.NODE_ENV === 'production'
+  ? 'https://minju25kim.fly.dev/api/content'
+  : 'http://localhost:3001/api/content';
+
 async function fetchData() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL; // Use environment variable for base URL
-    const response = await fetch(`${baseUrl}/api/content`, {
+    const response = await fetch(API_URL, {
       method: 'GET'
-      // headers: {
-      //   'x-request-type': 'get-by-id', // Example: Fetch content by ID
-      // },
     });
 
     if (!response.ok) {
@@ -38,8 +38,7 @@ async function fetchData() {
 }
 
 export default async function Page() {
-  // Fetch data on the server side
-  const contents: Content[] = await fetchData();
+  const contents = await fetchData();
 
   return (
     <>
