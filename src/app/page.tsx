@@ -17,7 +17,7 @@ const links = [
 
 async function fetchData() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001'; // Use environment variable for base URL
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL; // Use environment variable for base URL
     const response = await fetch(`${baseUrl}/api/content`, {
       method: 'GET'
       // headers: {
