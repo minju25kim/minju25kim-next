@@ -1,4 +1,4 @@
-import { Content, Resume } from "@/interfaces/Data";
+import { Content } from "@/interfaces/Data";
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 

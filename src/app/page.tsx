@@ -19,9 +19,10 @@ async function fetchData() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001'; // Use environment variable for base URL
     const response = await fetch(`${baseUrl}/api/content`, {
-      headers: {
-        'x-request-type': 'get-by-id', // Example: Fetch content by ID
-      },
+      method: 'GET'
+      // headers: {
+      //   'x-request-type': 'get-by-id', // Example: Fetch content by ID
+      // },
     });
 
     if (!response.ok) {
