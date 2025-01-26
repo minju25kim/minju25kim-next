@@ -21,14 +21,15 @@ RUN apt-get update -qq && \
 
 # Install node modules
 COPY package-lock.json package.json ./
+# Add these lines in the build stage, before npm ci
+
 RUN npm ci --include=dev
 
 # Copy application code
 COPY . .
 
-# Pass the environment variable to the build process
-ARG NEXT_PUBLIC_BACKEND_URL
-ENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
+RUN --mount=type=secret,id=NEXT_PUBLIC_BACKEND_URL \
+    NEXT_PUBLIC_BACKEND_URL="$(cat /run/secrets/NEXT_PUBLIC_BACKEND_URL)"
 
 # Build application
 RUN npx next build --experimental-build-mode compile
