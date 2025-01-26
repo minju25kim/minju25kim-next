@@ -2,7 +2,7 @@
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
-/* @plugin "tailwind-corner-smoothing"; */
+@plugin "tailwind-corner-smoothing";
 
 @layer base {
   :root {
@@ -76,11 +76,11 @@
   }
 }
 
-@layer base {
+/* @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
   }
-}
+} */
