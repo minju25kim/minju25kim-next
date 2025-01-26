@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "PORT=3001 next dev --turbopack",
     "build": "next build",
-    "start": "npm run build && next start",
+    "start": "next start",
     "lint": "next lint",
     "prepare": "husky"
   },
