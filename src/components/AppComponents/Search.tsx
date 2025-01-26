@@ -74,7 +74,7 @@ export default function Search() {
 
       {results.length > 0 && (
         <div className="absolute z-10 mt-2 w-full max-w-xs">
-          <ul className="max-h-60 overflow-y-auto rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg">
+          <ul className="max-h-60 overflow-y-auto rounded-md smooth-corners-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg">
             {results.map((item: Content) => (
               <Link key={item._id} href={`/${item.dir}/${item._id}`} onClick={() => handleItemClick()}>
                 <li className="p-3 border-b last:border-b-0 border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer">

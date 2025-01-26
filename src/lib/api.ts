@@ -85,22 +85,3 @@ export async function getAllContent(): Promise<Content[]> {
   }
 }
 
-export async function getAllResume(): Promise<Resume[]> {
-  try {
-    const response = await fetch(`${backendUrl}/resume`);
-    if (!response.ok) {
-      throw new Error(`Error fetching all resume: ${response.statusText}`);
-    }
-
-    const resumes: Resume[] = await response.json();
-    return resumes.sort((resume1, resume2) => {
-      const date1 = new Date(resume1.meta.date);
-      const date2 = new Date(resume2.meta.date);
-      return date2.getTime() - date1.getTime();
-    });
-  } catch (error) {
-    console.error("Error fetching contents:", error);
-    return [];
-  }
-}
-

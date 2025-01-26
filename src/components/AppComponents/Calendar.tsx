@@ -27,7 +27,7 @@ export default function AppCalendar({ directory, allContent }: CalendarProps) {
         mode="single"
         selected={date}
         onSelect={setDate}
-        className="rounded-md border shadow"
+        className="rounded-md smooth-corners-md border shadow"
         datesWithPosts={datesWithPosts}
       />
       <Card directory={directory} allContent={date ? filteredPost(date) : []} />
