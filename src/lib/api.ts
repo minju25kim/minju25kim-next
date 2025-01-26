@@ -2,11 +2,11 @@ import { Content } from "@/interfaces/Data";
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-if (!backendUrl) {
-  throw new Error(
-    "NEXT_PUBLIC_BACKEND_URL is not defined. Please set it in your environment variables."
-  );
-}
+// if (!backendUrl) {
+//   throw new Error(
+//     "NEXT_PUBLIC_BACKEND_URL is not defined. Please set it in your environment variables."
+//   );
+// }
 
 export async function fetchContentTitle(id: string): Promise<string> {
   try {
