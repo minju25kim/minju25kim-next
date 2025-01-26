@@ -1,3 +1,4 @@
+'use client'
 import Title from "@/components/AppComponents/PrimaryTitle";
 import Link from "next/link";
 import { GitHubIcon, LinkedInIcon, TwitterIcon } from "@/components/icons";
@@ -7,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import Card from "@/components/AppComponents/Card";
 import { Content } from '@/interfaces/Data';
 import Badge from "@/components/AppComponents/Badge";
+import { useEffect, useState } from "react";
 
 const links = [
   { title: 'github', url: 'https://github.com/minju25kim', icon: GitHubIcon },
@@ -15,32 +17,25 @@ const links = [
   { title: 'email', url: 'mailto:minju25kim@gmail.com', icon: MailIcon },
 ];
 
-async function fetchData() {
-  try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001'; // Use environment variable for base URL
-    const response = await fetch(`${baseUrl}/api/content`, {
-      method: 'GET'
-      // headers: {
-      //   'x-request-type': 'get-by-id', // Example: Fetch content by ID
-      // },
-    });
+export default function Page() {
+  const [results, setResults] = useState<Content[]>([]);
 
-    if (!response.ok) {
-      throw new Error('Failed to fetch data');
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/content', {
+          method: 'GET'
+        });
+        const data = await response.json();
+        setResults(data)
+      } catch (error) {
+        console.error("Error fetching contents:", error);
+      }
+    };
 
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    return [];
-  }
-}
-
-export default async function Page() {
-  // Fetch data on the server side
-  const contents: Content[] = await fetchData();
-
+    fetchData();
+  }, []);
+  
   return (
     <>
       <div className="flex flex-col items-center md:items-start mb-4">
@@ -75,7 +70,7 @@ export default async function Page() {
       <Badge />
       <div className="flex flex-col mx-auto w-full mt-2">
         <SecondaryTitle title="Latest contents" />
-        <Card allContent={contents} />
+        <Card allContent={results} />
       </div>
     </>
   );
