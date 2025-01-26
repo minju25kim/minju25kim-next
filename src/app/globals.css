@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@plugin "tailwind-corner-smoothing";
 
 @layer base {
   :root {

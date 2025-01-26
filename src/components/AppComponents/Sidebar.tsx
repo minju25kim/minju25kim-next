@@ -1,18 +1,19 @@
-import { Calendar, Home, FolderCode, Book, Paperclip } from "lucide-react"
+"use client"; // Add this line at the top of the file
 
+import { useState } from 'react';
+import { Calendar, Home, FolderCode, Book, Paperclip } from "lucide-react";
 import {
     Sidebar,
     SidebarContent,
     SidebarGroup,
     SidebarGroupContent,
     SidebarHeader,
-    // SidebarGroupLabel,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
     SidebarRail,
     SidebarClose
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 import Link from "next/link";
 
 const items = [
@@ -24,14 +25,20 @@ const items = [
 ];
 
 function AppSidebar() {
+    const [isSidebarVisible, setSidebarVisible] = useState(true);
+
+    const toggleSidebar = () => {
+        setSidebarVisible(!isSidebarVisible);
+    };
+
     return (
-        <Sidebar>
+        <Sidebar className={isSidebarVisible ? '' : 'hidden'}>
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarHeader>
                         Minju25kim
                     </SidebarHeader>
-                    <SidebarClose className="absolute right-0 top-0" />
+                    <SidebarClose className="absolute right-0 top-0" onClick={toggleSidebar} />
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (
@@ -50,7 +57,7 @@ function AppSidebar() {
             </SidebarContent>
             <SidebarRail />
         </Sidebar>
-    )
+    );
 }
 
-export default AppSidebar
+export default AppSidebar;

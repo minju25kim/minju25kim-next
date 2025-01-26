@@ -1,13 +1,11 @@
 import Title from "@/components/AppComponents/PrimaryTitle";
 import Link from "next/link";
 import { GitHubIcon, LinkedInIcon, TwitterIcon } from "@/components/icons";
-import { getAllPosts } from '@/lib/api'
 import SecondaryTitle from "@/components/AppComponents/SecondaryTitle";
 import { GlobeIcon, MailIcon } from "lucide-react";
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import Card from "@/components/AppComponents/Card";
-import { Post } from '@/interfaces/Data'
-// import AppTab from "@/components/AppComponents/Tab"
+import { Content } from '@/interfaces/Data';
 import Badge from "@/components/AppComponents/Badge";
 
 const links = [
@@ -17,8 +15,32 @@ const links = [
   { title: 'email', url: 'mailto:minju25kim@gmail.com', icon: MailIcon },
 ];
 
-async function Home() {
-  const allPosts: Post[] = await getAllPosts()
+async function fetchData() {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001'; // Use environment variable for base URL
+    const response = await fetch(`${baseUrl}/api/content`, {
+      method: 'GET'
+      // headers: {
+      //   'x-request-type': 'get-by-id', // Example: Fetch content by ID
+      // },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return [];
+  }
+}
+
+export default async function Page() {
+  // Fetch data on the server side
+  const contents: Content[] = await fetchData();
+
   return (
     <>
       <div className="flex flex-col items-center md:items-start mb-4">
@@ -52,14 +74,9 @@ async function Home() {
       </div>
       <Badge />
       <div className="flex flex-col mx-auto w-full mt-2">
-        {/* <SecondaryTitle title="Featured posts" />
-        based on the view count of the post */}
-        <SecondaryTitle title="Latest posts" />
-        {/* <AppTab views={["table", "card"]} allPosts={allPosts} /> */}
-        <Card allPosts={allPosts} />
+        <SecondaryTitle title="Latest contents" />
+        <Card allContent={contents} />
       </div>
     </>
   );
 }
-
-export default Home;

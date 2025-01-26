@@ -2,24 +2,24 @@
 
 import * as React from "react"
 import { Calendar } from "@/components/ui/calendar"
-import { Post } from "@/interfaces/Data"
+import { Content } from "@/interfaces/Data"
 import Card from "@/components/AppComponents/Card"
 
 interface CalendarProps {
   directory: string;
-  allPosts: Post[];
+  allContent: Content[];
 }
 
-export default function AppCalendar({ directory, allPosts }: CalendarProps) {
+export default function AppCalendar({ directory, allContent }: CalendarProps) {
   const [date, setDate] = React.useState<Date | undefined>(new Date())
 
   function filteredPost(date: Date) {
-    const [...post] = allPosts.filter((post) => new Date(post.date).toLocaleDateString() === date.toLocaleDateString())
+    const [...post] = allContent.filter((post) => new Date(post.date).toLocaleDateString() === date.toLocaleDateString())
     return post
   }
   const datesWithPosts = React.useMemo(() => {
-    return allPosts.map(post => new Date(post.date))
-  }, [allPosts])
+    return allContent.map(post => new Date(post.date))
+  }, [allContent])
 
   return (
     <div className="flex flex-col gap-2">
@@ -27,10 +27,10 @@ export default function AppCalendar({ directory, allPosts }: CalendarProps) {
         mode="single"
         selected={date}
         onSelect={setDate}
-        className="rounded-md border shadow"
+        className="rounded-md smooth-corners-md border shadow"
         datesWithPosts={datesWithPosts}
       />
-      <Card directory={directory} allPosts={date ? filteredPost(date) : []} />
+      <Card directory={directory} allContent={date ? filteredPost(date) : []} />
     </div>
   )
 }

@@ -7,15 +7,15 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { Post } from "@/interfaces/Data";
+import { Content } from "@/interfaces/Data";
 import { dateString } from "@/lib/utils";
 
 interface TableProps {
     directory: string;
-    allPosts: Post[];
+    allContent: Content[];
 }
 
-function AppTable({ directory, allPosts }: TableProps) {
+function AppTable({ directory, allContent }: TableProps) {
 
     return (
         <Table>
@@ -27,7 +27,7 @@ function AppTable({ directory, allPosts }: TableProps) {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {allPosts.map((post: Post) => {
+                {allContent.map((post: Content) => {
                     return (
                         <TableRow key={post._id}>
                             <TableCell className="font-medium">

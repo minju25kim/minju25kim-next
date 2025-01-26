@@ -1,4 +1,4 @@
-export type Post = {
+export type Content = {
   dir: string;
   _id: string;
   title: string;
@@ -14,18 +14,16 @@ export type Post = {
   author: string;
 };
 
-export type Json = {
-  slug: string;
-  fileContents: string;
-};
 
-export interface ResumeData {
+export interface Resume {
+  _id: string;
   meta: {
     title: string;
     lang: string;
     version: string;
+    date: Date;
   };
-  resume: {
+  data: {
     infos: {
       name: string;
       headline: string;
