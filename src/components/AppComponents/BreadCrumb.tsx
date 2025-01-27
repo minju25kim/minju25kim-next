@@ -1,33 +1,18 @@
-"use client";
 import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
     BreadcrumbList,
 } from "@/components/ui/breadcrumb";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 import { getContentById } from "@/lib/api";
 
-function AppBreadCrumb() {
-    const pathname = usePathname();
-    const [directory, id] = pathname
-        .split("/")
-        .filter((segment) => segment.length > 0);
+type Props = {
+    currentUrl: string;
+}
 
-    const [title, setTitle] = useState<string | null>(null);
 
-    useEffect(() => {
-        if (id) {
-            async function getTitle() {
-                const content = await getContentById(id);
-                const title = content.title
-                setTitle(title);
-            }
-            getTitle();
-        }
-    }, [id]);
-
+function AppBreadCrumb({ currentUrl }: Props) {
+    console.log(currentUrl)
     return (
         <Breadcrumb className="flex justify-center md:justify-start md:pl-2">
             <BreadcrumbList>
@@ -35,7 +20,7 @@ function AppBreadCrumb() {
                     <BreadcrumbLink href="/">~</BreadcrumbLink>
                 </BreadcrumbItem>
 
-                {directory && (
+                {/* {directory && (
                     <>
                         /
                         <BreadcrumbItem>
@@ -50,7 +35,7 @@ function AppBreadCrumb() {
                             <BreadcrumbLink href={`/${directory}/${id}`}>{title}</BreadcrumbLink>
                         </BreadcrumbItem>
                     </>
-                )}
+                )} */}
             </BreadcrumbList>
         </Breadcrumb>
     );

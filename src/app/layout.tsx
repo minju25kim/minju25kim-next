@@ -33,6 +33,7 @@ export const metadata: Metadata = {
 
 async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const cookieStore = await cookies()
+
   const defaultOpen = cookieStore.get("sidebar:state")?.value === "true"
 
   return (
@@ -51,13 +52,13 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
 
       <body className={`${pretendard.className} antialiased`}>
         <SidebarProvider defaultOpen={defaultOpen}>
-          <AppSidebar/>
+          <AppSidebar />
           <div className="mx-auto w-full container max-w-2xl grid grid-rows-[auto_auto_1fr_auto] gap-4 min-h-screen p-4">
             <header className='flex flex-row items-center justify-between w-full'>
               <SidebarTrigger />
               <Search />
             </header>
-            <BreadCrumb />
+            {/* <BreadCrumb  /> */}
             <Container>
               {children}
             </Container>
