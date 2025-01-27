@@ -7,24 +7,6 @@ const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 // req: NextRequest
 export async function GET() {
     try {
-        // Parse the request URL and search parameters
-        // const { searchParams } = new URL(req.url);
-        // const id = searchParams.get("id");
-        // const requestType = req.headers.get("x-request-type");
-
-        // switch (requestType) {
-        //     case "get-by-id":
-        //         if (id) {
-        //             // Fetch content by ID
-        //             const content = await getContentById(id);
-        //             return NextResponse.json(content, { status: 200 });
-        //         } else {
-        //             return NextResponse.json({ error: "ID is required" }, { status: 400 });
-        //         }
-
-        //     default:
-        //         // Default to fetching all content
-        //     }
         const contents = await getAllContent();
         return NextResponse.json(contents, { status: 200 });
     } catch (error) {
