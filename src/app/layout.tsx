@@ -7,7 +7,7 @@ import Container from "@/components/AppComponents/Container"
 import Footer from "@/components/AppComponents/Footer"
 import { cookies } from "next/headers"
 // import Header from "@/components/AppComponents/Header";
-import BreadCrumb from '@/components/AppComponents/BreadCrumb'
+// import BreadCrumb from '@/components/AppComponents/BreadCrumb'
 import Search from '@/components/AppComponents/Search'
 
 export const metadata: Metadata = {
