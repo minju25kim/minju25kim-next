@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { fetchContentTitle } from "@/lib/api";
+import { getContentById } from "@/lib/api";
 
 function AppBreadCrumb() {
     const pathname = usePathname();
@@ -20,13 +20,14 @@ function AppBreadCrumb() {
     useEffect(() => {
         if (id) {
             async function getTitle() {
-                const title = await fetchContentTitle(id);
+                const content = await getContentById(id);
+                const title = content.title
                 setTitle(title);
             }
             getTitle();
         }
     }, [id]);
-    
+
     return (
         <Breadcrumb className="flex justify-center md:justify-start md:pl-2">
             <BreadcrumbList>
