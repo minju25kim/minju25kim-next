@@ -4,7 +4,7 @@ import {
     BreadcrumbLink,
     BreadcrumbList,
 } from "@/components/ui/breadcrumb";
-import { getContentById } from "@/lib/api";
+// import { getContentById } from "@/lib/api";
 
 type Props = {
     currentUrl: string;
