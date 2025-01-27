@@ -2,29 +2,11 @@ import { Content } from "@/interfaces/Data";
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-// if (!backendUrl) {
-//   throw new Error(
-//     "NEXT_PUBLIC_BACKEND_URL is not defined. Please set it in your environment variables."
-//   );
-// }
-
-export async function fetchContentTitle(id: string): Promise<string> {
-  try {
-    const response = await fetch(`${backendUrl}/content/${id}`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch content");
-    }
-    const post = await response.json();
-    return post.title;
-  } catch (error) {
-    console.error("Error fetching content:", error);
-    return "";
-  }
-}
 
 export async function getContentById(id: string): Promise<Content> {
   try {
-    const response = await fetch(`${backendUrl}/content/${id}`);
+    const url = `${backendUrl}/content/${id}`;
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error("Failed to fetch post");
     }
@@ -45,6 +27,7 @@ export async function getContentById(id: string): Promise<Content> {
       dir: "unknown",
       excerpt: "Error occurred while fetching the content.",
     };
+
   }
 }
 

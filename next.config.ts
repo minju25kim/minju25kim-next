@@ -5,6 +5,12 @@ const nextConfig: NextConfig = () => {
     pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
     reactStrictMode: true,
     output: "standalone",
+    async redirects() {
+      return [];
+    },
+    async rewrites() {
+      return [];
+    },
   };
 };
 
