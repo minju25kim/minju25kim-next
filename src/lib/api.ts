@@ -67,3 +67,21 @@ export async function getAllContentsDirectory(dir: string): Promise<Content[]> {
 }
 
 
+export async function getAllContent(): Promise<Content[]> {
+  try {
+    const response = await fetch(`${backendUrl}/content`);
+    if (!response.ok) {
+      throw new Error(`Error fetching contents: ${response.statusText}`);
+    }
+
+    const posts: Content[] = await response.json();
+    return posts.sort((post1, post2) => {
+      const date1 = new Date(post1.date);
+      const date2 = new Date(post2.date);
+      return date2.getTime() - date1.getTime();
+    });
+  } catch (error) {
+    console.error("Error fetching contents:", error);
+    return [];
+  }
+}
