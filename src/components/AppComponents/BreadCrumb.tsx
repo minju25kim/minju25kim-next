@@ -10,7 +10,6 @@ type Props = {
     currentUrl: string;
 }
 
-
 function AppBreadCrumb({ currentUrl }: Props) {
     console.log(currentUrl)
     return (
