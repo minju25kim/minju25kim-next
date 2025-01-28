@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/table"
 import { Content } from "@/interfaces/Data";
 import { dateString } from "@/lib/utils";
-
+import Views from "@/components/AppComponents/Views";
 interface TableProps {
     directory: string;
     allContent: Content[];
@@ -36,7 +36,7 @@ function AppTable({ directory, allContent }: TableProps) {
                                 </Link>
                             </TableCell>
                             <TableCell className="text-center">{dateString(post.date)}</TableCell>
-                            <TableCell className="text-center">0</TableCell>
+                            <TableCell className="text-center"><Views contentId={post._id} /></TableCell>
                         </TableRow>
                     )
                 })}

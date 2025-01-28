@@ -58,6 +58,7 @@ async function Page(props: Params) {
         coverImage={post.coverImage}
         date={post.date}
         keywords={post.keywords}
+        contentId={post._id}
       />
       <PostBody content={post.content} />
     </>

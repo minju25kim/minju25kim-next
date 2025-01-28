@@ -48,7 +48,7 @@ async function Page({ params }: Params) {
     return notFound();
   }
 
-  const { title, coverImage, date, author, content } = post
+  const { title, coverImage, date, author, content, _id } = post
   return (
     <>
       <PostHeader
@@ -57,7 +57,7 @@ async function Page({ params }: Params) {
         date={date}
         author={author}
         keywords={post.keywords}
-
+        contentId={_id}
       />
       <PostBody content={content} />
     </>

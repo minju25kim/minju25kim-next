@@ -6,7 +6,6 @@ import AppSidebar from "@/components/AppComponents/Sidebar"
 import Container from "@/components/AppComponents/Container"
 import Footer from "@/components/AppComponents/Footer"
 import { cookies } from "next/headers"
-// import Header from "@/components/AppComponents/Header";
 // import BreadCrumb from '@/components/AppComponents/BreadCrumb'
 import Search from '@/components/AppComponents/Search'
 
@@ -58,6 +57,7 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
               <SidebarTrigger />
               <Search />
             </header>
+            <div>fix breadcrumb</div>
             {/* <BreadCrumb  /> */}
             <Container>
               {children}
