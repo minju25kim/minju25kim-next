@@ -10,8 +10,8 @@ import { Content } from '@/interfaces/Data'
 import Link from "next/link";
 import Image from "next/image";
 import Keywords from "./Keywords";
-import { dateString } from "@/lib/utils";
-import Views from "@/components/AppComponents/Views";
+// import { dateString } from "@/lib/utils";
+// import Views from "@/components/AppComponents/Views";
 
 interface CardProps {
     directory?: string;
@@ -33,7 +33,7 @@ export default function AppCard({ directory, allContent }: CardProps) {
                                 {post.title}
                             </CardTitle>
                             <CardDescription>
-                                {dateString(post.date)} | <Views contentId={post._id} /> views
+                                {/* {dateString(post.date)} | <Views contentId={post._id} /> views */}
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="flex flex-row justify-center">

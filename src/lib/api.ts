@@ -56,11 +56,10 @@ export async function getAllContent(): Promise<Content[]> {
     if (!response.ok) {
       throw new Error(`Error fetching contents: ${response.statusText}`);
     }
-
-    const posts: Content[] = await response.json();
-    return posts.sort((post1, post2) => {
-      const date1 = new Date(post1.date);
-      const date2 = new Date(post2.date);
+    const contents: Content[] = await response.json();
+    return contents.sort((content1, content2) => {
+      const date1 = new Date(content1.date);
+      const date2 = new Date(content2.date);
       return date2.getTime() - date1.getTime();
     });
   } catch (error) {
