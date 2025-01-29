@@ -59,7 +59,7 @@ async function Page(props: Params) {
         date={post.date}
         author={post.author}
         keywords={post.keywords}
-
+        contentId={post._id}
       />
       <PostBody content={post.content} />
     </>
