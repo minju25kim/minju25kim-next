@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/menubar"
 
 function AppMenuBar({ views }: { views: string[] }) {
-    console.log(views)
+    // console.log(views)
     return (
         <Menubar>
             <MenubarMenu>

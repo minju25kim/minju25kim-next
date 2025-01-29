@@ -10,7 +10,8 @@ import { Content } from '@/interfaces/Data'
 import Link from "next/link";
 import Image from "next/image";
 import Keywords from "./Keywords";
-import { dateString } from "@/lib/utils";
+// import { dateString } from "@/lib/utils";
+// import Views from "@/components/AppComponents/Views";
 
 interface CardProps {
     directory?: string;
@@ -19,7 +20,9 @@ interface CardProps {
 
 
 export default function AppCard({ directory, allContent }: CardProps) {
-const defaultCoverImage = '/opengraph-image.png'
+
+
+    const defaultCoverImage = '/opengraph-image.png'
     return (
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
             {allContent.map((post: Content) => (
@@ -30,7 +33,7 @@ const defaultCoverImage = '/opengraph-image.png'
                                 {post.title}
                             </CardTitle>
                             <CardDescription>
-                                {dateString(post.date)} | 0 views
+                                {/* {dateString(post.date)} | <Views contentId={post._id} /> views */}
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="flex flex-row justify-center">
