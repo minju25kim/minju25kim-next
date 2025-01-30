@@ -24,7 +24,7 @@ export default function Search() {
         setIsSearchOpen(true)
         inputRef.current?.focus()
       }
-      
+
       if (results.length > 0) {
         if (event.key === 'ArrowDown') {
           event.preventDefault()
@@ -38,10 +38,6 @@ export default function Search() {
             if (prev <= 0) return results.length - 1
             return prev - 1
           })
-        } else if (event.key === 'Enter' && selectedIndex >= 0) {
-          event.preventDefault()
-          const selectedItem = results[selectedIndex]
-          window.location.href = `/${selectedItem.dir}/${selectedItem._id}`
         }
       }
     }
@@ -105,21 +101,22 @@ export default function Search() {
 
   return (
     <div ref={searchContainerRef} className="relative">
-      {/* Search Icon */}
-      {!isSearchOpen && (
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          onClick={handleSearchToggle}
-          className="rounded-full"
-        >
-          <SearchIcon className="h-4 w-4" />
-        </Button>
-      )}
+      {/* Search Icon and Bar */}
+      <div className="flex items-center">
+        {/* Show only icon on small screens */}
+        {!isSearchOpen && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handleSearchToggle}
+            className="rounded-full md:hidden"
+          >
+            <SearchIcon className="h-4 w-4" />
+          </Button>
+        )}
 
-      {/* Search Bar */}
-      {isSearchOpen && (
-        <div className="flex items-center bg-gray-100 rounded-full">
+        {/* Show search bar on medium screens and above */}
+        <div className={`${isSearchOpen ? 'flex' : 'hidden'} md:flex items-center bg-gray-100 rounded-full`}>
           <SearchIcon className="ml-3 h-4 w-4 text-gray-500" />
           <Input
             ref={inputRef}
@@ -130,18 +127,17 @@ export default function Search() {
             onKeyDown={(e) => e.key === 'Enter' && query.length > 0 && setSelectedIndex(0)}
           />
         </div>
-      )}
+      </div>
 
       {/* Search Results */}
-      {isSearchOpen && (
+      {(isSearchOpen || query.length > 0) && (
         <div className="absolute z-10 mt-2 w-full">
           {results.length > 0 ? (
             <ul className="max-h-[60vh] overflow-y-auto rounded-md smooth-corners-md bg-white dark:bg-gray-800 shadow-lg">
               {results.map((item: Content, index) => (
                 <Link key={item._id} href={`/${item.dir}/${item._id}`} onClick={handleItemClick}>
-                  <li className={`p-3 border-b last:border-b-0 border-gray-100 dark:border-gray-700 transition-all duration-200 ${
-                    index === selectedIndex ? 'shadow-md scale-[1.02] bg-primary-50 dark:bg-primary-900' : 'hover:bg-gray-50 dark:hover:bg-gray-700'
-                  }`}>
+                  <li className={`p-3 border-b last:border-b-0 border-gray-100 dark:border-gray-700 transition-all duration-200 ${index === selectedIndex ? 'shadow-md scale-[1.02] bg-primary-50 dark:bg-primary-900' : 'hover:bg-gray-50 dark:hover:bg-gray-700'
+                    }`}>
                     <h3 className="font-semibold text-lg">{item.title}</h3>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                       {item.content.substring(0, 100)}...
