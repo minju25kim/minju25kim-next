@@ -13,6 +13,7 @@
   "dependencies": {
     "@custom-react-hooks/use-media-query": "^1.5.1",
     "@radix-ui/react-dialog": "^1.1.4",
+    "@radix-ui/react-dropdown-menu": "^2.1.5",
     "@radix-ui/react-label": "^2.1.1",
     "@radix-ui/react-menubar": "^1.1.4",
     "@radix-ui/react-popover": "^1.1.4",
@@ -69,7 +70,7 @@
     "lint-staged": "^15.3.0",
     "prettier": "^3.4.2",
     "tailwind-corner-smoothing": "^1.2.0",
-    "typescript": "^5"
+    "typescript": "^5.7.3"
   },
   "lint-staged": {
     "*.js": [

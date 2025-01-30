@@ -40,6 +40,7 @@ export async function generateStaticParams() {
     return [];
   }
 }
+
 async function Page({ params }: Params) {
   const { id } = await params;
   const post = await getContentById(id);

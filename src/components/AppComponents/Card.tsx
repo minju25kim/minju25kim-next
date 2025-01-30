@@ -38,7 +38,13 @@ export default function AppCard({ directory, allContent }: CardProps) {
                         </CardHeader>
                         <CardContent className="flex flex-row justify-center">
                             {post.coverImage
-                                ? <Image width={100} height={100} alt={post.title} src={post.coverImage} />
+                                ? <Image
+                                    width={100}
+                                    height={100}
+                                    alt={post.title}
+                                    src={post.coverImage}
+                                // unoptimized // Disable Next.js image optimization
+                                />
                                 : <Image width={100} height={100} alt={post.title} src={defaultCoverImage} />
                             }
                         </CardContent>
