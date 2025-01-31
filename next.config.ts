@@ -7,7 +7,7 @@ const nextConfig: NextConfig = () => {
       remotePatterns: [
         {
           protocol: 'https',
-          hostname: 'pbs.twimg.com',
+          hostname: 'd19nzf9df6lwtm.cloudfront.net',
         },
       ],
     },
