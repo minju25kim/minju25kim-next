@@ -49,7 +49,7 @@ function AppResume({ allResume }: { allResume: Resume[] }) {
             return (
                 <div key={meta.title}>
                     <div className="flex flex-wrap justify-between items-center">
-                        <Button variant="outline" onClick={() => { generatePDF(meta.title) }}><Download />Download as PDF</Button>
+                        {/* <Button variant="outline" onClick={() => { generatePDF(meta.title) }}><Download />Download as PDF</Button> */}
                         <div className="italic text-sm text-muted-foreground text-center md:text-start">{meta.lang.toUpperCase()} | {new Date(meta.date).toDateString()}</div>
                     </div>
                     <div className="w-full p-4 shadow-lg bg-white mb-4" id={`${meta.title}`}>
