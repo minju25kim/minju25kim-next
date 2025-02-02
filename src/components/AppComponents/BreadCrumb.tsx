@@ -15,10 +15,24 @@ export default function AppBreadCrumb() {
 
     // Fetch title when id changes
     useEffect(() => {
-        if (id) {
-            getContentById(id).then(data => setTitle(data.title));
+        // Validate the id before making the API call
+        if (id && typeof id === 'string' && id.length === 24) { // Ensure id is a valid MongoDB ObjectId
+            console.log('Fetching content for id:', id); // Debugging
+            getContentById(id)
+                .then(data => {
+                    if (data && data.title) {
+                        setTitle(data.title);
+                    } else {
+                        setTitle('Not Found');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching content:', error);
+                    setTitle('Error');
+                });
         } else {
-            setTitle(''); // Reset title when no id
+            console.warn('Invalid or missing id:', id); // Debugging
+            setTitle('');
         }
     }, [id]);
 
