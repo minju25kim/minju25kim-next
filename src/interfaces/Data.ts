@@ -1,17 +1,19 @@
 export type Content = {
-  dir: string;
   _id: string;
-  title: string;
   date: string;
-  coverImage: string;
+  dir: string;
+  title: string;
   excerpt: string;
+  keywords: string[];
+  coverImage: string;
   ogImage: {
     url: string;
   };
   content: string;
-  preview?: boolean;
-  keywords: string[];
   author: string;
+  viewCount: number;
+  dailyViews?: Record<string, number>; // Optional field for daily views
+  __v?: number; // Optional field for version key
 };
 
 
