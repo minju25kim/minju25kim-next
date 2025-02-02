@@ -16,6 +16,7 @@ export default function AppBreadCrumb() {
 
     useEffect(() => {
         if (id) {
+            console.log("Backend URL:", process.env.NEXT_PUBLIC_BACKEND_URL);
             const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/content/${id}`;
             fetch(url)
                 .then(res => res.json())

@@ -31,6 +31,8 @@ COPY . .
 RUN --mount=type=secret,id=NEXT_PUBLIC_BACKEND_URL \
     NEXT_PUBLIC_BACKEND_URL="$(cat /run/secrets/NEXT_PUBLIC_BACKEND_URL)"
 
+COPY .env .env
+
 # Build application
 RUN npx next build --experimental-build-mode compile
 
