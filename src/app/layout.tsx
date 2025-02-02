@@ -6,7 +6,7 @@ import AppSidebar from "@/components/AppComponents/Sidebar"
 import Container from "@/components/AppComponents/Container"
 import Footer from "@/components/AppComponents/Footer"
 import { cookies } from "next/headers"
-// import BreadCrumb from '@/components/AppComponents/BreadCrumb'
+import BreadCrumb from '@/components/AppComponents/BreadCrumb'
 import Search from '@/components/AppComponents/Search'
 
 export const metadata: Metadata = {
@@ -32,7 +32,6 @@ export const metadata: Metadata = {
 
 async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const cookieStore = await cookies()
-
   const defaultOpen = cookieStore.get("sidebar:state")?.value === "true"
 
   return (
@@ -57,8 +56,8 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
               <SidebarTrigger />
               <Search />
             </header>
-            <div>fix breadcrumb</div>
-            {/* <BreadCrumb  /> */}
+            {/* <div>fix breadcrumb</div> */}
+            <BreadCrumb />
             <Container>
               {children}
             </Container>

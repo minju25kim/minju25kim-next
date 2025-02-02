@@ -1,18 +1,18 @@
 "use client"; // Add this line at the top of the file
 
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Calendar, Home, FolderCode, Book, Paperclip } from "lucide-react";
 import {
     Sidebar,
     SidebarContent,
     SidebarGroup,
     SidebarGroupContent,
-    SidebarHeader,
+    // SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
     SidebarRail,
-    SidebarClose
+    // SidebarClose
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 
@@ -25,20 +25,17 @@ const items = [
 ];
 
 function AppSidebar() {
-    const [isSidebarVisible, setSidebarVisible] = useState(true);
+    // const [isSidebarVisible, setSidebarVisible] = useState(true);
 
-    const toggleSidebar = () => {
-        setSidebarVisible(!isSidebarVisible);
-    };
+    // const toggleSidebar = () => {
+    //     setSidebarVisible(!isSidebarVisible);
+    // };
 
     return (
-        <Sidebar className={isSidebarVisible ? '' : 'hidden'}>
+        <Sidebar>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarHeader>
-                        Minju25kim
-                    </SidebarHeader>
-                    <SidebarClose className="absolute right-0 top-0" onClick={toggleSidebar} />
+                    {/* <SidebarClose className="absolute right-0 top-0" onClick={toggleSidebar} /> */}
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (

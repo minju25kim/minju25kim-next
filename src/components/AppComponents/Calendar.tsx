@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Calendar } from "@/components/ui/calendar"
 import { Content } from "@/interfaces/Data"
-import Card from "@/components/AppComponents/Card"
+import Card from "@/components/AppComponents/Cards"
 
 interface CalendarProps {
   directory: string;

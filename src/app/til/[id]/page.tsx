@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllContentsDirectory, getContentById } from "@/lib/api";
+import { getContentById } from "@/lib/api";
 import { PostHeader } from "@/components/AppComponents/PostHeader";
 import { PostBody } from "@/components/AppComponents/PostBody";
 
@@ -12,54 +12,54 @@ type Params = {
 
 export async function generateMetadata(props: Params): Promise<Metadata> {
   const params = await props.params;
-  const post = await getContentById(params.id);
+  const content = await getContentById(params.id);
 
-  if (!post) {
+  if (!content) {
     return notFound();
   }
 
-  const title = `${post.title}`;
+  const title = `${content.title}`;
 
   return {
     title,
     openGraph: {
       title,
-      images: [post.ogImage.url],
+      images: [content.ogImage.url],
     },
   };
 }
 
-export async function generateStaticParams() {
-  try {
-    const posts = await getAllContentsDirectory("til");
-    return posts.map((post) => ({
-      id: post._id,
-    }));
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    return [];
-  }
-}
-async function Page({ params }: Params) {
-  const { id } = await params;
-  const post = await getContentById(id);
+// export async function generateStaticParams() {
+//   try {
+//     const posts = await getAllContentsDirectory("til");
+//     return posts.map((post) => ({
+//       id: post._id,
+//     }));
+//   } catch (error) {
+//     console.error("Error fetching posts:", error);
+//     return [];
+//   }
+// }
 
-  if (!post) {
+async function Page(props: Params) {
+  const params = await props.params;
+  const content = await getContentById(params.id);
+
+  if (!content || content.dir !== "til") {
     return notFound();
   }
 
-  const { title, coverImage, date, author, content, _id } = post
   return (
     <>
       <PostHeader
-        title={title}
-        coverImage={coverImage}
-        date={date}
-        author={author}
-        keywords={post.keywords}
-        contentId={_id}
+        title={content.title}
+        coverImage={content.coverImage}
+        date={content.date}
+        author={content.author}
+        keywords={content.keywords}
+        contentId={content._id}
       />
-      <PostBody content={content} />
+      <PostBody content={content.content} />
     </>
   );
 }
