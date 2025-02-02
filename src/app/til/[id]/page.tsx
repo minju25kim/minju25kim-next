@@ -26,6 +26,10 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
       title,
       images: [content.ogImage.url],
     },
+    twitter: {
+      card: 'summary_large_image',
+      images: [content.ogImage.url],
+    },
   };
 }
 
