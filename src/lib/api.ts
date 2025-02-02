@@ -2,7 +2,6 @@ import { Content } from "@/interfaces/Data";
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-
 export async function getContentById(id: string): Promise<Content> {
   try {
     const url = `${backendUrl}/content/${id}`;
