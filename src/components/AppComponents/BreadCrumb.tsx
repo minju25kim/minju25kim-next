@@ -2,7 +2,7 @@
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/components/ui/breadcrumb";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { getContentById } from "@/lib/api";
+// import { getContentById } from "@/lib/api";
 import { ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -13,26 +13,17 @@ export default function AppBreadCrumb() {
     const [dir, id] = parts;
     const [title, setTitle] = useState('');
 
-    // Fetch title when id changes
+
     useEffect(() => {
-        // Validate the id before making the API call
-        if (id && typeof id === 'string' && id.length === 24) { // Ensure id is a valid MongoDB ObjectId
-            console.log('Fetching content for id:', id); // Debugging
-            getContentById(id)
+        if (id) {
+            const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/content/${id}`;
+            fetch(url)
+                .then(res => res.json())
                 .then(data => {
-                    if (data && data.title) {
-                        setTitle(data.title);
-                    } else {
-                        setTitle('Not Found');
-                    }
+                    // console.log("Breadcrumb Data:", data)
+                    setTitle(data.title)
                 })
-                .catch(error => {
-                    console.error('Error fetching content:', error);
-                    setTitle('Error');
-                });
-        } else {
-            console.warn('Invalid or missing id:', id); // Debugging
-            setTitle('');
+                .catch(err => console.error("Breadcrumb Fetch Error:", err));
         }
     }, [id]);
 

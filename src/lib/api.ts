@@ -7,26 +7,13 @@ export async function getContentById(id: string): Promise<Content> {
     const url = `${backendUrl}/content/${id}`;
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error("Failed to fetch post");
+      throw new Error(`Failed to fetch post: ${response.statusText}`);
     }
     const post: Content = await response.json();
     return post;
   } catch (error) {
-    console.error("Error fetching posts:", error);
-    return {
-      _id: "error",
-      title: "Error fetching content",
-      content:
-        "There was an error connecting to the backend. Please try again later.",
-      author: "System",
-      date: new Date().toISOString(),
-      coverImage: "",
-      keywords: [],
-      ogImage: { url: "" },
-      dir: "unknown",
-      excerpt: "Error occurred while fetching the content.",
-    };
-
+    console.error("Error fetching post:", error);
+    throw error
   }
 }
 
