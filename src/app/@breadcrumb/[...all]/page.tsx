@@ -9,9 +9,8 @@ import {
 import React from "react";
 import type { ReactElement } from "react";
 
-export default function BreadcrumbSlot({
-    params,
-}: { params: { all: string[] } }) {
+export default async function BreadcrumbSlot(props: { params: Promise<{ all: string[] }> }) {
+    const params = await props.params;
     const breadcrumbItems: ReactElement[] = [];
     let breadcrumbPage: ReactElement = <></>;
     for (let i = 0; i < params.all.length; i++) {

@@ -55,8 +55,6 @@ async function RootLayout({ children, breadcrumb, }: Readonly<{ children: React.
               <SidebarTrigger />
               <Search />
             </header>
-            {/* <div>fix breadcrumb</div> */}
-            {/* <BreadCrumb /> */}
             {breadcrumb}
             <Container>
               {children}
