@@ -12,55 +12,54 @@ type Params = {
 
 export async function generateMetadata(props: Params): Promise<Metadata> {
   const params = await props.params;
-  const post = await getContentById(params.id);
+  const content = await getContentById(params.id);
 
-  if (!post) {
+  if (!content) {
     return notFound();
   }
 
-  const title = `${post.title}`;
+  const title = `${content.title}`;
 
   return {
     title,
     openGraph: {
       title,
-      images: [post.ogImage.url],
+      images: [content.ogImage.url],
     },
   };
 }
 
-export async function generateStaticParams() {
-  try {
-    const posts = await getAllContentsDirectory("dev");
-    return posts.map((post) => ({
-      id: post._id,
-    }));
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    return [];
-  }
-}
+// export async function generateStaticParams() {
+//   try {
+//     const posts = await getAllContentsDirectory("dev");
+//     return posts.map((post) => ({
+//       id: post._id,
+//     }));
+//   } catch (error) {
+//     console.error("Error fetching posts:", error);
+//     return [];
+//   }
+// }
 
 async function Page(props: Params) {
   const params = await props.params;
-  const post = await getContentById(params.id);
+  const content = await getContentById(params.id);
 
-  if (!post) {
+  if (!content || content.dir !== "dev") {
     return notFound();
   }
-
 
   return (
     <>
       <PostHeader
-        author={post.author}
-        title={post.title}
-        coverImage={post.coverImage}
-        date={post.date}
-        keywords={post.keywords}
-        contentId={post._id}
+        author={content.author}
+        title={content.title}
+        coverImage={content.coverImage}
+        date={content.date}
+        keywords={content.keywords}
+        contentId={content._id}
       />
-      <PostBody content={post.content} />
+      <PostBody content={content.content} />
     </>
   );
 }

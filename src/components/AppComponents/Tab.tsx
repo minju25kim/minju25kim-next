@@ -9,7 +9,7 @@ import {
 import { Content } from "@/interfaces/Data";
 
 import Table from '@/components/AppComponents/Table';
-import Card from '@/components/AppComponents/Card'
+import Card from '@/components/AppComponents/Cards'
 import Calendar from "@/components/AppComponents//Calendar";
 import { usePathname } from "next/navigation";
 

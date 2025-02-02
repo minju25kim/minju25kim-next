@@ -4,9 +4,9 @@ import { GitHubIcon, LinkedInIcon, TwitterIcon } from "@/components/icons";
 import SecondaryTitle from "@/components/AppComponents/SecondaryTitle";
 import { GlobeIcon, MailIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Card from "@/components/AppComponents/Card";
+import Cards from "@/components/AppComponents/Cards";
 import { Content } from '@/interfaces/Data';
-import Badge from "@/components/AppComponents/Badge";
+// import Badge from "@/components/AppComponents/Badge";
 import { getAllContent } from "@/lib/api";
 
 const links = [
@@ -50,10 +50,10 @@ export default async function Page() {
           ))}
         </div>
       </div>
-      <Badge />
+      {/* <Badge /> */}
       <div className="flex flex-col mx-auto w-full mt-2">
         <SecondaryTitle title="Latest contents" />
-        <Card allContent={contents} />
+        <Cards allContent={contents} />
       </div>
     </>
   );

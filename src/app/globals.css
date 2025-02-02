@@ -1,8 +1,10 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @plugin 'tailwindcss-animate';
 
 @plugin "@tailwindcss/typography";
+
+@tailwindcss-corner-smoothing;
 
 @custom-variant dark (&:is(.dark *));
 
