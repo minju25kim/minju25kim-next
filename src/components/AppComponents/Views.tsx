@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 interface ViewsProps {
     contentId: string;
@@ -10,7 +10,7 @@ interface ViewsProps {
 export default function Views({ contentId, incrementOnMount = false }: ViewsProps) {
     const [views, setViews] = useState<number | null>(null);
 
-    const fetchTotalViews = async () => {
+    const fetchTotalViews = useCallback(async () => {
         try {
             const response = await fetch(`/api/view?contentId=${contentId}`);
             if (response.ok) {
@@ -22,9 +22,9 @@ export default function Views({ contentId, incrementOnMount = false }: ViewsProp
         } catch (error) {
             console.error('Error fetching views:', error);
         }
-    };
+    }, [contentId]);
 
-    const incrementViews = async () => {
+    const incrementViews = useCallback(async () => {
         try {
             await fetch(`/api/view?contentId=${contentId}`, {
                 method: 'POST',
@@ -32,7 +32,7 @@ export default function Views({ contentId, incrementOnMount = false }: ViewsProp
         } catch (error) {
             console.error('Error incrementing views:', error);
         }
-    };
+    }, [contentId]);
 
     useEffect(() => {
         if (incrementOnMount) {
@@ -40,7 +40,7 @@ export default function Views({ contentId, incrementOnMount = false }: ViewsProp
         }
         fetchTotalViews();
 
-    }, [contentId, incrementOnMount]);
+    }, [contentId, incrementOnMount, fetchTotalViews, incrementViews]);
 
     return <span>{views}</span>
 }

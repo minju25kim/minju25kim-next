@@ -1,45 +1,45 @@
 'use client'
 import { Resume } from "@/interfaces/Data"
 import React from 'react'
-import { Button } from "../ui/button";
-import { Download } from "lucide-react";
+// import { Button } from "../ui/button";
+// import { Download } from "lucide-react";
 
 function AppResume({ allResume }: { allResume: Resume[] }) {
-    const generatePDF = async (title: string) => {
-        try {
-            const pdfElement = document.getElementById(`${title}`);
-            if (!pdfElement) {
-                throw new Error('Element with ID "pdf-download" not found');
-            }
-            const htmlContent = pdfElement.outerHTML;
-            const response = await fetch('/api/generate-pdf', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ htmlContent }),
-            });
+    // const generatePDF = async (title: string) => {
+    //     try {
+    //         const pdfElement = document.getElementById(`${title}`);
+    //         if (!pdfElement) {
+    //             throw new Error('Element with ID "pdf-download" not found');
+    //         }
+    //         const htmlContent = pdfElement.outerHTML;
+    //         const response = await fetch('/api/generate-pdf', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({ htmlContent }),
+    //         });
 
-            if (!response.ok) {
-                throw new Error('Failed to generate PDF');
-            }
+    //         if (!response.ok) {
+    //             throw new Error('Failed to generate PDF');
+    //         }
 
-            const pdfBlob = await response.blob();
-            const downloadUrl = URL.createObjectURL(pdfBlob);
+    //         const pdfBlob = await response.blob();
+    //         const downloadUrl = URL.createObjectURL(pdfBlob);
 
-            const downloadLink = document.createElement("a") as HTMLAnchorElement;
-            downloadLink.href = downloadUrl;
-            downloadLink.download = `${title}.pdf`;
+    //         const downloadLink = document.createElement("a") as HTMLAnchorElement;
+    //         downloadLink.href = downloadUrl;
+    //         downloadLink.download = `${title}.pdf`;
 
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
+    //         document.body.appendChild(downloadLink);
+    //         downloadLink.click();
 
-            document.body.removeChild(downloadLink);
-            window.URL.revokeObjectURL(downloadUrl);
-        } catch (error) {
-            console.error('Error generating PDF:', error);
-        }
-    };
+    //         document.body.removeChild(downloadLink);
+    //         window.URL.revokeObjectURL(downloadUrl);
+    //     } catch (error) {
+    //         console.error('Error generating PDF:', error);
+    //     }
+    // };
 
 
     return (

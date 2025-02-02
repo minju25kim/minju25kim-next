@@ -148,7 +148,7 @@ export default function Search() {
             </ul>
           ) : query.length > 0 ? (
             <div className="p-4 rounded-md smooth-corners-md bg-white dark:bg-gray-800 shadow-lg">
-              <p className="text-gray-600 dark:text-gray-400">No results found for "{query}"</p>
+              <p className="text-gray-600 dark:text-gray-400">No results found for query:{query}</p>
             </div>
           ) : null}
         </div>

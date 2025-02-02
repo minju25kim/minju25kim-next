@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
         const data = await response.json();
         return NextResponse.json(data, { status: 200 });
     } catch (error) {
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        return NextResponse.json({ error: 'Internal Server Error', message: error }, { status: 500 });
     }
 }
 
@@ -26,6 +26,6 @@ export async function GET(req: NextRequest) {
         const data = await response.json();
         return NextResponse.json(data, { status: 200 });
     } catch (error) {
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        return NextResponse.json({ error: 'Internal Server Error', message: error }, { status: 500 });
     }
 }          

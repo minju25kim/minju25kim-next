@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllContentsDirectory, getContentById } from "@/lib/api";
+import { getContentById } from "@/lib/api";
 import { PostHeader } from "@/components/AppComponents/PostHeader";
 import { PostBody } from "@/components/AppComponents/PostBody";
 
