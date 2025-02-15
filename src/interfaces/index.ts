@@ -14,7 +14,8 @@ export type Content = {
   viewCount: number;
   dailyViews?: Record<string, number>; 
   __v?: number; 
-  likeCount: number;
+  likes: number;
+  hasLiked: boolean;
 }
 
 
