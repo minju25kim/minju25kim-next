@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { getContentById } from "@/lib/api";
 import { PostHeader } from "@/components/AppComponents/PostHeader";
 import { PostBody } from "@/components/AppComponents/PostBody";
+import { PostImage } from "@/components/AppComponents/PostImage";
+
 // import {Likes} from "@/components/AppComponents/Likes";
 
 type Params = {
@@ -52,6 +54,7 @@ async function Page(props: Params) {
         keywords={content.keywords}
         contentId={content._id}
       />
+      <PostImage coverImage={content.coverImage} />
       <PostBody content={content.content} />
       {/* <Likes id={content._id} /> */}
     </>
