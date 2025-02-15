@@ -4,12 +4,15 @@ import { useEffect, useState } from 'react';
 import { GlobeIcon } from 'lucide-react';
 
 export default function RealTimeClock() {
-    const [time, setTime] = useState(new Date().toLocaleTimeString());
+    const [time, setTime] = useState('');
     const [isHovering, setIsHovering] = useState(false);
 
     useEffect(() => {
+        // Initialize time only on client side
+        setTime(new Date().toLocaleTimeString('en-US', { hour12: false }));
+        
         const timer = setInterval(() => {
-            setTime(new Date().toLocaleTimeString());
+            setTime(new Date().toLocaleTimeString('en-US', { hour12: false }));
         }, 1000);
 
         return () => clearInterval(timer);
@@ -27,9 +30,11 @@ export default function RealTimeClock() {
                     <GlobeIcon className="size-3" />
                     Seoul, South Korea
                 </span>
-                <span className={`absolute md:left-0 transition-opacity duration-300 ease-in-out ${isHovering ? 'opacity-100' : 'opacity-0'}`}>
-                    {time}
-                </span>
+                {time && ( // Only render time when it's available
+                    <span className={`absolute md:left-0 transition-opacity duration-300 ease-in-out ${isHovering ? 'opacity-100' : 'opacity-0'}`}>
+                        {time}
+                    </span>
+                )}
             </div>
         </div>
     );

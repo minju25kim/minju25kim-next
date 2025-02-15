@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getContentById } from "@/lib/api";
 import { PostHeader } from "@/components/AppComponents/PostHeader";
 import { PostBody } from "@/components/AppComponents/PostBody";
-import {Likes} from "@/components/AppComponents/Likes";
+// import {Likes} from "@/components/AppComponents/Likes";
 
 type Params = {
   params: Promise<{
