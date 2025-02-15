@@ -8,7 +8,8 @@ import Cards from "@/components/AppComponents/Cards";
 import { Content } from '@/interfaces';
 import { getAllContent } from "@/lib/api";
 import RealTimeClock from "@/components/AppComponents/RealTmeClock";
-import { Introduction } from "@/components/AppComponents/Introduction";
+// import { Introduction } from "@/components/AppComponents/Introduction";
+
 const links = [
   { title: 'github', url: 'https://github.com/minju25kim', icon: GitHubIcon },
   { title: 'linkedin', url: 'https://www.linkedin.com/in/minju25kim/', icon: LinkedInIcon },
@@ -43,7 +44,7 @@ export default async function Page() {
         </div>
       </div>
       {/* <Badge /> */}
-      <Introduction  />
+      {/* <Introduction  /> */}
       <div className="flex flex-col mx-auto w-full mt-2">
         <SecondaryTitle title="Latest contents" />
         <Cards allContent={contents} />
