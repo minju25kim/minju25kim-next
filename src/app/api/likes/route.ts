@@ -18,6 +18,7 @@ export async function POST(request: NextRequest) {
 }
 
 async function getLikes(id: string | null) {
+  console.log(id)
     // const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/content/${id}/likes`);
   return 0;
 }
