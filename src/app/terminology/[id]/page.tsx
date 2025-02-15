@@ -18,17 +18,17 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
     return notFound();
   }
 
-  const title = `${content.title}`;
-
   return {
-    title,
+    title: content.title,
+    description: content.excerpt,
     openGraph: {
-      title,
+      type: 'website',
+      title: content.title,
       images: [content.ogImage.url],
     },
     twitter: {
-      card: 'summary_large_image',
       images: [content.ogImage.url],
+      card: 'summary_large_image'
     },
   };
 }
@@ -65,7 +65,7 @@ async function Page(props: Params) {
         keywords={content.keywords}
         contentId={content._id}
       />
-      <PostBody content={content.content} />
+      <PostBody content={content.content} likeCount={content.likeCount} contentId={content._id}/>
     </>
   );
 }

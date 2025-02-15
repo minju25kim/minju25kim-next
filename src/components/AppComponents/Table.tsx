@@ -7,7 +7,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { Content } from "@/interfaces/Data";
+import { Content } from "@/interfaces";
 import { dateString } from "@/lib/utils";
 import Views from "@/components/AppComponents/Views";
 

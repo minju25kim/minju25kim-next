@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { pretendard } from '@/ui/fonts';
+import { pretendard } from '@/fonts';
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import AppSidebar from "@/components/AppComponents/Sidebar"
 import Container from "@/components/AppComponents/Container"

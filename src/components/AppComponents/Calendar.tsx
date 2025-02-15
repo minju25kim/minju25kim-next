@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Calendar } from "@/components/ui/calendar"
-import { Content } from "@/interfaces/Data"
+import { Content } from "@/interfaces"
 import Card from "@/components/AppComponents/Cards"
 
 interface CalendarProps {

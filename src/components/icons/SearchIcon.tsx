@@ -1,6 +1,6 @@
 import { SVGProps } from "react";
 
-export default function SearchIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
+export function SearchIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
     return (
         <svg
             {...props}

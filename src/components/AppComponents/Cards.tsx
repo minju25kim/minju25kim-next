@@ -6,7 +6,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Content } from '@/interfaces/Data'
+import { Content } from '@/interfaces'
 import Link from "next/link";
 import Image from "next/image";
 import Keywords from "./Keywords";

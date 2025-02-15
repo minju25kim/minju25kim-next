@@ -6,7 +6,7 @@ import {
     TabsList,
     TabsTrigger,
 } from "@/components/ui/tabs"
-import { Content } from "@/interfaces/Data";
+import { Content } from "@/interfaces";
 
 import Table from '@/components/AppComponents/Table';
 import Card from '@/components/AppComponents/Cards'

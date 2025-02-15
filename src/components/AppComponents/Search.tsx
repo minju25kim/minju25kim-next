@@ -3,7 +3,7 @@
 import { Input } from "@/components/ui/input"
 import { useEffect, useRef, useState } from "react"
 import { SearchIcon } from '@/components/icons/index'
-import { Content } from "@/interfaces/Data"
+import { Content } from "@/interfaces"
 import { Button } from "../ui/button"
 import Link from "next/link"
 

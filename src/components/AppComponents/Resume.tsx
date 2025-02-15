@@ -1,5 +1,5 @@
 'use client'
-import { Resume } from "@/interfaces/Data"
+import { Resume } from "@/interfaces"
 import React from 'react'
 // import { Button } from "../ui/button";
 // import { Download } from "lucide-react";
