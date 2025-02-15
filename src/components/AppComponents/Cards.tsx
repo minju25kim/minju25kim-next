@@ -6,7 +6,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Content } from '@/interfaces/Data'
+import { Content } from '@/interfaces'
 import Link from "next/link";
 import Image from "next/image";
 import Keywords from "./Keywords";
@@ -21,20 +21,20 @@ interface CardProps {
 
 export default function AppCard({ allContent }: CardProps) {
 
-
     const defaultCoverImage = '/opengraph-image.png'
     return (
-        <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-2">
             {allContent.map((content: Content) => (
-                <Card className="flex flex-col gap-2 p-2 smooth-corners-md" key={content._id}>
-                    <CardContent className="p-0 m-0 max-w-full border-1 border-gray-200 rounded-md smooth-corners-md h-48">
+                <Card className="min-w-[350px] w-[350px] flex flex-col gap-2 p-2 smooth-corners-md mx-auto" key={content._id}>
+                    <CardContent className="p-0 m-0 rounded-md smooth-corners-md border border-gray-200 flex justify-center items-center max-h-[200px]">
                         <Link href={`/${content.dir}/${content._id}`}>
                             <Image
-                                className="w-full h-full object-contain"
+                                className="rounded-md smooth-corners-md object-contain h-[180px]"
                                 width={500}
                                 height={500}
                                 alt={content.title}
                                 src={content.coverImage || defaultCoverImage}
+                                loading="lazy"
                             />
                         </Link>
                     </CardContent>

@@ -12,9 +12,11 @@ export type Content = {
   content: string;
   author: string;
   viewCount: number;
-  dailyViews?: Record<string, number>; // Optional field for daily views
-  __v?: number; // Optional field for version key
-};
+  dailyViews?: Record<string, number>; 
+  __v?: number; 
+  likes: number;
+  hasLiked: boolean;
+}
 
 
 export interface Resume {

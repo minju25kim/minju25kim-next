@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getContentById } from "@/lib/api";
 import { PostHeader } from "@/components/AppComponents/PostHeader";
 import { PostBody } from "@/components/AppComponents/PostBody";
+// import { Likes } from "@/components/AppComponents/Likes";
 
 type Params = {
   params: Promise<{
@@ -18,29 +19,20 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
     return notFound();
   }
 
-  const title = `${content.title}`;
-
   return {
-    title,
+    title: content.title,
+    description: content.excerpt,
     openGraph: {
-      title,
+      type: 'website',
+      title: content.title,
       images: [content.ogImage.url],
+    },
+    twitter: {
+      images: [content.ogImage.url],
+      card: 'summary_large_image'
     },
   };
 }
-
-// export async function generateStaticParams() {
-//   try {
-//     const posts = await getAllContentsDirectory("terminology");
-//     return posts.map((post) => ({
-//       id: post._id,
-//     }));
-//   } catch (error) {
-//     console.error("Error fetching posts:", error);
-//     // Return an empty array or handle the error as needed
-//     return [];
-//   }
-// }
 
 async function Page(props: Params) {
   const params = await props.params;
@@ -62,6 +54,7 @@ async function Page(props: Params) {
         contentId={content._id}
       />
       <PostBody content={content.content} />
+      {/* <Likes id={content._id} /> */}
     </>
   );
 }

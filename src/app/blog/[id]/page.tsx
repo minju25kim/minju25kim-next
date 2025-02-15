@@ -38,7 +38,7 @@ async function Page(props: Params) {
   const params = await props.params;
   const content = await getContentById(params.id);
 
-  if (!content || content.dir !== "dev") {
+  if (!content || content.dir !== "blog") {
     return notFound();
   }
 

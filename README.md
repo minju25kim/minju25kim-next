@@ -9,10 +9,10 @@
 
 ## Schedule
 - Deploy on Sundays
-- Contents on Saturdays
 
 ## add more
 - search feature
 - resume archive feature
 - view count feature
 - like feature
+- translate feature

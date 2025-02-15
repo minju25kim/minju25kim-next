@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { Resume } from "@/interfaces/Data";
+import { Resume } from "@/interfaces";
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { pretendard } from '@/ui/fonts';
+import { pretendard } from '@/fonts';
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import AppSidebar from "@/components/AppComponents/Sidebar"
 import Container from "@/components/AppComponents/Container"
@@ -50,7 +50,7 @@ async function RootLayout({ children, breadcrumb, }: Readonly<{ children: React.
       <body className={`${pretendard.className} antialiased`}>
         <SidebarProvider defaultOpen={defaultOpen}>
           <AppSidebar />
-          <div className="mx-auto w-full container max-w-2xl grid grid-rows-[auto_auto_1fr_auto] gap-4 min-h-screen p-4">
+          <div className="mx-auto w-full container max-w-3xl grid grid-rows-[auto_auto_1fr_auto] gap-4 min-h-screen p-4">
             <header className='flex flex-row items-center justify-between w-full'>
               <SidebarTrigger />
               <Search />

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getContentById } from "@/lib/api";
 import { PostHeader } from "@/components/AppComponents/PostHeader";
 import { PostBody } from "@/components/AppComponents/PostBody";
+// import { Likes } from "@/components/AppComponents/Likes";
 
 type Params = {
   params: Promise<{
@@ -26,20 +27,12 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
       title,
       images: [content.ogImage.url],
     },
+    twitter: {
+      card: 'summary_large_image',
+      images: [content.ogImage.url],
+    },
   };
 }
-
-// export async function generateStaticParams() {
-//   try {
-//     const posts = await getAllContentsDirectory("til");
-//     return posts.map((post) => ({
-//       id: post._id,
-//     }));
-//   } catch (error) {
-//     console.error("Error fetching posts:", error);
-//     return [];
-//   }
-// }
 
 async function Page(props: Params) {
   const params = await props.params;
@@ -60,6 +53,7 @@ async function Page(props: Params) {
         contentId={content._id}
       />
       <PostBody content={content.content} />
+      {/* <Likes id={content._id} /> */}
     </>
   );
 }
