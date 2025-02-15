@@ -23,13 +23,13 @@ export default function AppCard({ allContent }: CardProps) {
 
     const defaultCoverImage = '/opengraph-image.png'
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {allContent.map((content: Content) => (
-                <Card className="min-w-[350px] w-[350px] flex flex-col gap-2 p-2 smooth-corners-md mx-auto" key={content._id}>
-                    <CardContent className="p-0 m-0 rounded-md smooth-corners-md border border-gray-200 flex justify-center items-center max-h-[200px]">
+                <Card key={content._id} className="w-full flex flex-col gap-2 p-2 rounded-md smooth-corners-md">
+                    <CardContent className="flex justify-center p-0 rounded-md smooth-corners-md border border-gray-200 h-[200px]">
                         <Link href={`/${content.dir}/${content._id}`}>
                             <Image
-                                className="rounded-md smooth-corners-md object-contain h-[180px]"
+                                className="object-contain h-full"
                                 width={500}
                                 height={500}
                                 alt={content.title}
