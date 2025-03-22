@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://minju25kim.fly.dev/'),
 };
 
-export default function RootLayout({ children, breadcrumb, }: Readonly<{ children: React.ReactNode, breadcrumb: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html suppressHydrationWarning lang="en">
       <head>
