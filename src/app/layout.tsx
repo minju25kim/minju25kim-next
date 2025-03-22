@@ -47,6 +47,7 @@ export default function RootLayout({ children, breadcrumb }: Readonly<LayoutProp
 
       <body className={`${pretendard.className} antialiased`}>
         <div className="mx-auto container max-w-3xl grid-rows-[auto_auto_1fr_auto] min-h-[100dvh] p-4">
+          {breadcrumb}
           <Container>
             {children}
           </Container>
