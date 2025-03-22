@@ -2,14 +2,12 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  // Allow access to the root path and static files
+  // Allow access to static files and root path
   if (
     request.nextUrl.pathname === '/' ||
     request.nextUrl.pathname.startsWith('/_next/') ||
-    request.nextUrl.pathname.startsWith('/favicon.ico') ||
-    request.nextUrl.pathname.startsWith('/logo.svg') ||
-    request.nextUrl.pathname.startsWith('/touch-icon-iphone.png') ||
-    request.nextUrl.pathname.startsWith('/safari-pinned-tab.svg')
+    request.nextUrl.pathname.startsWith('/static/') ||
+    request.nextUrl.pathname.match(/\.(ico|png|svg|jpg|jpeg|gif)$/)
   ) {
     return NextResponse.next();
   }
