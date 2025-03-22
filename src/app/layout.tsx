@@ -25,12 +25,11 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://minju25kim.fly.dev/'),
 };
 
-interface LayoutProps {
+export default function RootLayout({
+  children,
+}: {
   children: React.ReactNode;
-  breadcrumb: React.ReactNode;
-}
-
-export default function RootLayout({ children, breadcrumb }: Readonly<LayoutProps>) {
+}) {
   return (
     <html suppressHydrationWarning lang="en">
       <head>
@@ -47,7 +46,6 @@ export default function RootLayout({ children, breadcrumb }: Readonly<LayoutProp
 
       <body className={`${pretendard.className} antialiased`}>
         <div className="mx-auto container max-w-3xl grid-rows-[auto_auto_1fr_auto] min-h-[100dvh] p-4">
-          {breadcrumb}
           <Container>
             {children}
           </Container>
