@@ -8,6 +8,7 @@ import Cards from "@/components/AppComponents/Cards";
 import { Content } from '@/interfaces';
 import { getAllContent } from "@/lib/api";
 import RealTimeClock from "@/components/AppComponents/RealTmeClock";
+import UnderConstruction from '@/app/components/UnderConstruction';
 // import { Introduction } from "@/components/AppComponents/Introduction";
 
 const links = [
@@ -17,38 +18,6 @@ const links = [
   { title: 'email', url: 'mailto:minju25kim@gmail.com', icon: MailIcon },
 ];
 
-export default async function Page() {
-  const contents: Content[] = await getAllContent()
-
-  return (
-    <>
-      <div className="flex flex-col items-center md:items-start mb-4">
-        <Title title="Minju Kim" />
-        <span className="text-pretty text-md text-muted-foreground pb-2">
-          Fullstack Developer
-        </span>
-        <RealTimeClock />
-        <div className="flex flex-row flex-wrap justify-center sm:justify-start gap-2 mt-4">
-          {links.map((link) => (
-            <Button
-              key={link.title}
-              className="size-8"
-              variant="outline"
-              size="icon"
-              asChild
-            >
-              <Link href={link.url} rel="noopener noreferrer" target="_blank"
-              ><link.icon className="size-4" /></Link>
-            </Button>
-          ))}
-        </div>
-      </div>
-      {/* <Badge /> */}
-      {/* <Introduction  /> */}
-      <div className="flex flex-col mx-auto w-full mt-2">
-        <SecondaryTitle title="Latest contents" />
-        <Cards allContent={contents} />
-      </div>
-    </>
-  );
+export default function Page() {
+  return <UnderConstruction />;
 }

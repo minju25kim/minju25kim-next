@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { pretendard } from '@/fonts';
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import AppSidebar from "@/components/AppComponents/Sidebar"
 import Container from "@/components/AppComponents/Container"
 import Footer from "@/components/AppComponents/Footer"
-import { cookies } from "next/headers"
-import Search from '@/components/AppComponents/Search'
 
 export const metadata: Metadata = {
   title: {
@@ -29,10 +25,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://minju25kim.fly.dev/'),
 };
 
-async function RootLayout({ children, breadcrumb, }: Readonly<{ children: React.ReactNode, breadcrumb: React.ReactNode }>) {
-  const cookieStore = await cookies()
-  const defaultOpen = cookieStore.get("sidebar:state")?.value === "true"
-
+export default function RootLayout({ children, breadcrumb, }: Readonly<{ children: React.ReactNode, breadcrumb: React.ReactNode }>) {
   return (
     <html suppressHydrationWarning lang="en">
       <head>
@@ -48,25 +41,13 @@ async function RootLayout({ children, breadcrumb, }: Readonly<{ children: React.
       </head>
 
       <body className={`${pretendard.className} antialiased`}>
-        <SidebarProvider defaultOpen={defaultOpen}>
-          <AppSidebar />
-          <div className="mx-auto container max-w-3xl grid-rows-[auto_auto_1fr_auto] min-h-[100dvh] p-4">
-            <header className='flex flex-row items-center justify-between w-full'>
-              <SidebarTrigger />
-              <Search />
-            </header>
-            <div className="my-2">
-              {breadcrumb}
-            </div>
-            <Container>
-              {children}
-            </Container>
-            <Footer />
-          </div>
-        </SidebarProvider>
+        <div className="mx-auto container max-w-3xl grid-rows-[auto_auto_1fr_auto] min-h-[100dvh] p-4">
+          <Container>
+            {children}
+          </Container>
+          <Footer />
+        </div>
       </body>
     </html>
   );
 }
-
-export default RootLayout;
