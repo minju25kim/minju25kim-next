@@ -2,6 +2,7 @@ import { Pagination } from "@/components/ui/pagination";
 import Link from "next/link";
 import clientPromise from "@/lib/mongodb";
 import Image from "next/image";
+import { WithId, Document } from 'mongodb';
 
 const POSTS_PER_PAGE = 12; // Changed to 12 for better grid layout (3x4)
 
@@ -18,10 +19,20 @@ function formatDate(dateStr: string | Date | undefined): string {
       month: 'short',
       day: 'numeric'
     });
-  } catch (error) {
+  } catch {
     return 'Invalid date';
   }
 }
+
+interface VideoPost extends Document {
+  title: string;
+  date: string;
+  thumbnail?: string;
+  category?: string;
+  tags?: string[];
+}
+
+type MongoDBVideoPost = WithId<VideoPost>;
 
 async function getVideoPosts(page: number = 1, sort: SortOption = 'latest') {
   try {
@@ -38,7 +49,7 @@ async function getVideoPosts(page: number = 1, sort: SortOption = 'latest') {
       .sort({ date: sort === 'latest' ? -1 : 1 })
       .skip((page - 1) * POSTS_PER_PAGE)
       .limit(POSTS_PER_PAGE)
-      .toArray();
+      .toArray() as MongoDBVideoPost[];
 
     return {
       status: 'success',
@@ -52,7 +63,7 @@ async function getVideoPosts(page: number = 1, sort: SortOption = 'latest') {
         }
       }
     };
-  } catch (_) {
+  } catch {
     console.error("Error fetching video posts");
     return {
       status: 'error',
@@ -103,41 +114,35 @@ function SortSwitcher({
   );
 }
 
-interface VideoPost {
-  _id: string;
-  title: string;
-  date: string;
-  thumbnail?: string;
-  category?: string;
-  tags?: string[];
+type Params = Promise<{ [key: string]: string }>;
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
+interface PageProps {
+  params: Params;
+  searchParams: SearchParams;
 }
 
 export default async function VideoPage({
   searchParams,
-}: {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) {
-  // Safely access search parameters with default values
-  const params = await Promise.resolve(searchParams);
+}: PageProps) {
+  const params = await searchParams;
   let currentPage = 1;
   let sort: SortOption = 'latest';
 
   try {
-    if (params) {
-      // Handle page parameter
-      const pageParam = params.page;
-      if (typeof pageParam === 'string') {
-        const parsedPage = parseInt(pageParam, 10);
-        if (!isNaN(parsedPage)) {
-          currentPage = Math.max(1, parsedPage);
-        }
+    // Handle page parameter
+    const pageParam = params.page;
+    if (typeof pageParam === 'string') {
+      const parsedPage = parseInt(pageParam, 10);
+      if (!isNaN(parsedPage)) {
+        currentPage = Math.max(1, parsedPage);
       }
+    }
 
-      // Handle sort parameter
-      const sortParam = params.sort;
-      if (typeof sortParam === 'string') {
-        sort = sortParam === 'oldest' ? 'oldest' : 'latest';
-      }
+    // Handle sort parameter
+    const sortParam = params.sort;
+    if (typeof sortParam === 'string') {
+      sort = sortParam === 'oldest' ? 'oldest' : 'latest';
     }
   } catch (error) {
     console.error('Error parsing search parameters:', error);
@@ -174,9 +179,9 @@ export default async function VideoPage({
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              {result.data.posts.map((post: VideoPost) => (
+              {result.data.posts.map((post: MongoDBVideoPost) => (
                 <Link 
-                  key={post._id}
+                  key={post._id.toString()}
                   href={`/video/${post.title.toLowerCase().replace(/\s+/g, '_')}`}
                   className="group"
                 >

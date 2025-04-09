@@ -1,81 +1,92 @@
 import Link from 'next/link';
 import clientPromise from '@/lib/mongodb';
+import { WithId, Document } from 'mongodb';
 
-interface Post {
-  _id: string;
+interface Post extends Document {
   title: string;
   createdAt: string;
 }
 
-interface Tag {
-  _id: string;
+type MongoDBPost = WithId<Post>;
+
+interface CategoryCount {
+  name: string;
   count: number;
 }
 
-async function getData() {
+interface TagCount {
+  name: string;
+  count: number;
+}
+
+interface MetaData {
+  recentPosts: MongoDBPost[];
+  totalPosts: number;
+  categoryCount: number;
+  totalViews: number;
+  categoryList: { name: string; count: number }[];
+  tags: { name: string; count: number }[];
+}
+
+interface MetaResponse {
+  status: 'success' | 'error';
+  error?: string;
+  data: MetaData;
+}
+
+async function getMetaData(): Promise<MetaResponse> {
   try {
     const client = await clientPromise;
-    console.log("🔄 Fetching data from MongoDB...");
-    
     const db = client.db("minju25kim");
-
-    // Get total posts count
-    const totalPosts = await db.collection("dev").countDocuments();
-    console.log(`📊 Found ${totalPosts} total posts`);
-
-    // Get categories
-    const categoryList = await db.collection("dev")
-      .distinct("category");
-    console.log(`📑 Found ${categoryList.length} categories`);
-
-    // Get total views
-    const totalViews = await db.collection("dev")
-      .aggregate([
-        { $group: { _id: null, total: { $sum: "$views" } } }
-      ]).toArray();
-    console.log(`👀 Total views: ${totalViews[0]?.total || 0}`);
-
-    // Get recent posts
-    const recentPosts = await db.collection("dev")
+    
+    const recentPosts = await db.collection("meta")
       .find({})
       .sort({ createdAt: -1 })
       .limit(5)
-      .toArray();
-    console.log(`📝 Fetched ${recentPosts.length} recent posts`);
+      .toArray() as MongoDBPost[];
 
-    // Get popular tags
-    const tags = await db.collection("dev")
+    // Get other metadata from your database
+    const totalPosts = await db.collection("meta").countDocuments();
+    const categoryCount = await db.collection("categories").countDocuments();
+    const totalViews = 0; // Replace with actual view count logic
+    
+    // Get category list
+    const categoryList = await db.collection("categories")
       .aggregate([
-        { $unwind: "$tags" },
-        { $group: { _id: "$tags", count: { $sum: 1 } } },
-        { $sort: { count: -1 } },
-        { $limit: 10 }
-      ]).toArray();
-    console.log(`🏷️ Found ${tags.length} tags`);
+        { $group: { _id: "$name", count: { $sum: 1 } } },
+        { $project: { name: "$_id", count: 1, _id: 0 } }
+      ])
+      .toArray() as CategoryCount[];
 
-    console.log("✅ Successfully fetched all data");
+    // Get tags
+    const tags = await db.collection("tags")
+      .aggregate([
+        { $group: { _id: "$name", count: { $sum: 1 } } },
+        { $project: { name: "$_id", count: 1, _id: 0 } }
+      ])
+      .toArray() as TagCount[];
 
     return {
       status: 'success',
       data: {
-        totalPosts,
-        categoryCount: categoryList.length,
-        totalViews: totalViews[0]?.total || 0,
         recentPosts,
+        totalPosts,
+        categoryCount,
+        totalViews,
         categoryList,
         tags
       }
     };
-  } catch (error) {
-    console.error("❌ Error fetching data:", error);
+  } catch {
+    console.error("Error fetching meta data");
     return {
       status: 'error',
-      error: error instanceof Error ? error.message : 'Unknown error occurred',
+      error: 'Failed to fetch meta data',
       data: {
+        recentPosts: [],
         totalPosts: 0,
         categoryCount: 0,
         totalViews: 0,
-        recentPosts: [],
         categoryList: [],
         tags: []
       }
@@ -84,7 +95,7 @@ async function getData() {
 }
 
 export default async function MetaPage() {
-  const result = await getData();
+  const result = await getMetaData();
 
   return (
     <div className="min-h-screen p-8">
@@ -127,8 +138,8 @@ export default async function MetaPage() {
             <h2 className="text-2xl font-semibold mb-4">Recent Posts</h2>
             <div className="space-y-4">
               {result.data.recentPosts.length > 0 ? (
-                result.data.recentPosts.map((post: Post) => (
-                  <div key={post._id} className="flex justify-between items-center">
+                result.data.recentPosts.map((post: MongoDBPost) => (
+                  <div key={post._id.toString()} className="flex justify-between items-center">
                     <span className="text-lg">{post.title}</span>
                     <span className="text-gray-500">
                       {new Date(post.createdAt).toLocaleDateString()}
@@ -146,12 +157,12 @@ export default async function MetaPage() {
             <h2 className="text-2xl font-semibold mb-4">Categories</h2>
             <div className="flex flex-wrap gap-2">
               {result.data.categoryList.length > 0 ? (
-                result.data.categoryList.map((category: string) => (
+                result.data.categoryList.map((category: { name: string; count: number }) => (
                   <span 
-                    key={category}
+                    key={category.name}
                     className="px-3 py-1 bg-gray-100 rounded-full text-gray-700"
                   >
-                    {category}
+                    {category.name}
                   </span>
                 ))
               ) : (
@@ -165,12 +176,12 @@ export default async function MetaPage() {
             <h2 className="text-2xl font-semibold mb-4">Popular Tags</h2>
             <div className="flex flex-wrap gap-2">
               {result.data.tags.length > 0 ? (
-                result.data.tags.map((tag: Tag) => (
+                result.data.tags.map((tag: { name: string; count: number }) => (
                   <span 
-                    key={tag._id}
+                    key={tag.name}
                     className="px-3 py-1 bg-gray-100 rounded-full text-gray-700"
                   >
-                    {tag._id} ({tag.count})
+                    {tag.name} ({tag.count})
                   </span>
                 ))
               ) : (

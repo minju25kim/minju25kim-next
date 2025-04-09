@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { WithId, Document } from 'mongodb';
 
 const POSTS_PER_PAGE = 10;
 
@@ -25,7 +26,7 @@ function formatDate(dateStr: string | Date | undefined): string {
       month: 'short',
       day: 'numeric'
     });
-  } catch (error) {
+  } catch {
     return 'Invalid date';
   }
 }
@@ -34,18 +35,18 @@ async function getDevPosts(page: number = 1, sort: SortOption = 'latest') {
   try {
     const client = await clientPromise;
     const db = client.db("minju25kim");
-    
+
     // Get total count for pagination
     const totalPosts = await db.collection("dev").countDocuments();
     const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
-    
+
     // Get paginated posts using the date field
     const posts = await db.collection("dev")
       .find({})
       .sort({ date: sort === 'latest' ? -1 : 1 })
       .skip((page - 1) * POSTS_PER_PAGE)
       .limit(POSTS_PER_PAGE)
-      .toArray();
+      .toArray() as MongoDBDevPost[];
 
     return {
       status: 'success',
@@ -59,7 +60,7 @@ async function getDevPosts(page: number = 1, sort: SortOption = 'latest') {
         }
       }
     };
-  } catch (_) {
+  } catch {
     console.error("Error fetching dev posts");
     return {
       status: 'error',
@@ -77,10 +78,10 @@ async function getDevPosts(page: number = 1, sort: SortOption = 'latest') {
   }
 }
 
-function SortSwitcher({ 
-  currentSort, 
-  currentPage 
-}: { 
+function SortSwitcher({
+  currentSort,
+  currentPage
+}: {
   currentSort: SortOption;
   currentPage: number;
 }) {
@@ -88,21 +89,19 @@ function SortSwitcher({
     <div className="flex items-center gap-2 bg-gray-100 p-1 rounded-lg">
       <Link
         href={`/dev?sort=latest&page=${currentPage}`}
-        className={`px-3 py-1.5 rounded-md transition-colors ${
-          currentSort === 'latest' 
-            ? 'bg-white shadow-sm' 
+        className={`px-3 py-1.5 rounded-md transition-colors ${currentSort === 'latest'
+            ? 'bg-white shadow-sm'
             : 'hover:bg-gray-200'
-        }`}
+          }`}
       >
         Latest
       </Link>
       <Link
         href={`/dev?sort=oldest&page=${currentPage}`}
-        className={`px-3 py-1.5 rounded-md transition-colors ${
-          currentSort === 'oldest' 
-            ? 'bg-white shadow-sm' 
+        className={`px-3 py-1.5 rounded-md transition-colors ${currentSort === 'oldest'
+            ? 'bg-white shadow-sm'
             : 'hover:bg-gray-200'
-        }`}
+          }`}
       >
         Oldest
       </Link>
@@ -110,40 +109,44 @@ function SortSwitcher({
   );
 }
 
-interface DevPost {
-  _id: string;
+interface DevPost extends Document {
   title: string;
   date: string;
   category?: string;
   tags?: string[];
 }
 
+type MongoDBDevPost = WithId<DevPost>;
+
+type Params = Promise<{ [key: string]: string }>;
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
+interface PageProps {
+  params: Params;
+  searchParams: SearchParams;
+}
+
 export default async function DevPage({
   searchParams,
-}: {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) {
-  // Safely access search parameters with default values
-  const params = await Promise.resolve(searchParams);
+}: PageProps) {
+  const params = await searchParams;
   let currentPage = 1;
   let sort: SortOption = 'latest';
 
   try {
-    if (params) {
-      // Handle page parameter
-      const pageParam = params.page;
-      if (typeof pageParam === 'string') {
-        const parsedPage = parseInt(pageParam, 10);
-        if (!isNaN(parsedPage)) {
-          currentPage = Math.max(1, parsedPage);
-        }
+    // Handle page parameter
+    const pageParam = params.page;
+    if (typeof pageParam === 'string') {
+      const parsedPage = parseInt(pageParam, 10);
+      if (!isNaN(parsedPage)) {
+        currentPage = Math.max(1, parsedPage);
       }
+    }
 
-      // Handle sort parameter
-      const sortParam = params.sort;
-      if (typeof sortParam === 'string') {
-        sort = sortParam === 'oldest' ? 'oldest' : 'latest';
-      }
+    // Handle sort parameter
+    const sortParam = params.sort;
+    if (typeof sortParam === 'string') {
+      sort = sortParam === 'oldest' ? 'oldest' : 'latest';
     }
   } catch (error) {
     console.error('Error parsing search parameters:', error);
@@ -155,8 +158,8 @@ export default async function DevPage({
   return (
     <div className="min-h-screen p-8">
       <div className="max-w-4xl mx-auto">
-        <Link 
-          href="/" 
+        <Link
+          href="/"
           className="text-gray-600 hover:text-blue-600 transition-colors mb-8 inline-block"
         >
           ← Back to home
@@ -167,9 +170,9 @@ export default async function DevPage({
         </div>
 
         <div className="flex justify-end mb-6">
-          <SortSwitcher 
-            currentSort={sort} 
-            currentPage={currentPage} 
+          <SortSwitcher
+            currentSort={sort}
+            currentPage={currentPage}
           />
         </div>
 
@@ -188,11 +191,11 @@ export default async function DevPage({
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {result.data.posts.map((post: DevPost) => (
-                    <TableRow key={post._id}>
+                  {result.data.posts.map((post: MongoDBDevPost) => (
+                    <TableRow key={post._id.toString()}>
                       <TableCell className="font-medium">
                         <div>
-                          <Link 
+                          <Link
                             href={`/dev/${post.title.toLowerCase().replace(/\s+/g, '_')}`}
                             className="hover:text-blue-600 transition-colors"
                           >
@@ -207,7 +210,7 @@ export default async function DevPage({
                         {post.tags && post.tags.length > 0 && (
                           <div className="flex flex-wrap gap-1 mt-1">
                             {post.tags.map((tag: string) => (
-                              <span 
+                              <span
                                 key={tag}
                                 className="px-2 py-0.5 bg-gray-50 rounded-full text-xs text-gray-500"
                               >
@@ -226,7 +229,7 @@ export default async function DevPage({
               </Table>
             </div>
 
-            <Pagination 
+            <Pagination
               currentPage={result.data.pagination.currentPage}
               totalPages={result.data.pagination.totalPages}
               baseUrl="/dev"
