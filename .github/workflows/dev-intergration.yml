@@ -27,5 +27,5 @@ jobs:
       # Check if the app builds successfully
       - name: Build the app
         env:
-          NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: npm run build
