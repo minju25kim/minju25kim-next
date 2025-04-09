@@ -28,8 +28,8 @@ RUN npm ci --include=dev
 # Copy application code
 COPY . .
 
-RUN --mount=type=secret,id=NEXT_PUBLIC_BACKEND_URL \
-    NEXT_PUBLIC_BACKEND_URL="$(cat /run/secrets/NEXT_PUBLIC_BACKEND_URL)"
+RUN --mount=type=secret,id=MONGODB_URI \
+    MONGODB_URI="$(cat /run/secrets/MONGODB_URI)"
 
 # Build application
 RUN npx next build --experimental-build-mode compile

@@ -59,11 +59,11 @@ async function getDevPosts(page: number = 1, sort: SortOption = 'latest') {
         }
       }
     };
-  } catch (error) {
-    console.error("Error fetching dev posts:", error);
+  } catch (_) {
+    console.error("Error fetching dev posts");
     return {
       status: 'error',
-      error: error instanceof Error ? error.message : 'Unknown error occurred',
+      error: 'Failed to fetch dev posts',
       data: {
         posts: [],
         pagination: {
@@ -108,6 +108,14 @@ function SortSwitcher({
       </Link>
     </div>
   );
+}
+
+interface DevPost {
+  _id: string;
+  title: string;
+  date: string;
+  category?: string;
+  tags?: string[];
 }
 
 export default async function DevPage({
@@ -180,7 +188,7 @@ export default async function DevPage({
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {result.data.posts.map((post: any) => (
+                  {result.data.posts.map((post: DevPost) => (
                     <TableRow key={post._id}>
                       <TableCell className="font-medium">
                         <div>

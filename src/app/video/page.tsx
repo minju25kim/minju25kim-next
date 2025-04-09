@@ -52,11 +52,11 @@ async function getVideoPosts(page: number = 1, sort: SortOption = 'latest') {
         }
       }
     };
-  } catch (error) {
-    console.error("Error fetching video posts:", error);
+  } catch (_) {
+    console.error("Error fetching video posts");
     return {
       status: 'error',
-      error: error instanceof Error ? error.message : 'Unknown error occurred',
+      error: 'Failed to fetch video posts',
       data: {
         posts: [],
         pagination: {
@@ -101,6 +101,15 @@ function SortSwitcher({
       </Link>
     </div>
   );
+}
+
+interface VideoPost {
+  _id: string;
+  title: string;
+  date: string;
+  thumbnail?: string;
+  category?: string;
+  tags?: string[];
 }
 
 export default async function VideoPage({
@@ -165,7 +174,7 @@ export default async function VideoPage({
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              {result.data.posts.map((post: any) => (
+              {result.data.posts.map((post: VideoPost) => (
                 <Link 
                   key={post._id}
                   href={`/video/${post.title.toLowerCase().replace(/\s+/g, '_')}`}

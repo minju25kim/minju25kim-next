@@ -1,6 +1,17 @@
 import Link from 'next/link';
 import clientPromise from '@/lib/mongodb';
 
+interface Post {
+  _id: string;
+  title: string;
+  createdAt: string;
+}
+
+interface Tag {
+  _id: string;
+  count: number;
+}
+
 async function getData() {
   try {
     const client = await clientPromise;
@@ -116,7 +127,7 @@ export default async function MetaPage() {
             <h2 className="text-2xl font-semibold mb-4">Recent Posts</h2>
             <div className="space-y-4">
               {result.data.recentPosts.length > 0 ? (
-                result.data.recentPosts.map((post: any) => (
+                result.data.recentPosts.map((post: Post) => (
                   <div key={post._id} className="flex justify-between items-center">
                     <span className="text-lg">{post.title}</span>
                     <span className="text-gray-500">
@@ -154,7 +165,7 @@ export default async function MetaPage() {
             <h2 className="text-2xl font-semibold mb-4">Popular Tags</h2>
             <div className="flex flex-wrap gap-2">
               {result.data.tags.length > 0 ? (
-                result.data.tags.map((tag: any) => (
+                result.data.tags.map((tag: Tag) => (
                   <span 
                     key={tag._id}
                     className="px-3 py-1 bg-gray-100 rounded-full text-gray-700"

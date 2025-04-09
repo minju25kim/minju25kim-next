@@ -1,6 +1,7 @@
 import { Pagination } from "@/components/ui/pagination";
 import Link from "next/link";
 import clientPromise from "@/lib/mongodb";
+import { WithId, Document } from 'mongodb';
 import {
   Table,
   TableBody,
@@ -30,6 +31,16 @@ function formatDate(dateStr: string | Date | undefined): string {
   }
 }
 
+interface BlogPost {
+  _id: string;
+  title: string;
+  date: string;
+  category?: string;
+  tags?: string[];
+}
+
+type MongoDBBlogPost = WithId<Document> & BlogPost;
+
 async function getBlogPosts(page: number = 1, sort: SortOption = 'latest') {
   try {
     const client = await clientPromise;
@@ -45,7 +56,7 @@ async function getBlogPosts(page: number = 1, sort: SortOption = 'latest') {
       .sort({ date: sort === 'latest' ? -1 : 1 })
       .skip((page - 1) * POSTS_PER_PAGE)
       .limit(POSTS_PER_PAGE)
-      .toArray();
+      .toArray() as MongoDBBlogPost[];
 
     return {
       status: 'success',
@@ -59,11 +70,11 @@ async function getBlogPosts(page: number = 1, sort: SortOption = 'latest') {
         }
       }
     };
-  } catch (error) {
-    console.error("Error fetching blog posts:", error);
+  } catch (_) {
+    console.error("Error fetching blog posts");
     return {
       status: 'error',
-      error: error instanceof Error ? error.message : 'Unknown error occurred',
+      error: 'Failed to fetch blog posts',
       data: {
         posts: [],
         pagination: {
@@ -113,29 +124,26 @@ function SortSwitcher({
 export default async function BlogPage({
   searchParams,
 }: {
-  searchParams?: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | string[] | undefined };
 }) {
   // Safely access search parameters with default values
-  const params = await Promise.resolve(searchParams);
   let currentPage = 1;
   let sort: SortOption = 'latest';
 
   try {
-    if (params) {
-      // Handle page parameter
-      const pageParam = params.page;
-      if (typeof pageParam === 'string') {
-        const parsedPage = parseInt(pageParam, 10);
-        if (!isNaN(parsedPage)) {
-          currentPage = Math.max(1, parsedPage);
-        }
+    // Handle page parameter
+    const pageParam = searchParams.page;
+    if (typeof pageParam === 'string') {
+      const parsedPage = parseInt(pageParam, 10);
+      if (!isNaN(parsedPage)) {
+        currentPage = Math.max(1, parsedPage);
       }
+    }
 
-      // Handle sort parameter
-      const sortParam = params.sort;
-      if (typeof sortParam === 'string') {
-        sort = sortParam === 'oldest' ? 'oldest' : 'latest';
-      }
+    // Handle sort parameter
+    const sortParam = searchParams.sort;
+    if (typeof sortParam === 'string') {
+      sort = sortParam === 'oldest' ? 'oldest' : 'latest';
     }
   } catch (error) {
     console.error('Error parsing search parameters:', error);
@@ -180,8 +188,8 @@ export default async function BlogPage({
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {result.data.posts.map((post: any) => (
-                    <TableRow key={post._id}>
+                  {result.data.posts.map((post: MongoDBBlogPost) => (
+                    <TableRow key={post._id.toString()}>
                       <TableCell className="font-medium">
                         <div>
                           <Link 
