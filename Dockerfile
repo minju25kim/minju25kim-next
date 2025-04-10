@@ -21,18 +21,10 @@ RUN apt-get update -qq && \
 
 # Install node modules
 COPY package-lock.json package.json ./
-# Add these lines in the build stage, before npm ci
-
 RUN npm ci --include=dev
 
 # Copy application code
 COPY . .
-
-RUN --mount=type=secret,id=MONGODB_URI \
-    MONGODB_URI="$(cat /run/secrets/MONGODB_URI)"
-
-# Build application
-RUN npx next build --experimental-build-mode compile
 
 # Remove development dependencies
 RUN npm prune --omit=dev

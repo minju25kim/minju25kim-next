@@ -26,6 +26,4 @@ jobs:
 
       # Check if the app builds successfully
       - name: Build the app
-        env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: npm run build

@@ -4,8 +4,8 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen p-8">
       <div className="max-w-4xl mx-auto">
-        <Link 
-          href="/" 
+        <Link
+          href="/"
           className="text-gray-600 hover:text-blue-600 transition-colors mb-8 inline-block"
         >
           ← Back to home
