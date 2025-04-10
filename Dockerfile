@@ -12,12 +12,6 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV="production"
 
-# Mount secrets at build time
-RUN --mount=type=secret,id=NEXT_PUBLIC_SUPABASE_URL \
-    --mount=type=secret,id=NEXT_PUBLIC_SUPABASE_ANON_KEY \
-    echo "NEXT_PUBLIC_SUPABASE_URL=$(cat /run/secrets/NEXT_PUBLIC_SUPABASE_URL)" >> .env && \
-    echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=$(cat /run/secrets/NEXT_PUBLIC_SUPABASE_ANON_KEY)" >> .env
-
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
