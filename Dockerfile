@@ -12,6 +12,12 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV="production"
 
+# Mount secrets at build time
+RUN --mount=type=secret,id=NEXT_PUBLIC_SUPABASE_URL \
+    --mount=type=secret,id=NEXT_PUBLIC_SUPABASE_ANON_KEY \
+    echo "NEXT_PUBLIC_SUPABASE_URL=$(cat /run/secrets/NEXT_PUBLIC_SUPABASE_URL)" >> .env && \
+    echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=$(cat /run/secrets/NEXT_PUBLIC_SUPABASE_ANON_KEY)" >> .env
+
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
@@ -21,18 +27,10 @@ RUN apt-get update -qq && \
 
 # Install node modules
 COPY package-lock.json package.json ./
-# Add these lines in the build stage, before npm ci
-
 RUN npm ci --include=dev
 
 # Copy application code
 COPY . .
-
-RUN --mount=type=secret,id=MONGODB_URI \
-    MONGODB_URI="$(cat /run/secrets/MONGODB_URI)"
-
-# Build application
-RUN npx next build --experimental-build-mode compile
 
 # Remove development dependencies
 RUN npm prune --omit=dev
