@@ -1,9 +1,5 @@
 import Link from 'next/link';
 
-interface Post extends Document {
-  title: string;
-  createdAt: string;
-}
 
 export default async function MetaPage() {
 
