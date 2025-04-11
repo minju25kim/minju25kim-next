@@ -45,7 +45,6 @@ export default async function TimelinePage() {
         <div className="flex items-center justify-between mb-12">
           <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-200">Timeline</h1>
         </div>
-        <p className="text-gray-800 dark:text-gray-200">this will be updated soon</p>
 
         <Timeline>
           {timelineData.map((event) => (
