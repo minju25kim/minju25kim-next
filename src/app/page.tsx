@@ -24,7 +24,7 @@ export default function Page() {
       {/* Theme Toggle Button */}
       <button
         onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-        className="fixed top-4 left-1/2 -translate-x-1/2 p-2 rounded-lg hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors"
+        className="fixed top-4 right-4 md:right-auto md:left-1/2 md:-translate-x-1/2 p-2 rounded-lg hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors"
         aria-label="Toggle theme"
       >
         {theme === 'light' ? (
@@ -34,19 +34,21 @@ export default function Page() {
         )}
       </button>
 
-      {/* Corner Navigation Links */}
-      <Link href="/blog" className="fixed top-8 left-8 md:top-16 md:left-16 text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-        blog
-      </Link>
-      <Link href="/dev" className="fixed top-8 right-8 md:top-16 md:right-16 text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-        dev
-      </Link>
-      <Link href="/timeline" className="fixed bottom-8 left-8 md:bottom-16 md:left-16 text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-        timeline
-      </Link>
-      <Link href="/video" className="fixed bottom-8 right-8 md:bottom-16 md:right-16 text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-        video
-      </Link>
+      {/* Corner Navigation Links - Desktop Only */}
+      <div className="hidden md:block">
+        <Link href="/blog" className="fixed top-16 left-16 text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+          blog
+        </Link>
+        <Link href="/dev" className="fixed top-16 right-16 text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+          dev
+        </Link>
+        <Link href="/timeline" className="fixed bottom-16 left-16 text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+          timeline
+        </Link>
+        <Link href="/video" className="fixed bottom-16 right-16 text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+          video
+        </Link>
+      </div>
 
       {/* Centered Content */}
       <div className="h-full flex flex-col items-center justify-center">
@@ -113,11 +115,24 @@ export default function Page() {
               <YouTubeIcon className="w-8 h-8 fill-current" />
             </a>
           </div>
+
+          {/* Mobile Navigation Links */}
+          <div className="md:hidden flex flex-col items-center gap-6 mt-8">
+            <Link href="/blog" className="text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              blog
+            </Link>
+            <Link href="/dev" className="text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              dev
+            </Link>
+            <Link href="/timeline" className="text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              timeline
+            </Link>
+            <Link href="/video" className="text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              video
+            </Link>
+          </div>
         </div>
       </div>
-      <footer className="fixed bottom-2 w-full text-center text-sm text-gray-500 dark:text-gray-400">
-        © {new Date().getFullYear()} Minju Kim. All rights reserved.
-      </footer>
     </div>
   );
 }
