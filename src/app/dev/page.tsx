@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 type SortOption = 'latest' | 'oldest';
 
@@ -116,29 +117,31 @@ export default async function DevPage({ searchParams }: PageProps) {
         )}
 
         {totalPages > 1 && (
-          <div className="flex justify-center gap-2 mt-8">
+          <div className="flex justify-center items-center gap-2 mt-8">
             <Link
               href={`/dev?sort=${sort}&page=${Math.max(1, page - 1)}`}
-              className={`px-4 py-2 rounded-md transition-colors ${
+              className={`inline-flex items-center justify-center rounded-md transition-colors h-10 w-10 ${
                 page === 1
                   ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed'
                   : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200'
               }`}
             >
-              Previous
+              <ArrowLeft className="h-5 w-5" />
+              <span className="sr-only">Previous page</span>
             </Link>
             <span className="px-4 py-2 text-gray-800 dark:text-gray-200">
               Page {page} of {totalPages}
             </span>
             <Link
               href={`/dev?sort=${sort}&page=${Math.min(totalPages, page + 1)}`}
-              className={`px-4 py-2 rounded-md transition-colors ${
+              className={`inline-flex items-center justify-center rounded-md transition-colors h-10 w-10 ${
                 page === totalPages
                   ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed'
                   : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200'
               }`}
             >
-              Next
+              <ArrowRight className="h-5 w-5" />
+              <span className="sr-only">Next page</span>
             </Link>
           </div>
         )}

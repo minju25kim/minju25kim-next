@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface PaginationProps {
@@ -67,13 +67,14 @@ export function Pagination({ currentPage, totalPages, baseUrl, additionalParams 
       <Link
         href={buildUrl(currentPage - 1)}
         className={cn(
-          "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors h-10 px-4",
-          "hover:bg-gray-100",
+          "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors h-10 w-10",
+          "hover:bg-gray-100 dark:hover:bg-gray-800",
+          "text-gray-800 dark:text-gray-200",
           currentPage <= 1 ? "pointer-events-none opacity-50" : ""
         )}
         aria-disabled={currentPage <= 1}
       >
-        <ChevronLeft className="h-4 w-4" />
+        <ArrowLeft className="h-5 w-5" />
         <span className="sr-only">Previous page</span>
       </Link>
 
@@ -82,7 +83,7 @@ export function Pagination({ currentPage, totalPages, baseUrl, additionalParams 
           pageNumber === '...' ? (
             <span
               key={`dots-${i}`}
-              className="px-4 py-2"
+              className="px-4 py-2 text-gray-800 dark:text-gray-200"
             >
               ...
             </span>
@@ -93,8 +94,8 @@ export function Pagination({ currentPage, totalPages, baseUrl, additionalParams 
               className={cn(
                 "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors h-10 w-10",
                 pageNumber === currentPage
-                  ? "bg-gray-900 text-white"
-                  : "hover:bg-gray-100"
+                  ? "bg-gray-900 text-white dark:bg-gray-800"
+                  : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-200"
               )}
               aria-current={pageNumber === currentPage ? "page" : undefined}
             >
@@ -107,13 +108,14 @@ export function Pagination({ currentPage, totalPages, baseUrl, additionalParams 
       <Link
         href={buildUrl(currentPage + 1)}
         className={cn(
-          "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors h-10 px-4",
-          "hover:bg-gray-100",
+          "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors h-10 w-10",
+          "hover:bg-gray-100 dark:hover:bg-gray-800",
+          "text-gray-800 dark:text-gray-200",
           currentPage >= totalPages ? "pointer-events-none opacity-50" : ""
         )}
         aria-disabled={currentPage >= totalPages}
       >
-        <ChevronRight className="h-4 w-4" />
+        <ArrowRight className="h-5 w-5" />
         <span className="sr-only">Next page</span>
       </Link>
     </nav>
