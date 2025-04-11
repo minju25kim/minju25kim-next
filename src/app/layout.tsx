@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from 'next/font/google';
 import "./globals.css";
 import { Providers } from "@/components/providers";
+import { Footer } from "@/components/footer";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -44,9 +45,12 @@ export default function RootLayout({
         <link rel="canonical" href="https://minju25kim.fly.dev" />
       </head>
 
-      <body>
+      <body className="flex flex-col min-h-screen">
         <Providers>
-          {children}
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
         </Providers>
       </body>
     </html>
