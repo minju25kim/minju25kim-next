@@ -41,25 +41,25 @@ export default async function DevPage({ searchParams }: PageProps) {
     .range((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE - 1);
 
   return (
-    <div className="min-h-screen p-8">
+    <div className="min-h-screen p-8 bg-white dark:bg-gray-900 transition-colors duration-200">
       <div className="max-w-4xl mx-auto">
         <Link
           href="/"
-          className="text-gray-600 hover:text-blue-600 transition-colors mb-8 inline-block"
+          className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-8 inline-block"
         >
           ← Back to home
         </Link>
         
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-4xl font-bold">Dev Posts</h1>
+          <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-200">Dev Posts</h1>
           
-          <div className="flex items-center gap-2 bg-gray-100 p-1 rounded-lg">
+          <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
             <Link
               href={`/dev?sort=latest&page=${page}`}
               className={`px-3 py-1.5 rounded-md transition-colors ${
                 sort === 'latest'
-                  ? 'bg-white shadow-sm'
-                  : 'hover:bg-gray-200'
+                  ? 'bg-white dark:bg-gray-700 shadow-sm'
+                  : 'hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               Latest
@@ -68,8 +68,8 @@ export default async function DevPage({ searchParams }: PageProps) {
               href={`/dev?sort=oldest&page=${page}`}
               className={`px-3 py-1.5 rounded-md transition-colors ${
                 sort === 'oldest'
-                  ? 'bg-white shadow-sm'
-                  : 'hover:bg-gray-200'
+                  ? 'bg-white dark:bg-gray-700 shadow-sm'
+                  : 'hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               Oldest
@@ -77,26 +77,26 @@ export default async function DevPage({ searchParams }: PageProps) {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead>Title</TableHead>
-                <TableHead className="w-[180px]">Date</TableHead>
+              <TableRow className="border-b dark:border-gray-700">
+                <TableHead className="text-gray-800 dark:text-gray-200">Title</TableHead>
+                <TableHead className="w-[180px] text-gray-800 dark:text-gray-200">Date</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {posts?.map((post) => (
-                <TableRow key={post.id}>
+                <TableRow key={post.id} className="border-b dark:border-gray-700">
                   <TableCell>
                     <Link
                       href={`/dev/${post.slug}`}
-                      className="hover:text-blue-600 transition-colors font-medium"
+                      className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
                     >
                       {post.title}
                     </Link>
                   </TableCell>
-                  <TableCell className="text-gray-500">
+                  <TableCell className="text-gray-500 dark:text-gray-400">
                     {new Date(post.created_at).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'short',
@@ -110,7 +110,7 @@ export default async function DevPage({ searchParams }: PageProps) {
         </div>
 
         {!posts?.length && (
-          <div className="text-center text-gray-500 mt-8">
+          <div className="text-center text-gray-500 dark:text-gray-400 mt-8">
             No posts found
           </div>
         )}
@@ -121,21 +121,21 @@ export default async function DevPage({ searchParams }: PageProps) {
               href={`/dev?sort=${sort}&page=${Math.max(1, page - 1)}`}
               className={`px-4 py-2 rounded-md transition-colors ${
                 page === 1
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                  : 'bg-gray-100 hover:bg-gray-200'
+                  ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed'
+                  : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200'
               }`}
             >
               Previous
             </Link>
-            <span className="px-4 py-2">
+            <span className="px-4 py-2 text-gray-800 dark:text-gray-200">
               Page {page} of {totalPages}
             </span>
             <Link
               href={`/dev?sort=${sort}&page=${Math.min(totalPages, page + 1)}`}
               className={`px-4 py-2 rounded-md transition-colors ${
                 page === totalPages
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                  : 'bg-gray-100 hover:bg-gray-200'
+                  ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed'
+                  : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200'
               }`}
             >
               Next
