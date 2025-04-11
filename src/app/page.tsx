@@ -4,8 +4,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { MapPin, Sun, Moon } from '@/components/ui/icons';
-import { LinkedInIcon, GitHubIcon, MediumIcon, YouTubeIcon } from '@/components/ui/icons';
+import { MapPin, Sun, Moon } from 'lucide-react';
+import LinkedInIcon from '@/components/ui/icons/linkedin-icon';
+import GitHubIcon from '@/components/ui/icons/github-icon';
+import MediumIcon from '@/components/ui/icons/medium-icon';
+import YouTubeIcon from '@/components/ui/icons/youtube-icon';
+import { MailIcon } from '@/components/ui/icons/mail-icon';
 
 export default function Page() {
   const { theme, setTheme } = useTheme();
@@ -71,12 +75,15 @@ export default function Page() {
             <MapPin className="w-5 h-5" />
             <span>Seoul, South Korea</span>
           </div>
-          <a
-            href="mailto:minju25kim@gmail.com"
-            className="text-lg text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-          >
-            minju25kim@gmail.com
-          </a>
+          <div className="flex items-center gap-2">
+            <MailIcon className="w-5 h-5 text-gray-800 dark:text-gray-200" />
+            <a
+              href="mailto:minju25kim@gmail.com"
+              className="text-lg text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              minju25kim@gmail.com
+            </a>
+          </div>
           <div className="flex justify-center items-center gap-6 mt-2">
             <a
               href="https://www.linkedin.com/in/minju25kim/"
