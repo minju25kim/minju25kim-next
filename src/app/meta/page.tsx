@@ -43,11 +43,12 @@ const techStack = [
 ];
 
 interface PageProps {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-export default function MetaPage({ searchParams }: PageProps) {
-  const tab = (searchParams.tab as string) || 'metadata';
+export default async function MetaPage({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const tab = (params.tab as string) || 'metadata';
 
   return (
     <div className="min-h-screen p-8 bg-white dark:bg-gray-900 transition-colors duration-200">
