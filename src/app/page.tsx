@@ -24,11 +24,11 @@ export default function Page() {
   }
 
   return (
-    <div className="h-screen relative bg-white dark:bg-gray-900 transition-colors duration-200">
+    <div className="h-screen relative bg-white dark:bg-gray-900 transition-colors duration-200 flex flex-col">
       {/* Theme Toggle Button */}
       <button
         onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-        className="fixed top-4 right-4 md:right-auto md:left-1/2 md:-translate-x-1/2 p-2 rounded-lg hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors"
+        className="fixed top-4 right-4 p-2 rounded-lg hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors"
         aria-label="Toggle theme"
       >
         {theme === 'light' ? (
@@ -38,25 +38,9 @@ export default function Page() {
         )}
       </button>
 
-      {/* Corner Navigation Links - Desktop Only */}
-      <div className="hidden md:block">
-        <Link href="/blog" className="fixed top-16 left-16 text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-          blog
-        </Link>
-        <Link href="/dev" className="fixed top-16 right-16 text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-          dev
-        </Link>
-        <Link href="/timeline" className="fixed bottom-16 left-16 text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-          timeline
-        </Link>
-        <Link href="/video" className="fixed bottom-16 right-16 text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-          video
-        </Link>
-      </div>
-
-      {/* Centered Content */}
-      <div className="h-full flex flex-col items-center justify-center">
-        <div className="flex flex-col items-center space-y-6">
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center space-y-4">
           <Link
             href="/meta"
             className="relative block hover:scale-105 transition-transform duration-300"
@@ -124,7 +108,7 @@ export default function Page() {
           </div>
 
           {/* Mobile Navigation Links */}
-          <div className="md:hidden flex flex-col items-center gap-6 mt-8">
+          <div className="flex flex-col items-center gap-6 mt-8">
             <Link href="/blog" className="text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
               blog
             </Link>
@@ -140,6 +124,11 @@ export default function Page() {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="py-4 text-center text-sm text-gray-600 dark:text-gray-400">
+        <p>© {new Date().getFullYear()} Minju Kim. All rights reserved.</p>
+      </footer>
     </div>
   );
 }
