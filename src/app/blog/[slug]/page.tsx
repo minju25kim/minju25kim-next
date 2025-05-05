@@ -3,21 +3,13 @@ import { createClient } from '@/utils/supabase/server';
 import { notFound } from "next/navigation";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import Image from 'next/image';
-import { Components } from 'react-markdown';
+import NextImage from 'next/image';
+import type { Components } from 'react-markdown';
 
 interface PageProps {
   params: Promise<{
     slug: string;
   }>;
-}
-
-interface CustomComponents extends Components {
-  img?: React.ComponentType<any>;
-  h2?: React.ComponentType<any>;
-  p?: React.ComponentType<any>;
-  strong?: React.ComponentType<any>;
-  blockquote?: React.ComponentType<any>;
 }
 
 export default async function BlogPost({ params }: PageProps) {
@@ -36,10 +28,12 @@ export default async function BlogPost({ params }: PageProps) {
     notFound();
   }
 
-  const components: CustomComponents = {
+  const components: Partial<Components> = {
     p: ({ children, node, ...props }) => {
       // Check if the paragraph contains only an image
-      const hasOnlyImage = node?.children?.length === 1 && node?.children[0].type === 'element' && node?.children[0].tagName === 'img';
+      const hasOnlyImage = node?.children?.length === 1 && 
+        'tagName' in (node?.children[0] ?? {}) && 
+        (node?.children[0] as { tagName?: string })?.tagName === 'img';
       
       if (hasOnlyImage) {
         // Return the children directly without the paragraph wrapper
@@ -52,21 +46,28 @@ export default async function BlogPost({ params }: PageProps) {
         </p>
       );
     },
-    img: ({ alt, src, ...props }) => (
-      <span className="block my-4">
-        <img
-          src={src}
-          alt={alt || ''}
-          className="rounded-lg shadow-lg max-w-full h-auto"
-          {...props}
-        />
-        {alt && (
-          <span className="block text-center text-sm text-gray-500 mt-2">
-            {alt}
-          </span>
-        )}
-      </span>
-    ),
+    img: ({ src, alt }) => {
+      if (!src) return null;
+      
+      return (
+        <span className="block my-4">
+          <div className="relative w-full aspect-video">
+            <NextImage
+              src={src}
+              alt={alt || ''}
+              fill
+              className="rounded-lg shadow-lg object-contain"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+            />
+          </div>
+          {alt && (
+            <span className="block text-center text-sm text-gray-500 mt-2">
+              {alt}
+            </span>
+          )}
+        </span>
+      );
+    },
     h2: ({ children, ...props }) => (
       <h2 className="text-2xl font-bold mt-8 mb-4" {...props}>
         {children}
