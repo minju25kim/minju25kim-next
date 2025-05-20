@@ -1,6 +1,6 @@
 import { PlateEditor } from '@/components/PlateEditor';
 import type { Value } from '@udecode/plate';
-import { createClient } from '@/utils/supabase/server';
+// import { createClient } from '@/utils/supabase/server';
 
 const initialValue: Value = [
     {
@@ -21,14 +21,15 @@ const initialValue: Value = [
     },
 ];
 
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-    const resolvedParams = await params;
-    const supabase = await createClient();
+// export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+//     const resolvedParams = await params;
+//     const supabase = await createClient();
   
-    const { data: devDataRaw } = await supabase.from('dev').select('*').eq('slug', resolvedParams.slug);
+//     const { data: devDataRaw } = await supabase.from('dev').select('*').eq('slug', resolvedParams.slug);
   
-    // console.log(devDataRaw?.[0]?.content)
+//     console.log(devDataRaw?.[0]?.content)
 
+export default async function Page() {
 
     return (
         <div className="max-w-3xl mx-auto mt-12">

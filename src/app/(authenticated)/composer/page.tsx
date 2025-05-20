@@ -45,7 +45,7 @@ export default async function ComposerPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {devData.length > 0 ? devData.map((item: any) => (
+                {devData.length > 0 ? devData.map((item) => (
                   <TableRow key={item.id}>
                     <TableCell>
                       {item.slug ? (
@@ -75,7 +75,7 @@ export default async function ComposerPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {blogData.length > 0 ? blogData.map((item: any) => (
+                {blogData.length > 0 ? blogData.map((item) => (
                   <TableRow key={item.id}>
                     <TableCell>
                       {item.slug ? (
