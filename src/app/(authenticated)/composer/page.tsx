@@ -1,4 +1,4 @@
-import { signOut } from '@/app/logout/actions';
+import { signOut } from '@/app/(authenticated)/composer/actions';
 import { createClient } from '@/utils/supabase/server';
 
 export default async function ComposerPage() {

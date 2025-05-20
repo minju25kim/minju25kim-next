@@ -7,10 +7,15 @@ import { createClient } from '@/utils/supabase/server'
 export async function signInWithGithub() {
   const supabase = await createClient()
 
+  const baseUrl =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3001'
+      : 'https://minju25kim.fly.dev';
+      
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'github',
     options: {
-      redirectTo: `${process.env.NEXT_PUBLIC_URL}/auth/callback?next=/composer`,
+      redirectTo: `${baseUrl}/auth/callback?next=/composer`,
     },
   })
 
