@@ -7,7 +7,7 @@ export default async function ComposerPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  let username =
+  const username =
     user?.user_metadata?.user_name ||
     user?.user_metadata?.name ||
     user?.email ||
