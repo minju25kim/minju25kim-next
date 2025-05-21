@@ -35,7 +35,7 @@ export default async function Page() {
     <div className="max-w-3xl mx-auto mt-12">
       <h1 className="text-2xl font-bold mb-6">blog Content Editor</h1>
       <p>This is the blog content editing page.</p>
-      <PlateEditor initialValue={initialValue} />
+      {/* <PlateEditor initialValue={initialValue} /> */}
     </div>
   );
 }

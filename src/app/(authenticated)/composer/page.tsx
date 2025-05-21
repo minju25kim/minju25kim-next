@@ -16,9 +16,8 @@ type ContentRow = {
   slug?: string;
   title?: string;
   name?: string;
-  created_at: string; // ISO string from Supabase
+  created_at: string; 
   tableType: 'dev' | 'blog';
-  // ...other fields
 };
 
 // ContentTable: renders a table for given data
