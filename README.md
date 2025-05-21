@@ -1,6 +1,7 @@
 # minju25kim
 
 ## Tech stack
+
 - nextjs
 - typescript
 - fly.io

@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 interface PaginationProps {
   currentPage: number;
@@ -9,7 +9,12 @@ interface PaginationProps {
   additionalParams?: Record<string, string>;
 }
 
-export function Pagination({ currentPage, totalPages, baseUrl, additionalParams = {} }: PaginationProps) {
+export function Pagination({
+  currentPage,
+  totalPages,
+  baseUrl,
+  additionalParams = {},
+}: PaginationProps) {
   // Generate page numbers to show
   const getPageNumbers = () => {
     const delta = 2; // Number of pages to show on each side of current page
@@ -38,7 +43,7 @@ export function Pagination({ currentPage, totalPages, baseUrl, additionalParams 
         if (i - l === 2) {
           rangeWithDots.push(l + 1);
         } else if (i - l !== 1) {
-          rangeWithDots.push('...');
+          rangeWithDots.push("...");
         }
       }
       rangeWithDots.push(i);
@@ -52,7 +57,10 @@ export function Pagination({ currentPage, totalPages, baseUrl, additionalParams 
 
   // Helper function to build URL with all parameters
   const buildUrl = (page: number) => {
-    const params = new URLSearchParams({ ...additionalParams, page: page.toString() });
+    const params = new URLSearchParams({
+      ...additionalParams,
+      page: page.toString(),
+    });
     return `${baseUrl}?${params.toString()}`;
   };
 
@@ -70,7 +78,7 @@ export function Pagination({ currentPage, totalPages, baseUrl, additionalParams 
           "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors h-10 w-10",
           "hover:bg-gray-100 dark:hover:bg-gray-800",
           "text-gray-800 dark:text-gray-200",
-          currentPage <= 1 ? "pointer-events-none opacity-50" : ""
+          currentPage <= 1 ? "pointer-events-none opacity-50" : "",
         )}
         aria-disabled={currentPage <= 1}
       >
@@ -79,8 +87,8 @@ export function Pagination({ currentPage, totalPages, baseUrl, additionalParams 
       </Link>
 
       <div className="flex items-center space-x-2">
-        {pageNumbers.map((pageNumber, i) => (
-          pageNumber === '...' ? (
+        {pageNumbers.map((pageNumber, i) =>
+          pageNumber === "..." ? (
             <span
               key={`dots-${i}`}
               className="px-4 py-2 text-gray-800 dark:text-gray-200"
@@ -95,14 +103,14 @@ export function Pagination({ currentPage, totalPages, baseUrl, additionalParams 
                 "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors h-10 w-10",
                 pageNumber === currentPage
                   ? "bg-gray-900 text-white dark:bg-gray-800"
-                  : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-200"
+                  : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-200",
               )}
               aria-current={pageNumber === currentPage ? "page" : undefined}
             >
               {pageNumber}
             </Link>
-          )
-        ))}
+          ),
+        )}
       </div>
 
       <Link
@@ -111,7 +119,7 @@ export function Pagination({ currentPage, totalPages, baseUrl, additionalParams 
           "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors h-10 w-10",
           "hover:bg-gray-100 dark:hover:bg-gray-800",
           "text-gray-800 dark:text-gray-200",
-          currentPage >= totalPages ? "pointer-events-none opacity-50" : ""
+          currentPage >= totalPages ? "pointer-events-none opacity-50" : "",
         )}
         aria-disabled={currentPage >= totalPages}
       >
@@ -120,4 +128,4 @@ export function Pagination({ currentPage, totalPages, baseUrl, additionalParams 
       </Link>
     </nav>
   );
-} 
+}

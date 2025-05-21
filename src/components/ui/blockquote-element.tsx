@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { type PlateElementProps, PlateElement } from '@udecode/plate/react';
+import { PlateElement, type PlateElementProps } from "@udecode/plate/react";
 
 export function BlockquoteElement(props: PlateElementProps) {
   return (

@@ -1,15 +1,16 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import { MapPin, Sun, Moon } from 'lucide-react';
-import LinkedInIcon from '@/components/ui/icons/linkedin-icon';
-import GitHubIcon from '@/components/ui/icons/github-icon';
-import MediumIcon from '@/components/ui/icons/medium-icon';
-import YouTubeIcon from '@/components/ui/icons/youtube-icon';
-import { MailIcon } from '@/components/ui/icons/mail-icon';
+import { useEffect, useState } from "react";
+
+import GitHubIcon from "@/components/ui/icons/github-icon";
+import LinkedInIcon from "@/components/ui/icons/linkedin-icon";
+import { MailIcon } from "@/components/ui/icons/mail-icon";
+import MediumIcon from "@/components/ui/icons/medium-icon";
+import YouTubeIcon from "@/components/ui/icons/youtube-icon";
+import { MapPin, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Page() {
   const { theme, setTheme } = useTheme();
@@ -27,11 +28,11 @@ export default function Page() {
     <div className="h-screen relative bg-white dark:bg-gray-900 transition-colors duration-200 flex flex-col">
       {/* Theme Toggle Button */}
       <button
-        onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
         className="fixed top-4 right-4 p-2 rounded-lg hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors"
         aria-label="Toggle theme"
       >
-        {theme === 'light' ? (
+        {theme === "light" ? (
           <Moon className="w-6 h-6 text-gray-800 dark:text-gray-200" />
         ) : (
           <Sun className="w-6 h-6 text-gray-800 dark:text-gray-200" />
@@ -54,7 +55,9 @@ export default function Page() {
               className="rounded-full"
             />
           </Link>
-          <p className="text-lg text-gray-800 dark:text-gray-200">🏃🏻‍♀️ running 👩🏻‍🔬 cooking</p>
+          <p className="text-lg text-gray-800 dark:text-gray-200">
+            🏃🏻‍♀️ running 👩🏻‍🔬 cooking
+          </p>
           <div className="flex items-center gap-2 text-lg text-gray-800 dark:text-gray-200">
             <MapPin className="w-5 h-5" />
             <span>Seoul, South Korea</span>
@@ -109,16 +112,28 @@ export default function Page() {
 
           {/* Mobile Navigation Links */}
           <div className="flex flex-col items-center gap-6 mt-8">
-            <Link href="/blog" className="text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            <Link
+              href="/blog"
+              className="text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
               blog
             </Link>
-            <Link href="/dev" className="text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            <Link
+              href="/dev"
+              className="text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
               dev
             </Link>
-            <Link href="/timeline" className="text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            <Link
+              href="/timeline"
+              className="text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
               timeline
             </Link>
-            <Link href="/video" className="text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            <Link
+              href="/video"
+              className="text-2xl text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
               video
             </Link>
           </div>

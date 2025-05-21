@@ -1,4 +1,3 @@
-
 export function Footer() {
   return (
     <footer className="w-full py-6 px-4 mt-auto bg-white dark:bg-gray-900">
@@ -9,4 +8,4 @@ export function Footer() {
       </div>
     </footer>
   );
-} 
+}

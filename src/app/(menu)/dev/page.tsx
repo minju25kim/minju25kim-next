@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { createClient } from '@/utils/supabase/server';
 import {
   Table,
   TableBody,
@@ -8,9 +6,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { createClient } from "@/utils/supabase/server";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
-type SortOption = 'latest' | 'oldest';
+type SortOption = "latest" | "oldest";
 
 interface PageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -21,24 +21,24 @@ const POSTS_PER_PAGE = 10;
 export default async function DevPage({ searchParams }: PageProps) {
   // Await the searchParams
   const params = await searchParams;
-  const sort = (params.sort as SortOption) || 'latest';
+  const sort = (params.sort as SortOption) || "latest";
   const page = Math.max(1, parseInt(params.page as string) || 1);
-  
+
   const supabase = await createClient();
-  
+
   // Get total count of posts
   const { count } = await supabase
-    .from('dev')
-    .select('*', { count: 'exact', head: true });
+    .from("dev")
+    .select("*", { count: "exact", head: true });
 
   // Calculate total pages
   const totalPages = Math.ceil((count || 0) / POSTS_PER_PAGE);
-  
+
   // Get paginated posts
   const { data: posts } = await supabase
-    .from('dev')
+    .from("dev")
     .select()
-    .order('created_at', { ascending: sort === 'oldest' })
+    .order("created_at", { ascending: sort === "oldest" })
     .range((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE - 1);
 
   return (
@@ -50,17 +50,19 @@ export default async function DevPage({ searchParams }: PageProps) {
         >
           ← Back to home
         </Link>
-        
+
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-200">Dev Posts</h1>
-          
+          <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-200">
+            Dev Posts
+          </h1>
+
           <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
             <Link
               href={`/dev?sort=latest&page=${page}`}
               className={`px-3 py-1.5 rounded-md transition-colors ${
-                sort === 'latest'
-                  ? 'bg-white dark:bg-gray-700 shadow-sm'
-                  : 'hover:bg-gray-200 dark:hover:bg-gray-600'
+                sort === "latest"
+                  ? "bg-white dark:bg-gray-700 shadow-sm"
+                  : "hover:bg-gray-200 dark:hover:bg-gray-600"
               }`}
             >
               Latest
@@ -68,9 +70,9 @@ export default async function DevPage({ searchParams }: PageProps) {
             <Link
               href={`/dev?sort=oldest&page=${page}`}
               className={`px-3 py-1.5 rounded-md transition-colors ${
-                sort === 'oldest'
-                  ? 'bg-white dark:bg-gray-700 shadow-sm'
-                  : 'hover:bg-gray-200 dark:hover:bg-gray-600'
+                sort === "oldest"
+                  ? "bg-white dark:bg-gray-700 shadow-sm"
+                  : "hover:bg-gray-200 dark:hover:bg-gray-600"
               }`}
             >
               Oldest
@@ -82,13 +84,20 @@ export default async function DevPage({ searchParams }: PageProps) {
           <Table>
             <TableHeader>
               <TableRow className="border-b dark:border-gray-700">
-                <TableHead className="text-gray-800 dark:text-gray-200">Title</TableHead>
-                <TableHead className="w-[180px] text-gray-800 dark:text-gray-200">Date</TableHead>
+                <TableHead className="text-gray-800 dark:text-gray-200">
+                  Title
+                </TableHead>
+                <TableHead className="w-[180px] text-gray-800 dark:text-gray-200">
+                  Date
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {posts?.map((post) => (
-                <TableRow key={post.id} className="border-b dark:border-gray-700">
+                <TableRow
+                  key={post.id}
+                  className="border-b dark:border-gray-700"
+                >
                   <TableCell>
                     <Link
                       href={`/dev/${post.slug}`}
@@ -98,10 +107,10 @@ export default async function DevPage({ searchParams }: PageProps) {
                     </Link>
                   </TableCell>
                   <TableCell className="text-gray-500 dark:text-gray-400">
-                    {new Date(post.created_at).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric'
+                    {new Date(post.created_at).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
                     })}
                   </TableCell>
                 </TableRow>
@@ -122,8 +131,8 @@ export default async function DevPage({ searchParams }: PageProps) {
               href={`/dev?sort=${sort}&page=${Math.max(1, page - 1)}`}
               className={`inline-flex items-center justify-center rounded-md transition-colors h-10 w-10 ${
                 page === 1
-                  ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed'
-                  : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200'
+                  ? "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed"
+                  : "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
               }`}
             >
               <ArrowLeft className="h-5 w-5" />
@@ -136,8 +145,8 @@ export default async function DevPage({ searchParams }: PageProps) {
               href={`/dev?sort=${sort}&page=${Math.min(totalPages, page + 1)}`}
               className={`inline-flex items-center justify-center rounded-md transition-colors h-10 w-10 ${
                 page === totalPages
-                  ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed'
-                  : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200'
+                  ? "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed"
+                  : "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
               }`}
             >
               <ArrowRight className="h-5 w-5" />
@@ -148,4 +157,4 @@ export default async function DevPage({ searchParams }: PageProps) {
       </div>
     </div>
   );
-} 
+}
