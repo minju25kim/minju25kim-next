@@ -1,26 +1,7 @@
-import { PlateEditor } from "@/components/PlateEditor";
-import type { Value } from "@udecode/plate";
+// import { PlateEditor } from "@/components/PlateEditor";
+// import type { Value } from "@udecode/plate";
 
 // import { createClient } from '@/utils/supabase/server';
-
-const initialValue: Value = [
-  {
-    children: [{ text: "Title" }],
-    type: "h3",
-  },
-  {
-    children: [{ text: "This is a quote." }],
-    type: "blockquote",
-  },
-  {
-    children: [
-      { text: "With some " },
-      { bold: true, text: "bold" },
-      { text: " text for emphasis!" },
-    ],
-    type: "p",
-  },
-];
 
 // export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
 //     const resolvedParams = await params;
