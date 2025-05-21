@@ -11,8 +11,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 
+type ContentRow = {
+  id: string | number;
+  slug?: string;
+  title?: string;
+  name?: string;
+  created_at: string; // ISO string from Supabase
+  tableType: 'dev' | 'blog';
+  // ...other fields
+};
+
 // ContentTable: renders a table for given data
-function ContentTable({ data }: { data: [] }) {
+function ContentTable({ data }: { data: ContentRow[] }) {
   return (
     <Table>
       <TableHeader>
@@ -69,8 +79,8 @@ export default async function ComposerPage() {
   const blogData = (blogDataRaw ?? []).map((item) => ({ ...item, tableType: "blog" }));
 
   // Helper sorters
-  const sortByLatest = (a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-  const sortByOldest = (a: any, b: any) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+  const sortByLatest = (a: ContentRow, b: ContentRow) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  const sortByOldest = (a: ContentRow, b: ContentRow) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-start gap-8">
