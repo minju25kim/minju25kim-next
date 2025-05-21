@@ -12,7 +12,7 @@ import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 
 // ContentTable: renders a table for given data
-function ContentTable({ data }: { data: any[] }) {
+function ContentTable({ data }: { data: [] }) {
   return (
     <Table>
       <TableHeader>
