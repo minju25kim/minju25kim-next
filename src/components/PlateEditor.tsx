@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-
 import { BlockquoteElement } from "@/components/ui/blockquote-element";
 import { Editor, EditorContainer } from "@/components/ui/editor";
 import { FixedToolbar } from "@/components/ui/fixed-toolbar";
@@ -22,7 +21,14 @@ import {
 import { MarkdownPlugin } from '@udecode/plate-markdown';
 
 
-export function PlateEditor({ markdownString }: { markdownString: string }) {
+export function PlateEditor({
+  markdownString,
+  setMarkdown,
+}: {
+  markdownString: string;
+  setMarkdown: (markdown: string) => void;
+}) {
+
   const editor = usePlateEditor({
     components: {
       blockquote: BlockquoteElement,
@@ -51,7 +57,13 @@ export function PlateEditor({ markdownString }: { markdownString: string }) {
   });
 
   return (
-    <Plate editor={editor}>
+    <Plate
+      editor={editor}
+      onChange={({ value, editor }) => {
+        const markdownString = editor.getApi(MarkdownPlugin).markdown.serialize(value);
+        setMarkdown(markdownString);
+      }}
+    >
       <FixedToolbar className="flex justify-start gap-1 rounded-t-lg">
         <ToolbarButton onClick={() => editor.tf.toggleBlock("h1")}>
           H1
