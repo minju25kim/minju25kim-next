@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { type SlateElementProps, SlateElement } from '@udecode/plate';
+import { SlateElement, type SlateElementProps } from "@udecode/plate";
 
 export function BlockquoteElementStatic(props: SlateElementProps) {
   return (

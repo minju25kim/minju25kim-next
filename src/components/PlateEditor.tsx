@@ -1,29 +1,33 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-
-import type { Value } from '@udecode/plate';
-
-import { BasicElementsPlugin } from '@udecode/plate-basic-elements/react';
-import { BasicMarksPlugin } from '@udecode/plate-basic-marks/react';
+import * as React from "react";
+import { BlockquoteElement } from "@/components/ui/blockquote-element";
+import { Editor, EditorContainer } from "@/components/ui/editor";
+import { FixedToolbar } from "@/components/ui/fixed-toolbar";
+import { HeadingElement } from "@/components/ui/heading-element";
+import { MarkToolbarButton } from "@/components/ui/mark-toolbar-button";
+import { ParagraphElement } from "@/components/ui/paragraph-element";
+import { ToolbarButton } from "@/components/ui/toolbar";
+import { BasicElementsPlugin } from "@udecode/plate-basic-elements/react";
+import { BasicMarksPlugin } from "@udecode/plate-basic-marks/react";
 import {
-  type PlateElementProps,
-  type PlateLeafProps,
   Plate,
+  type PlateElementProps,
   PlateLeaf,
+  type PlateLeafProps,
   usePlateEditor,
-} from '@udecode/plate/react';
+} from "@udecode/plate/react";
 
-import { BlockquoteElement } from '@/components/ui/blockquote-element';
-import { Editor, EditorContainer } from '@/components/ui/editor';
-import { FixedToolbar } from '@/components/ui/fixed-toolbar';
-import { HeadingElement } from '@/components/ui/heading-element';
-import { MarkToolbarButton } from '@/components/ui/mark-toolbar-button';
-import { ParagraphElement } from '@/components/ui/paragraph-element';
-import { ToolbarButton } from '@/components/ui/toolbar';
+import { MarkdownPlugin } from '@udecode/plate-markdown';
 
 
-export function PlateEditor({ initialValue }: { initialValue: Value }) {
+export function PlateEditor({
+  markdownString,
+  setMarkdown,
+}: {
+  markdownString: string;
+  setMarkdown: (markdown: string) => void;
+}) {
 
   const editor = usePlateEditor({
     components: {
@@ -48,24 +52,30 @@ export function PlateEditor({ initialValue }: { initialValue: Value }) {
         return <PlateLeaf {...props} as="u" />;
       },
     },
-    plugins: [BasicElementsPlugin, BasicMarksPlugin],
-    value: initialValue,
+    plugins: [BasicElementsPlugin, BasicMarksPlugin, MarkdownPlugin],
+    value: (editor) => editor.getApi(MarkdownPlugin).markdown.deserialize(markdownString),
   });
 
   return (
-    <Plate editor={editor}>
+    <Plate
+      editor={editor}
+      onChange={({ value, editor }) => {
+        const markdownString = editor.getApi(MarkdownPlugin).markdown.serialize(value);
+        setMarkdown(markdownString);
+      }}
+    >
       <FixedToolbar className="flex justify-start gap-1 rounded-t-lg">
-        <ToolbarButton onClick={() => editor.tf.toggleBlock('h1')}>
+        <ToolbarButton onClick={() => editor.tf.toggleBlock("h1")}>
           H1
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.tf.toggleBlock('h2')}>
+        <ToolbarButton onClick={() => editor.tf.toggleBlock("h2")}>
           H2
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.tf.toggleBlock('h3')}>
+        <ToolbarButton onClick={() => editor.tf.toggleBlock("h3")}>
           H3
         </ToolbarButton>
 
-        <ToolbarButton onClick={() => editor.tf.toggleBlock('blockquote')}>
+        <ToolbarButton onClick={() => editor.tf.toggleBlock("blockquote")}>
           Quote
         </ToolbarButton>
 
