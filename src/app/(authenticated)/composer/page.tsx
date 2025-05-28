@@ -16,7 +16,7 @@ type ContentRow = {
   slug?: string;
   title?: string;
   name?: string;
-  created_at: string; 
+  created_at: string;
   tableType: 'dev' | 'blog';
 };
 
@@ -92,6 +92,11 @@ export default async function ComposerPage() {
           Log Out
         </button>
       </form>
+      <div className="">
+        <Link href="/composer/create" className="bg-blue-500 text-white p-2 rounded-md">
+          Create
+        </Link>
+      </div>
       <div className="w-full max-w-3xl mt-8">
         <Tabs defaultValue="dev">
           <TabsList>

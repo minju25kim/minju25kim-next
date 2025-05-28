@@ -1,4 +1,3 @@
-// path: src/components/PlateEditorWithSave.tsx
 'use client';
 
 import { useState } from "react";
