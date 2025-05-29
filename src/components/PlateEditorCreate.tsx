@@ -50,11 +50,11 @@ export function PlateEditorCreate({ initialValue }: { initialValue: Value }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ markdown, category, title, slug }),
       });
-      
+
       if (!res.ok) {
         throw new Error(`Failed to save: ${res.status} ${res.statusText}`);
       }
-      
+
       router.push(`/${category}/${slug}`);
     } catch (error) {
       console.error('Save failed:', error);
@@ -64,7 +64,7 @@ export function PlateEditorCreate({ initialValue }: { initialValue: Value }) {
     }
   }
 
-
+  /* eslint-disable */
   const editor = usePlateEditor({
     components: {
       blockquote: BlockquoteElement,
@@ -79,8 +79,10 @@ export function PlateEditorCreate({ initialValue }: { initialValue: Value }) {
     plugins: [BasicElementsPlugin, BasicMarksPlugin, MarkdownPlugin],
     value: initialValue,
   });
+  /* eslint-enable */
 
   return (
+
     <div className="flex flex-col gap-2">
       <div className="flex gap-4 mb-2">
         <label className="flex items-center gap-1">
@@ -136,14 +138,13 @@ export function PlateEditorCreate({ initialValue }: { initialValue: Value }) {
 
         </Plate>
       </div>
-  const isValid = title.trim().length > 0;
-
-  // Update the save button to use validation
-  <button
-    className="bg-blue-500 text-white px-4 py-2 rounded-md mb-2"
-    onClick={handleSave}
-    disabled={saving || !isValid}
-  >
-    {saving ? "Saving..." : "Save"}
-  </button>
+      <button
+        className="bg-blue-500 text-white px-4 py-2 rounded-md mb-2"
+        onClick={handleSave}
+        disabled={saving}
+      >
+        {saving ? "Saving..." : "Save"}
+      </button>
+    </div>
+  )
 }

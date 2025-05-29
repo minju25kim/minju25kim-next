@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { use, useMemo, useState } from "react";
+import {useState } from "react";
 
 import { BlockquoteElement } from "@/components/ui/blockquote-element";
 import { Editor, EditorContainer } from "@/components/ui/editor";
@@ -21,7 +21,6 @@ import {
 } from "@udecode/plate/react";
 
 import { MarkdownPlugin } from '@udecode/plate-markdown';
-import { Value } from "@udecode/plate";
 
 export function PlateEditorWithSave({ initialMarkdown, slug }: { initialMarkdown: string, slug: string[] }) {
   const [markdown, setMarkdown] = useState(initialMarkdown);
