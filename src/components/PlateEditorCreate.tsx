@@ -44,15 +44,24 @@ export function PlateEditorCreate({ initialValue }: { initialValue: Value }) {
 
   async function handleSave() {
     setSaving(true);
-    console.log(JSON.stringify({ markdown, category, title, slug }))
-    const res = await fetch('/api/create-content', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ markdown, category, title, slug }),
-    });
-    setSaving(false);
-    if (!res.ok) alert('Failed to save!');
-    router.push(`/${category}/${slug}`);
+    try {
+      const res = await fetch('/api/create-content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ markdown, category, title, slug }),
+      });
+      
+      if (!res.ok) {
+        throw new Error(`Failed to save: ${res.status} ${res.statusText}`);
+      }
+      
+      router.push(`/${category}/${slug}`);
+    } catch (error) {
+      console.error('Save failed:', error);
+      alert('Failed to save content. Please try again.');
+    } finally {
+      setSaving(false);
+    }
   }
 
 
@@ -127,13 +136,14 @@ export function PlateEditorCreate({ initialValue }: { initialValue: Value }) {
 
         </Plate>
       </div>
-      <button
-        className="bg-blue-500 text-white px-4 py-2 rounded-md mb-2"
-        onClick={handleSave}
-        disabled={saving}
-      >
-        {saving ? "Saving..." : "Save"}
-      </button>
-    </div>
-  );
+  const isValid = title.trim().length > 0;
+
+  // Update the save button to use validation
+  <button
+    className="bg-blue-500 text-white px-4 py-2 rounded-md mb-2"
+    onClick={handleSave}
+    disabled={saving || !isValid}
+  >
+    {saving ? "Saving..." : "Save"}
+  </button>
 }

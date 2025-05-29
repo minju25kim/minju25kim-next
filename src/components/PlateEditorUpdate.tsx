@@ -29,15 +29,25 @@ export function PlateEditorWithSave({ initialMarkdown, slug }: { initialMarkdown
 
   async function handleSave() {
     setSaving(true);
-    const res = await fetch('/api/update-content', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ slug, markdown }),
-    });
-    setSaving(false);
-    if (!res.ok) alert('Failed to save!');
-    // Optionally: show success, refresh, etc.
-    alert('Saved!');
+    try {
+      const res = await fetch('/api/update-content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug, markdown }),
+      });
+      
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.message || `Server error: ${res.status}`);
+      }
+      
+      alert('Content saved successfully!');
+    } catch (error) {
+      console.error('Save failed:', error);
+      alert(`Failed to save: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    } finally {
+      setSaving(false);
+    }
   }
 
   const editor = usePlateEditor({
