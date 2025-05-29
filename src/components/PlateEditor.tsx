@@ -22,7 +22,7 @@ import { MarkdownPlugin } from '@udecode/plate-markdown';
 
 
 export function PlateEditor({
-  markdownString,
+  markdownString="",
   setMarkdown,
 }: {
   markdownString: string;
@@ -61,7 +61,7 @@ export function PlateEditor({
       editor={editor}
       onChange={({ value, editor }) => {
         const markdownString = editor.getApi(MarkdownPlugin).markdown.serialize(value);
-        setMarkdown(markdownString);
+        setMarkdown?.(markdownString);
       }}
     >
       <FixedToolbar className="flex justify-start gap-1 rounded-t-lg">
