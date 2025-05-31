@@ -1,4 +1,4 @@
-import { PlateEditorWithSave } from "@/components/PlateEditorUpdate";
+// import { PlateEditorWithSave } from "@/components/PlateEditorUpdate";
 import { createClient } from '@/utils/supabase/server';
 
 export default async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
@@ -24,10 +24,10 @@ export default async function Page({ params }: { params: Promise<{ slug?: string
       <h1 className="text-2xl font-bold">{title}</h1>
       <p className="text-sm text-gray-500 ">Created: {createdAt}</p>
       <p className="text-sm text-gray-500 ">Updated: {updatedAt}</p>
-      <PlateEditorWithSave
+      {/* <PlateEditorWithSave
         initialMarkdown={markdown}
         slug={[category, slug]}
-      />
+      /> */}
     </div>
   );
 }

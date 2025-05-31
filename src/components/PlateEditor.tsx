@@ -1,98 +1,39 @@
-"use client";
+'use client'
 
-import * as React from "react";
-import { BlockquoteElement } from "@/components/ui/blockquote-element";
-import { Editor, EditorContainer } from "@/components/ui/editor";
-import { FixedToolbar } from "@/components/ui/fixed-toolbar";
-import { HeadingElement } from "@/components/ui/heading-element";
-import { MarkToolbarButton } from "@/components/ui/mark-toolbar-button";
-import { ParagraphElement } from "@/components/ui/paragraph-element";
-import { ToolbarButton } from "@/components/ui/toolbar";
-import { BasicElementsPlugin } from "@udecode/plate-basic-elements/react";
-import { BasicMarksPlugin } from "@udecode/plate-basic-marks/react";
-import {
-  Plate,
-  type PlateElementProps,
-  PlateLeaf,
-  type PlateLeafProps,
-  usePlateEditor,
-} from "@udecode/plate/react";
+import { Plate } from '@udecode/plate/react';
+import { useCreateEditor } from '@/components/editor/use-create-editor';
 
+import { SettingsDialog } from '@/components/editor/settings';
+import { Editor, EditorContainer } from '@/components/ui/editor';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { MarkdownPlugin } from '@udecode/plate-markdown';
+import { useEditorValueStore } from '@/store/editorValue';
+import { useEffect } from 'react';
 
+export const PlateEditor = ({ initialMarkdown }: { initialMarkdown: string }) => {
+    // Use zustand store for global editor value (markdown string)
+    const { editorValue, setEditorValue } = useEditorValueStore();
 
-export function PlateEditor({
-  markdownString="",
-  setMarkdown,
-}: {
-  markdownString: string;
-  setMarkdown: (markdown: string) => void;
-}) {
+    const editor = useCreateEditor({
+        value: (editor) => editor.getApi(MarkdownPlugin).markdown.deserialize(initialMarkdown),
+    });
 
-  const editor = usePlateEditor({
-    components: {
-      blockquote: BlockquoteElement,
-      p: ParagraphElement,
-      bold: function Bold(props: PlateLeafProps) {
-        return <PlateLeaf {...props} as="strong" />;
-      },
-      h1: function H1(props: PlateElementProps) {
-        return <HeadingElement {...props} variant="h1" />;
-      },
-      h2: function H2(props: PlateElementProps) {
-        return <HeadingElement {...props} variant="h2" />;
-      },
-      h3: function H3(props: PlateElementProps) {
-        return <HeadingElement {...props} variant="h3" />;
-      },
-      italic: function Italic(props: PlateLeafProps) {
-        return <PlateLeaf {...props} as="em" />;
-      },
-      underline: function Underline(props: PlateLeafProps) {
-        return <PlateLeaf {...props} as="u" />;
-      },
-    },
-    plugins: [BasicElementsPlugin, BasicMarksPlugin, MarkdownPlugin],
-    value: (editor) => editor.getApi(MarkdownPlugin).markdown.deserialize(markdownString),
-  });
+    return (
+        <div className="border border-gray-200 rounded-lg">
+            <DndProvider backend={HTML5Backend}>
+                <Plate editor={editor} onChange={(value) => {
+                    // Serialize editor value to markdown and store in zustand
+                    const markdown = editor.getApi(MarkdownPlugin).markdown.serialize(value);
+                    setEditorValue(markdown);
+                }}>
+                    <EditorContainer>
+                        <Editor variant="demo" />
+                    </EditorContainer>
 
-  return (
-    <Plate
-      editor={editor}
-      onChange={({ value, editor }) => {
-        const markdownString = editor.getApi(MarkdownPlugin).markdown.serialize(value);
-        setMarkdown?.(markdownString);
-      }}
-    >
-      <FixedToolbar className="flex justify-start gap-1 rounded-t-lg">
-        <ToolbarButton onClick={() => editor.tf.toggleBlock("h1")}>
-          H1
-        </ToolbarButton>
-        <ToolbarButton onClick={() => editor.tf.toggleBlock("h2")}>
-          H2
-        </ToolbarButton>
-        <ToolbarButton onClick={() => editor.tf.toggleBlock("h3")}>
-          H3
-        </ToolbarButton>
-
-        <ToolbarButton onClick={() => editor.tf.toggleBlock("blockquote")}>
-          Quote
-        </ToolbarButton>
-
-        <MarkToolbarButton nodeType="bold" tooltip="Bold (⌘+B)">
-          B
-        </MarkToolbarButton>
-        <MarkToolbarButton nodeType="italic" tooltip="Italic (⌘+I)">
-          I
-        </MarkToolbarButton>
-        <MarkToolbarButton nodeType="underline" tooltip="Underline (⌘+U)">
-          U
-        </MarkToolbarButton>
-      </FixedToolbar>
-
-      <EditorContainer>
-        <Editor placeholder="Type your amazing content here..." />
-      </EditorContainer>
-    </Plate>
-  );
+                    <SettingsDialog />
+                </Plate>
+            </DndProvider>
+        </div>
+    )
 }
