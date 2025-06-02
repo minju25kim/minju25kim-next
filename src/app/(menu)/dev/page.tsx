@@ -42,7 +42,7 @@ export default async function DevPage({ searchParams }: PageProps) {
     .range((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE - 1);
 
   return (
-    <div className="min-h-screen p-8 bg-white dark:bg-gray-900 transition-colors duration-200">
+    <div className="mt-16 min-h-screen p-8 bg-white dark:bg-gray-900 transition-colors duration-200">
       <div className="max-w-4xl mx-auto">
         <Link
           href="/"

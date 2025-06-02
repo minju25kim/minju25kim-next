@@ -36,7 +36,7 @@ export default async function MetaPage({ searchParams }: PageProps) {
   const tab = (params.tab as string) || "metadata";
 
   return (
-    <div className="min-h-screen p-8 bg-white dark:bg-gray-900 transition-colors duration-200">
+    <div className="mt-16 min-h-screen p-8 bg-white dark:bg-gray-900 transition-colors duration-200">
       <div className="max-w-4xl mx-auto">
         <Link
           href="/"
