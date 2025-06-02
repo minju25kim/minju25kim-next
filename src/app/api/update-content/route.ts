@@ -2,14 +2,19 @@ import { createClient } from "@/utils/supabase/server";
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { slug, markdown } = body;
+  const { oldCategory, oldSlug, title, slug, markdown } = body;
 
   const supabase = await createClient();
 
   const { data, error } = await supabase
-    .from(slug[0])
-    .update({ content: markdown, updated_at: new Date().toLocaleString() })
-    .eq('slug', slug[1])
+    .from(oldCategory)
+    .update({
+      title,
+      slug,
+      content: markdown,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('slug', oldSlug)
     .select();
 
   if (error) {
