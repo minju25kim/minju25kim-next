@@ -22,12 +22,19 @@ export default async function Page({ params }: { params: Promise<{ slug?: string
   const updatedAt = RawData?.[0]?.updated_at;
 
   return (
-    <PlateEditorComponent
-      mode="edit"
-      initialMarkdown={markdown}
-      initialTitle={title}
-      initialSlug={slug}
-      initialCategory={category}
-    />
+    <div>
+      <div className="max-w-3xl mx-auto my-12 flex flex-col gap-4">
+        <h1 className="text-2xl font-bold">OG title: {title}</h1>
+        <p>createdAt: {createdAt?.toLocaleString()}</p>
+        <p>updatedAt: {updatedAt?.toLocaleString()}</p>
+      </div>
+      <PlateEditorComponent
+        mode="edit"
+        initialMarkdown={markdown}
+        initialTitle={title}
+        initialSlug={slug}
+        initialCategory={category as 'blog' | 'dev'}
+      />
+    </div>
   );
 }
