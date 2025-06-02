@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { oldCategory, oldSlug, title, slug, markdown, category } = body;
+  const { oldCategory, oldSlug, title, slug, markdown } = body;
 
   const supabase = await createClient();
 

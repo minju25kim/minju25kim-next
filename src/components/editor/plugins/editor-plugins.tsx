@@ -80,7 +80,7 @@ export const viewPlugins = [
   discussionPlugin,
   commentsPlugin,
   suggestionPlugin.configure({
-    render: { belowNodes: SuggestionBelowNodes as any },
+    render: { belowNodes: SuggestionBelowNodes },
   }),
 ] as const;
 
@@ -105,7 +105,7 @@ export const editorPlugins = [
   cursorOverlayPlugin,
   ...blockMenuPlugins,
   ...dndPlugins,
-  EmojiPlugin.configure({ options: { data: emojiMartData as any } }),
+  EmojiPlugin.configure({ options: { data: emojiMartData } }),
   exitBreakPlugin,
   resetBlockTypePlugin,
   ...deletePlugins,
