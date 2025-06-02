@@ -235,7 +235,7 @@ const InlineComboboxInput = React.forwardRef<
         </span>
 
         <Combobox
-          ref={ref}
+          ref={ref as any}
           className={cn(
             'absolute top-0 left-0 size-full bg-transparent outline-none',
             className
