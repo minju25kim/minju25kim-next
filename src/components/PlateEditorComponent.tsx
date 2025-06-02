@@ -70,7 +70,6 @@ export const PlateEditorComponent = ({
 
         try {
             if (mode === 'edit') {
-                // Send old and new values to API
                 const res = await fetch('/api/update-content', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -84,17 +83,15 @@ export const PlateEditorComponent = ({
                     }),
                 });
 
-                const data = await res.json();
-
+                const data: unknown = await res.json();
                 if (!res.ok) {
-                    setError(data.error || 'Failed to update content.');
+                    const errorMsg = typeof data === 'object' && data !== null && 'error' in data ? (data as { error: string }).error : 'Failed to update content.';
+                    setError(errorMsg);
                 } else {
                     alert('Content updated! Moving to the updated page.');
-                    // If slug or category changed, redirect to new URL
                     if (slug !== initialSlug || category !== initialCategory) {
                         router.push(`/${category}/${slug}`);
                     } else {
-                        // Optionally, reload or show success
                         router.refresh?.();
                     }
                 }
@@ -114,15 +111,15 @@ export const PlateEditorComponent = ({
                 }),
             });
 
-            const data = await res.json();
-
+            const data: unknown = await res.json();
             if (!res.ok) {
-                setError(data.error || 'Failed to create content.');
+                const errorMsg = typeof data === 'object' && data !== null && 'error' in data ? (data as { error: string }).error : 'Failed to create content.';
+                setError(errorMsg);
             } else {
                 alert('Content created! Moving to the new page.');
                 router.push(`/${category}/${slug}`);
             }
-        } catch (err) {
+        } catch {
             setError('Network error.');
         } finally {
             setIsLoading(false);
@@ -146,15 +143,15 @@ export const PlateEditorComponent = ({
                 }),
             });
 
-            const data = await res.json();
-
+            const data: unknown = await res.json();
             if (!res.ok) {
-                setError(data.error || 'Failed to delete content.');
+                const errorMsg = typeof data === 'object' && data !== null && 'error' in data ? (data as { error: string }).error : 'Failed to delete content.';
+                setError(errorMsg);
             } else {
                 alert('Content deleted.');
                 router.push('/composer');
             }
-        } catch (err) {
+        } catch {
             setError('Network error.');
         } finally {
             setIsLoading(false);
