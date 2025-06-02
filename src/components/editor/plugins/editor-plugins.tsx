@@ -80,7 +80,7 @@ export const viewPlugins = [
   discussionPlugin,
   commentsPlugin,
   suggestionPlugin.configure({
-    render: { belowNodes: SuggestionBelowNodes },
+    render: { belowNodes: SuggestionBelowNodes as any },
   }),
 ] as const;
 
