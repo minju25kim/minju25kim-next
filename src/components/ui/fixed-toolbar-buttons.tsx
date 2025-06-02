@@ -44,7 +44,7 @@ import { EmojiDropdownMenu } from './emoji-dropdown-menu';
 import { ExportToolbarButton } from './export-toolbar-button';
 import { FontSizeToolbarButton } from './font-size-toolbar-button';
 import { RedoToolbarButton, UndoToolbarButton } from './history-toolbar-button';
-import { ImportToolbarButton } from './import-toolbar-button';
+// import { ImportToolbarButton } from './import-toolbar-button';
 import {
   BulletedIndentListToolbarButton,
   NumberedIndentListToolbarButton,
@@ -55,7 +55,7 @@ import { InsertDropdownMenu } from './insert-dropdown-menu';
 import { LineHeightDropdownMenu } from './line-height-dropdown-menu';
 import { LinkToolbarButton } from './link-toolbar-button';
 import { MarkToolbarButton } from './mark-toolbar-button';
-import { MediaToolbarButton } from './media-toolbar-button';
+// import { MediaToolbarButton } from './media-toolbar-button';
 import { ModeDropdownMenu } from './mode-dropdown-menu';
 import { OutdentToolbarButton } from './outdent-toolbar-button';
 import { TableDropdownMenu } from './table-dropdown-menu';
@@ -86,7 +86,7 @@ export function FixedToolbarButtons() {
               <ArrowUpToLineIcon />
             </ExportToolbarButton>
 
-            <ImportToolbarButton />
+            {/* <ImportToolbarButton /> */}
           </ToolbarGroup>
 
           <ToolbarGroup>
@@ -155,12 +155,12 @@ export function FixedToolbarButtons() {
             <EmojiDropdownMenu />
           </ToolbarGroup>
 
-          <ToolbarGroup>
+          {/* <ToolbarGroup>
             <MediaToolbarButton nodeType={ImagePlugin.key} />
             <MediaToolbarButton nodeType={VideoPlugin.key} />
             <MediaToolbarButton nodeType={AudioPlugin.key} />
             <MediaToolbarButton nodeType={FilePlugin.key} />
-          </ToolbarGroup>
+          </ToolbarGroup> */}
 
           <ToolbarGroup>
             <LineHeightDropdownMenu />

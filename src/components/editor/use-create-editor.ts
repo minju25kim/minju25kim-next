@@ -91,7 +91,7 @@ import { LinkElement } from '@/components/ui/link-element';
 import { MediaAudioElement } from '@/components/ui/media-audio-element';
 import { MediaEmbedElement } from '@/components/ui/media-embed-element';
 import { MediaFileElement } from '@/components/ui/media-file-element';
-import { MediaPlaceholderElement } from '@/components/ui/media-placeholder-element';
+// import { MediaPlaceholderElement } from '@/components/ui/media-placeholder-element';
 import { MediaVideoElement } from '@/components/ui/media-video-element';
 import { MentionElement } from '@/components/ui/mention-element';
 import { MentionInputElement } from '@/components/ui/mention-input-element';
@@ -140,7 +140,7 @@ export const viewComponents = {
   [MediaEmbedPlugin.key]: MediaEmbedElement,
   [MentionPlugin.key]: MentionElement,
   [ParagraphPlugin.key]: ParagraphElement,
-  [PlaceholderPlugin.key]: MediaPlaceholderElement,
+  // [PlaceholderPlugin.key]: MediaPlaceholderElement,
   [StrikethroughPlugin.key]: withProps(PlateLeaf, { as: 's' }),
   [SubscriptPlugin.key]: withProps(PlateLeaf, { as: 'sub' }),
   [SuggestionPlugin.key]: SuggestionLeaf,
