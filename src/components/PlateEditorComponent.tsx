@@ -20,6 +20,7 @@ type PlateEditorComponentProps = {
     initialTitle?: string;
     initialSlug?: string;
     initialCategory?: 'blog' | 'dev';
+    initialPublished?: boolean;
     mode?: 'create' | 'edit';
 };
 
@@ -28,6 +29,7 @@ export const PlateEditorComponent = ({
     initialTitle = '',
     initialSlug = '',
     initialCategory = 'blog',
+    initialPublished = false,
     mode = 'create',
 }: PlateEditorComponentProps) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +38,7 @@ export const PlateEditorComponent = ({
     const [title, setTitle] = useState(initialTitle);
     const [category, setCategory] = useState<'blog' | 'dev'>(initialCategory);
     const [slug, setSlug] = useState(initialSlug);
+    const [published, setPublished] = useState(mode === 'edit' ? false : false);
 
     const { editorValue, setEditorValue } = useEditorValueStore();
     const router = useRouter();
@@ -43,7 +46,8 @@ export const PlateEditorComponent = ({
     // On mount, set editor value if editing
     useEffect(() => {
         if (initialMarkdown) setEditorValue(initialMarkdown);
-    }, [initialMarkdown, setEditorValue]);
+        if (mode === 'edit' && typeof initialPublished === 'boolean') setPublished(initialPublished);
+    }, [initialMarkdown, setEditorValue, mode, initialPublished]);
 
     // In both create and edit mode, update slug automatically when title changes
     useEffect(() => {
@@ -56,6 +60,10 @@ export const PlateEditorComponent = ({
 
     const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCategory(e.target.value as 'blog' | 'dev');
+    };
+
+    const handlePublishedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPublished(e.target.checked);
     };
 
     const handleSave = async () => {
@@ -80,6 +88,7 @@ export const PlateEditorComponent = ({
                         slug,
                         markdown: editorValue,
                         category,
+                        published,
                     }),
                 });
 
@@ -89,10 +98,10 @@ export const PlateEditorComponent = ({
                     setError(errorMsg);
                 } else {
                     alert('Content updated! Moving to the updated page.');
-                    if (slug !== initialSlug || category !== initialCategory) {
+                    if (published) {
                         router.push(`/${category}/${slug}`);
                     } else {
-                        router.refresh?.();
+                        router.refresh();
                     }
                 }
                 setIsLoading(false);
@@ -108,6 +117,7 @@ export const PlateEditorComponent = ({
                     title,
                     slug,
                     markdown: editorValue,
+                    published,
                 }),
             });
 
@@ -117,7 +127,11 @@ export const PlateEditorComponent = ({
                 setError(errorMsg);
             } else {
                 alert('Content created! Moving to the new page.');
-                router.push(`/${category}/${slug}`);
+                if (published) {
+                    router.push(`/${category}/${slug}`);
+                } else {
+                    router.refresh();
+                }
             }
         } catch {
             setError('Network error.');
@@ -159,7 +173,7 @@ export const PlateEditorComponent = ({
     };
 
     return (
-        <div className="max-w-3xl mx-auto my-12 flex flex-col gap-4">
+        <div className="max-w-3xl mx-auto flex flex-col gap-4">
             <h1 className="text-2xl font-bold">{mode === 'edit' ? 'Edit Content' : 'Create Contents'}</h1>
             <div className="flex gap-4 items-center">
                 <span>Category:</span>
@@ -186,8 +200,20 @@ export const PlateEditorComponent = ({
                     Dev
                 </label>
             </div>
+            <div className="flex items-center gap-2">
+                <label htmlFor="published-switch" className="font-medium">Published:</label>
+                <input
+                    id="published-switch"
+                    type="checkbox"
+                    checked={published}
+                    onChange={handlePublishedChange}
+                    disabled={isLoading}
+                    className="accent-blue-600 w-5 h-5"
+                />
+                <span className="text-sm text-gray-500">{mode === 'edit' ? 'Toggle to publish/unpublish' : 'Set published status before saving'}</span>
+            </div>
             <input
-                className="border border-gray-300 rounded px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-primary/50 transition"
+                className="border border-gray-300 rounded px-3 py-2 bg-white text-black dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary/50 transition"
                 placeholder="Title"
                 value={title}
                 onChange={handleTitleChange}

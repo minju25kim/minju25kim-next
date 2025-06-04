@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { oldCategory, oldSlug, title, slug, markdown } = body;
+  const { oldCategory, oldSlug, title, slug, markdown, published } = body;
 
   const supabase = await createClient();
 
@@ -13,6 +13,7 @@ export async function POST(request: Request) {
       slug,
       content: markdown,
       updated_at: new Date().toISOString(),
+      ...(typeof published === 'boolean' ? { published } : {}),
     })
     .eq('slug', oldSlug)
     .select();

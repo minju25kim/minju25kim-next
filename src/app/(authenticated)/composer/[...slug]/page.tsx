@@ -20,20 +20,21 @@ export default async function Page({ params }: { params: Promise<{ slug?: string
   const title = RawData?.[0]?.title || '';
   const createdAt = RawData?.[0]?.created_at;
   const updatedAt = RawData?.[0]?.updated_at;
+  const published = typeof RawData?.[0]?.published === 'boolean' ? RawData[0].published : false;
 
   return (
-    <div>
-      <div className="max-w-3xl mx-auto my-12 flex flex-col gap-4">
-        <h1 className="text-2xl font-bold">OG title: {title}</h1>
-        <p>createdAt: {createdAt?.toLocaleString()}</p>
-        <p>updatedAt: {updatedAt?.toLocaleString()}</p>
-      </div>
+
+    <div className="max-w-3xl mx-auto pt-16 flex flex-col gap-4">
+      <h1 className="text-2xl font-bold">OG title: {title}</h1>
+      <p>createdAt: {createdAt?.toLocaleString()}</p>
+      <p>updatedAt: {updatedAt?.toLocaleString()}</p>
       <PlateEditorComponent
         mode="edit"
         initialMarkdown={markdown}
         initialTitle={title}
         initialSlug={slug}
         initialCategory={category as 'blog' | 'dev'}
+        initialPublished={published}
       />
     </div>
   );

@@ -4,26 +4,45 @@ const techStack = [
   {
     category: "Frontend",
     items: [
-      "Next.js 15 (App Router)",
-      "React 18",
-      "TypeScript",
-      "Tailwind CSS 4",
-      "Shadcn UI Components",
-      "Radix UI",
-      "Lucide React Icons",
+      { name: "Next.js 15 (App Router)", url: "https://nextjs.org/" },
+      { name: "React 18", url: "https://react.dev/" },
+      { name: "TypeScript", url: "https://www.typescriptlang.org/" },
+      { name: "Tailwind CSS 4", url: "https://tailwindcss.com/" },
+      { name: "shadcn/ui Components", url: "https://ui.shadcn.com/" },
+      { name: "Radix UI", url: "https://www.radix-ui.com/" },
+      { name: "Lucide React Icons", url: "https://lucide.dev/" },
+      { name: "Plate (Rich Text Editor)", url: "https://plate.udecode.io/" },
+      { name: "React Markdown", url: "https://github.com/remarkjs/react-markdown" },
     ],
   },
   {
     category: "Backend & Database",
-    items: ["Supabase", "PostgreSQL", "Supabase SSR"],
+    items: [
+      { name: "Supabase", url: "https://supabase.com/" },
+      { name: "PostgreSQL", url: "https://www.postgresql.org/" },
+      { name: "Supabase SSR", url: "https://supabase.com/docs/guides/with-nextjs" },
+    ],
   },
   {
     category: "Deployment & Infrastructure",
-    items: ["Fly.io", "GitHub Actions", "Docker"],
+    items: [
+      { name: "Fly.io", url: "https://fly.io/" },
+      { name: "GitHub Actions", url: "https://github.com/features/actions" },
+      { name: "Docker", url: "https://www.docker.com/" },
+    ],
   },
   {
     category: "Development Tools",
-    items: ["ESLint", "Prettier", "Husky", "Commitlint", "Lint-staged", "Jest"],
+    items: [
+      { name: "ESLint", url: "https://eslint.org/" },
+      { name: "Prettier", url: "https://prettier.io/" },
+      { name: "Husky", url: "https://typicode.github.io/husky/" },
+      { name: "Commitlint", url: "https://commitlint.js.org/" },
+      { name: "Lint-staged", url: "https://github.com/okonet/lint-staged" },
+      { name: "Jest", url: "https://jestjs.io/" },
+      { name: "Zustand (State)", url: "https://zustand-demo.pmnd.rs/" },
+      { name: "Zod (Validation)", url: "https://zod.dev/" },
+    ],
   },
 ];
 
@@ -36,7 +55,7 @@ export default async function MetaPage({ searchParams }: PageProps) {
   const tab = (params.tab as string) || "metadata";
 
   return (
-    <div className="mt-16 min-h-screen p-8 bg-white dark:bg-gray-900 transition-colors duration-200">
+    <div className="  min-h-screen p-8 bg-white dark:bg-gray-900 transition-colors duration-200">
       <div className="max-w-4xl mx-auto">
         <Link
           href="/"
@@ -94,8 +113,15 @@ export default async function MetaPage({ searchParams }: PageProps) {
                 </h2>
                 <ul className="space-y-2">
                   {section.items.map((item) => (
-                    <li key={item} className="text-gray-600 dark:text-gray-400">
-                      {item}
+                    <li key={item.name} className="text-gray-600 dark:text-gray-400">
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-blue-600 dark:hover:text-blue-400 underline transition-colors"
+                      >
+                        {item.name}
+                      </a>
                     </li>
                   ))}
                 </ul>

@@ -38,11 +38,12 @@ export default async function BlogPage({ searchParams }: PageProps) {
   const { data: posts } = await supabase
     .from("blog")
     .select()
+    .eq("published", true)
     .order("created_at", { ascending: sort === "oldest" })
     .range((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE - 1);
 
   return (
-    <div className="mt-16 min-h-screen p-8 bg-white dark:bg-gray-900 transition-colors duration-200">
+    <div className="  min-h-screen p-8 bg-white dark:bg-gray-900 transition-colors duration-200">
       <div className="max-w-4xl mx-auto">
         <Link
           href="/"
@@ -59,21 +60,19 @@ export default async function BlogPage({ searchParams }: PageProps) {
           <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
             <Link
               href={`/blog?sort=latest&page=${page}`}
-              className={`px-3 py-1.5 rounded-md transition-colors ${
-                sort === "latest"
+              className={`px-3 py-1.5 rounded-md transition-colors ${sort === "latest"
                   ? "bg-white dark:bg-gray-700 shadow-sm"
                   : "hover:bg-gray-200 dark:hover:bg-gray-600"
-              }`}
+                }`}
             >
               Latest
             </Link>
             <Link
               href={`/blog?sort=oldest&page=${page}`}
-              className={`px-3 py-1.5 rounded-md transition-colors ${
-                sort === "oldest"
+              className={`px-3 py-1.5 rounded-md transition-colors ${sort === "oldest"
                   ? "bg-white dark:bg-gray-700 shadow-sm"
                   : "hover:bg-gray-200 dark:hover:bg-gray-600"
-              }`}
+                }`}
             >
               Oldest
             </Link>
@@ -129,11 +128,10 @@ export default async function BlogPage({ searchParams }: PageProps) {
           <div className="flex justify-center items-center gap-2 mt-8">
             <Link
               href={`/blog?sort=${sort}&page=${Math.max(1, page - 1)}`}
-              className={`inline-flex items-center justify-center rounded-md transition-colors h-10 w-10 ${
-                page === 1
+              className={`inline-flex items-center justify-center rounded-md transition-colors h-10 w-10 ${page === 1
                   ? "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed"
                   : "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
-              }`}
+                }`}
             >
               <ArrowLeft className="h-5 w-5" />
               <span className="sr-only">Previous page</span>
@@ -143,11 +141,10 @@ export default async function BlogPage({ searchParams }: PageProps) {
             </span>
             <Link
               href={`/blog?sort=${sort}&page=${Math.min(totalPages, page + 1)}`}
-              className={`inline-flex items-center justify-center rounded-md transition-colors h-10 w-10 ${
-                page === totalPages
+              className={`inline-flex items-center justify-center rounded-md transition-colors h-10 w-10 ${page === totalPages
                   ? "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed"
                   : "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
-              }`}
+                }`}
             >
               <ArrowRight className="h-5 w-5" />
               <span className="sr-only">Next page</span>
