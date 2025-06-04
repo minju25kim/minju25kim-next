@@ -1,11 +1,10 @@
-import ReactMarkdown from "react-markdown";
 import type { Components } from "react-markdown";
 
 import { createClient } from "@/utils/supabase/server";
 import NextImage from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import remarkGfm from "remark-gfm";
+import { PlateEditorReadOnly } from "@/components/PlateEditorReadOnly";
 
 interface PageProps {
   params: Promise<{
@@ -119,9 +118,10 @@ export default async function BlogPost({ params }: PageProps) {
           </div>
 
           <div className="text-gray-800 dark:text-gray-200">
-            <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+            {/* <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
               {post.content}
-            </ReactMarkdown>
+            </ReactMarkdown> */}
+            <PlateEditorReadOnly>{post.content}</PlateEditorReadOnly>
           </div>
         </article>
       </div>

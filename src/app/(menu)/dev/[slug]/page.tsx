@@ -6,6 +6,7 @@ import NextImage from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import remarkGfm from "remark-gfm";
+import { PlateEditorReadOnly } from "@/components/PlateEditorReadOnly";
 
 interface PageProps {
   params: Promise<{
@@ -135,9 +136,7 @@ export default async function DevPost({ params }: PageProps) {
           </div>
 
           <div className="text-gray-800 dark:text-gray-200">
-            <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
-              {post.content}
-            </ReactMarkdown>
+            <PlateEditorReadOnly>{post.content}</PlateEditorReadOnly>
           </div>
         </article>
       </div>
