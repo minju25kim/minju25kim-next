@@ -29,6 +29,11 @@ export default async function BlogPost({ params }: PageProps) {
     notFound();
   }
 
+  // If post is not published, return 404
+  if (!post.published) {
+    notFound();
+  }
+
   const components: Partial<Components> = {
     p: ({ children, node, ...props }) => {
       // Check if the paragraph contains only an image
@@ -91,7 +96,7 @@ export default async function BlogPost({ params }: PageProps) {
   };
 
   return (
-    <div className="min-h-screen p-8 bg-white dark:bg-gray-900 transition-colors duration-200">
+    <div className="  min-h-screen p-8 bg-white dark:bg-gray-900 transition-colors duration-200">
       <div className="max-w-4xl mx-auto">
         <Link
           href="/blog"

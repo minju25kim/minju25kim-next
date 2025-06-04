@@ -1,6 +1,15 @@
 import { Providers } from "@/components/providers";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import Link from "next/link";
+import { Menu } from "lucide-react";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Footer } from "@/components/footer";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 import "./globals.css";
 
@@ -62,6 +71,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+  // Menu links
+  const menuLinks = [
+    { href: "/blog", label: "blog" },
+    { href: "/dev", label: "dev" },
+    { href: "/timeline", label: "timeline" },
+    { href: "/video", label: "video" },
+    { href: "/meta", label: "meta" },
+  ];
+
   return (
     <html suppressHydrationWarning lang="en" className={inter.className}>
       <head>
@@ -77,8 +96,59 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col min-h-screen">
         <Providers>
-          <main className="flex-1">{children}</main>
+          <div className="absolute top-0 left-0 w-full flex items-center justify-between px-4 py-3 z-20 bg-white/80 dark:bg-gray-900/80 backdrop-blur">
+            {/* Logo (Avatar) */}
+            <Link href="/" className="flex items-center gap-2">
+              <Avatar className="w-12 h-12">
+                <AvatarImage src="/minju25kim.webp" alt="minju25kim" />
+                <AvatarFallback>MJ</AvatarFallback>
+              </Avatar>
+            </Link>
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon" aria-label="Open menu">
+                    <Menu className="w-7 h-7" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-64 flex flex-col h-full">
+                  <div className="flex-1 flex flex-col justify-center items-center w-full">
+                    <SheetHeader className="w-full flex justify-center">
+                      <SheetTitle className="text-center w-full">Menu</SheetTitle>
+                    </SheetHeader>
+                    <nav className="flex flex-col items-center gap-4 w-full">
+                      {menuLinks.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          className="text-lg font-medium text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </nav>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+          </div>
+          <main className="flex-1 mt-16 ">{children}</main>
+          <Footer />
         </Providers>
+
+        <Script
+          async src="https://www.googletagmanager.com/gtag/js?id=G-PHKNKBN90P"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+       window.dataLayer = window.dataLayer || [];
+       function gtag(){dataLayer.push(arguments);}
+       gtag('js', new Date());
+       gtag('config', 'G-PHKNKBN90P');
+     `}
+        </Script>
+        <GoogleAnalytics />
       </body>
     </html>
   );
