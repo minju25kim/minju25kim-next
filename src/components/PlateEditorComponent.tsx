@@ -43,7 +43,6 @@ export const PlateEditorComponent = ({
     const { editorValue, setEditorValue } = useEditorValueStore();
     const router = useRouter();
 
-    // On mount, set editor value if editing
     useEffect(() => {
         if (initialMarkdown) setEditorValue(initialMarkdown);
         if (mode === 'edit' && typeof initialPublished === 'boolean') setPublished(initialPublished);

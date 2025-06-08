@@ -18,13 +18,17 @@ const headingVariants = cva('relative mb-1', {
   },
 });
 
+type HeadingVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
 export function HeadingElementStatic({
   variant = 'h1',
   ...props
-}: SlateElementProps & VariantProps<typeof headingVariants>) {
+}: SlateElementProps & VariantProps<typeof headingVariants> & { variant?: HeadingVariant }) {
+  const Tag = variant as HeadingVariant;
+
   return (
     <SlateElement
-      as={variant!}
+      as={Tag}
       className={headingVariants({ variant })}
       {...props}
     >

@@ -1,7 +1,9 @@
-// src/app/(authenticated)/composer/layout.tsx
-// Shared layout for all /composer pages to ensure consistent theme background
-
 import React from "react";
+
+export const metadata = {
+  title: "Composer",
+  description: "Composer",
+};
 
 export default function ComposerLayout({ children }: { children: React.ReactNode }) {
   return (

@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: Promise<{ slug?: string
   const createdAt = RawData?.[0]?.created_at;
   const updatedAt = RawData?.[0]?.updated_at;
   const published = typeof RawData?.[0]?.published === 'boolean' ? RawData[0].published : false;
-
+;
   return (
 
     <div className="max-w-3xl mx-auto pt-16 flex flex-col gap-4">

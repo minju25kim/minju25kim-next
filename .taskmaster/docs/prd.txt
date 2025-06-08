@@ -1,0 +1,93 @@
+# Overview  
+A modern personal blog platform for developers and creators, built with Next.js, TypeScript, Tailwind CSS, and shadcn/ui. The blog enables users to publish, edit, and manage content with a beautiful, responsive UI. It is designed for easy deployment (Fly.io), fast performance, and extensibility. The platform solves the need for a customizable, developer-friendly blog that supports rich content editing and modern authentication.
+
+# Core Features  
+- **Post Creation & Editing**
+  - Users can create, edit, and delete blog posts using a rich text editor (Plate/Slate-based, shadcn/ui).
+  - Supports markdown, code blocks, images, and embeds.
+  - Autosave and draft support.
+- **Post Listing & Viewing**
+  - Homepage and timeline views for all published posts.
+  - Individual post pages with SEO-friendly URLs.
+  - Tagging and categorization.
+- **Authentication**
+  - Secure login/signup via OAuth (Google, GitHub).
+  - User profile management.
+- **Media Uploads**
+  - Image/file upload for posts (using Supabase or UploadThing).
+- **Comments (MVP: Optional)**
+  - Readers can comment on posts (can be deferred for MVP).
+- **Admin Dashboard**
+  - Manage posts, comments, and user settings.
+- **Responsive Design**
+  - Mobile-first, accessible, and dark mode support.
+- **Analytics**
+  - Google Analytics integration for traffic insights.
+
+# User Experience  
+- **User Personas**
+  - Blog Owner: Wants to write, edit, and manage posts easily.
+  - Reader: Wants to browse, search, and read posts on any device.
+- **Key User Flows**
+  - Owner: Login → Dashboard → Create/Edit Post → Publish
+  - Reader: Visit homepage → Browse posts → Read post → (Optional: Comment)
+- **UI/UX Considerations**
+  - Clean, distraction-free writing and reading experience.
+  - Fast navigation, clear CTAs, and accessible design.
+  - Consistent theming (light/dark), shadcn/ui components.
+
+</context>
+<PRD>
+# Technical Architecture  
+- **Frontend:** Next.js (App Router), TypeScript, shadcn/ui, Tailwind CSS.
+- **Editor:** Plate/Slate-based rich text editor with plugin support.
+- **Backend:** Next.js API routes for CRUD operations.
+- **Database:** Supabase (Postgres) for posts, users, and media.
+- **Auth:** Supabase Auth or NextAuth.js for OAuth.
+- **Media:** UploadThing or Supabase Storage for images/files.
+- **Analytics:** Google Analytics via custom component.
+- **Deployment:** Fly.io (Dockerfile, fly.toml).
+- **CI/CD:** GitHub Actions (optional, for auto-deploy).
+- **Testing:** Jest/React Testing Library (optional, for core logic).
+
+# Development Roadmap  
+- **MVP Requirements**
+  - User authentication (OAuth)
+  - Post creation, editing, deletion
+  - Post listing and detail pages
+  - Responsive, accessible UI
+  - Media upload for posts
+  - Basic admin dashboard
+  - Google Analytics integration
+- **Future Enhancements**
+  - Comments system
+  - Tag/category management
+  - Advanced editor plugins (tables, embeds)
+  - User profiles and avatars
+  - Search functionality
+  - RSS feed generation
+  - CI/CD pipeline
+  - Custom domain support
+
+# Logical Dependency Chain
+- Set up project structure and configuration (Next.js, Tailwind, shadcn/ui)
+- Implement authentication (must be done before dashboard/post management)
+- Build post data model and API routes
+- Develop editor and post CRUD UI
+- Add media upload integration
+- Create post listing and detail pages
+- Integrate analytics
+- Build admin dashboard
+- (Enhancements: comments, tags, search, etc.)
+
+# Risks and Mitigations  
+- **Technical challenges:** Integrating rich text editor and media uploads (mitigation: use well-supported libraries, start with minimal viable features).
+- **MVP scope creep:** Too many features at once (mitigation: strictly prioritize MVP, defer comments/tags/search).
+- **Deployment/config issues:** Fly.io or Supabase setup (mitigation: follow official guides, test early).
+- **Resource constraints:** Solo or small team (mitigation: automate with CI/CD, use templates).
+
+# Appendix  
+- **Research findings:** Plate editor is highly customizable and works well with shadcn/ui. Supabase provides easy auth and storage.
+- **Technical specifications:** Use TypeScript throughout. All components should be accessible and mobile-friendly. Use environment variables for secrets.
+
+</PRD>

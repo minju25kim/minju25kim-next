@@ -121,7 +121,7 @@ export default async function BlogPost({ params }: PageProps) {
             {/* <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
               {post.content}
             </ReactMarkdown> */}
-            <PlateEditorReadOnly>{post.content}</PlateEditorReadOnly>
+            <PlateEditorReadOnly initialMarkdown={post.content} />
           </div>
         </article>
       </div>

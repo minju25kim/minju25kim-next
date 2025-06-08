@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { MapPin, Mail, Github, Linkedin, Youtube, Moon, Sun } from "lucide-react";
-import MediumIcon from "@/components/ui/icons/medium-icon";
+import MediumIcon from "@/components/icons/medium-icon";
 
 export default function Page() {
   const [mounted, setMounted] = useState(false);

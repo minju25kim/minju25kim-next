@@ -1,20 +1,33 @@
 'use client'
 
-import { PlateReadOnlyEditor } from './editor/plate-read-only-editor';
+import { Plate } from '@udecode/plate/react';
+import { useCreateEditor } from '@/components/editor/use-create-editor';
 
+import { SettingsDialog } from '@/components/editor/settings';
+import { Editor, EditorContainer } from '@/components/ui/editor';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { MarkdownPlugin } from '@udecode/plate-markdown';
+import { useEditorValueStore } from '@/store/editorValue';
 
-export const PlateEditorReadOnly = ({
-    children,
-}: {
-    children: string;
-}) => {
+export const PlateEditorReadOnly = ({ initialMarkdown }: { initialMarkdown: string }) => {
+    const { setEditorValue } = useEditorValueStore();
+
+    const editor = useCreateEditor({
+        value: (editor) => editor.getApi(MarkdownPlugin).markdown.deserialize(initialMarkdown),
+    });
 
     return (
-        <div
-            data-registry="plate"
-            className="max-w-3xl mx-auto flex flex-col gap-4 h-screen w-full"
-        >
-            <PlateReadOnlyEditor>{children}</PlateReadOnlyEditor>
+        <div className="border border-gray-200 rounded-lg">
+            <DndProvider backend={HTML5Backend}>
+                <Plate editor={editor} readOnly>
+                    <EditorContainer>
+                        <Editor />
+                    </EditorContainer>
+
+                    <SettingsDialog />
+                </Plate>
+            </DndProvider>
         </div>
-    );
-};
+    )
+}

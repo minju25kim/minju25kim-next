@@ -25,7 +25,7 @@ export const PlateEditor = ({ initialMarkdown }: { initialMarkdown: string }) =>
                     setEditorValue(markdown);
                 }}>
                     <EditorContainer>
-                        <Editor variant="demo" />
+                        <Editor />
                     </EditorContainer>
 
                     <SettingsDialog />
