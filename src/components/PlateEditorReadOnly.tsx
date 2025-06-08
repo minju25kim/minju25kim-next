@@ -22,7 +22,7 @@ export const PlateEditorReadOnly = ({ initialMarkdown }: { initialMarkdown: stri
             <DndProvider backend={HTML5Backend}>
                 <Plate editor={editor} readOnly>
                     <EditorContainer>
-                        <Editor />
+                        <Editor className='px-2 md:px-8'/>
                     </EditorContainer>
 
                     <SettingsDialog />
