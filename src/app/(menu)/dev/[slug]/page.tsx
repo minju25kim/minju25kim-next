@@ -49,8 +49,8 @@ export default async function DevPost({ params }: PageProps) {
             day: "numeric",
           })}
         </div>
-
         <PlateEditorReadOnly initialMarkdown={post.content} />
+
       </div>
     </div>
   );

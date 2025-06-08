@@ -122,6 +122,7 @@ export default async function BlogPost({ params }: PageProps) {
               {post.content}
             </ReactMarkdown> */}
             <PlateEditorReadOnly initialMarkdown={post.content} />
+
           </div>
         </article>
       </div>
