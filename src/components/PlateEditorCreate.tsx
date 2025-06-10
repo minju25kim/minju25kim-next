@@ -67,7 +67,6 @@ export const PlateEditorCreate = () => {
 
     const handleContentChange = (newValue: Value) => {
         setValue(newValue);
-        // mutation.mutate({ category, title, slug, published, value: newValue });
     };
 
     return (
