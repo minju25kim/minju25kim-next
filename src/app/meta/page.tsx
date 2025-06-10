@@ -40,7 +40,6 @@ const techStack = [
       { name: "Commitlint", url: "https://commitlint.js.org/" },
       { name: "Lint-staged", url: "https://github.com/okonet/lint-staged" },
       { name: "Jest", url: "https://jestjs.io/" },
-      { name: "Zustand (State)", url: "https://zustand-demo.pmnd.rs/" },
       { name: "Zod (Validation)", url: "https://zod.dev/" },
     ],
   },

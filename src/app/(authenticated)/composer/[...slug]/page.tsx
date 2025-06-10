@@ -1,6 +1,6 @@
 // import { PlateEditorWithSave } from "@/components/PlateEditorUpdate";
 import { createClient } from '@/utils/supabase/server';
-import { PlateEditorComponent } from '@/components/PlateEditorComponent';
+import { PlateEditorComponent } from '@/components/PlateEditorEdit';
 
 export default async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
   const supabase = await createClient();

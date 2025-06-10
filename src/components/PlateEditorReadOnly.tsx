@@ -8,10 +8,8 @@ import { Editor, EditorContainer } from '@/components/ui/editor';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { MarkdownPlugin } from '@udecode/plate-markdown';
-import { useEditorValueStore } from '@/store/editorValue';
 
 export const PlateEditorReadOnly = ({ initialMarkdown }: { initialMarkdown: string }) => {
-    const { setEditorValue } = useEditorValueStore();
 
     const editor = useCreateEditor({
         value: (editor) => editor.getApi(MarkdownPlugin).markdown.deserialize(initialMarkdown),

@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { PlateEditor } from './PlateEditor';
-import { useEditorValueStore } from '@/store/editorValue';
 import { Button } from '@/components/ui/button';
 
 // Utility to convert string to kebab-case
@@ -21,7 +20,6 @@ type PlateEditorComponentProps = {
     initialSlug?: string;
     initialCategory?: 'blog' | 'dev';
     initialPublished?: boolean;
-    mode?: 'create' | 'edit';
 };
 
 export const PlateEditorComponent = ({
@@ -30,25 +28,21 @@ export const PlateEditorComponent = ({
     initialSlug = '',
     initialCategory = 'blog',
     initialPublished = false,
-    mode = 'create',
-}: PlateEditorComponentProps) => {
+}: Omit<PlateEditorComponentProps, 'mode'>) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     const [title, setTitle] = useState(initialTitle);
     const [category, setCategory] = useState<'blog' | 'dev'>(initialCategory);
     const [slug, setSlug] = useState(initialSlug);
-    const [published, setPublished] = useState(mode === 'edit' ? false : false);
+    const [published, setPublished] = useState(false);
 
-    const { editorValue, setEditorValue } = useEditorValueStore();
     const router = useRouter();
 
     useEffect(() => {
-        if (initialMarkdown) setEditorValue(initialMarkdown);
-        if (mode === 'edit' && typeof initialPublished === 'boolean') setPublished(initialPublished);
-    }, [initialMarkdown, setEditorValue, mode, initialPublished]);
+        setPublished(typeof initialPublished === 'boolean' ? initialPublished : false);
+    }, [initialMarkdown, initialPublished]);
 
-    // In both create and edit mode, update slug automatically when title changes
     useEffect(() => {
         setSlug(toKebabCase(title));
     }, [title]);
@@ -68,64 +62,31 @@ export const PlateEditorComponent = ({
     const handleSave = async () => {
         setIsLoading(true);
         setError(null);
-
-        if (!title || !category || !slug || !editorValue) {
+        if (!title || !category || !slug) {
             setError('All fields are required.');
             setIsLoading(false);
             return;
         }
-
         try {
-            if (mode === 'edit') {
-                const res = await fetch('/api/update-content', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        oldCategory: initialCategory,
-                        oldSlug: initialSlug,
-                        title,
-                        slug,
-                        markdown: editorValue,
-                        category,
-                        published,
-                    }),
-                });
-
-                const data: unknown = await res.json();
-                if (!res.ok) {
-                    const errorMsg = typeof data === 'object' && data !== null && 'error' in data ? (data as { error: string }).error : 'Failed to update content.';
-                    setError(errorMsg);
-                } else {
-                    alert('Content updated! Moving to the updated page.');
-                    if (published) {
-                        router.push(`/${category}/${slug}`);
-                    } else {
-                        router.refresh();
-                    }
-                }
-                setIsLoading(false);
-                return;
-            }
-
-            // Create mode
-            const res = await fetch('/api/create-content', {
+            const res = await fetch('/api/update-content', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    category,
+                    oldCategory: initialCategory,
+                    oldSlug: initialSlug,
                     title,
                     slug,
-                    markdown: editorValue,
+                    markdown: initialMarkdown,
+                    category,
                     published,
                 }),
             });
-
             const data: unknown = await res.json();
             if (!res.ok) {
-                const errorMsg = typeof data === 'object' && data !== null && 'error' in data ? (data as { error: string }).error : 'Failed to create content.';
+                const errorMsg = typeof data === 'object' && data !== null && 'error' in data ? (data as { error: string }).error : 'Failed to update content.';
                 setError(errorMsg);
             } else {
-                alert('Content created! Moving to the new page.');
+                alert('Content updated! Moving to the updated page.');
                 if (published) {
                     router.push(`/${category}/${slug}`);
                 } else {
@@ -145,7 +106,6 @@ export const PlateEditorComponent = ({
         }
         setIsLoading(true);
         setError(null);
-
         try {
             const res = await fetch('/api/delete-content', {
                 method: 'POST',
@@ -155,7 +115,6 @@ export const PlateEditorComponent = ({
                     slug: initialSlug,
                 }),
             });
-
             const data: unknown = await res.json();
             if (!res.ok) {
                 const errorMsg = typeof data === 'object' && data !== null && 'error' in data ? (data as { error: string }).error : 'Failed to delete content.';
@@ -173,7 +132,7 @@ export const PlateEditorComponent = ({
 
     return (
         <div className="max-w-3xl mx-auto flex flex-col gap-4">
-            <h1 className="text-2xl font-bold">{mode === 'edit' ? 'Edit Content' : 'Create Contents'}</h1>
+            <h1 className="text-2xl font-bold">Edit Content</h1>
             <div className="flex gap-4 items-center">
                 <span>Category:</span>
                 <label className="flex items-center gap-1">
@@ -209,7 +168,7 @@ export const PlateEditorComponent = ({
                     disabled={isLoading}
                     className="accent-blue-600 w-5 h-5"
                 />
-                <span className="text-sm text-gray-500">{mode === 'edit' ? 'Toggle to publish/unpublish' : 'Set published status before saving'}</span>
+                <span className="text-sm text-gray-500">Toggle to publish/unpublish</span>
             </div>
             <input
                 className="border border-gray-300 rounded px-3 py-2 bg-white text-black dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary/50 transition"
@@ -228,18 +187,16 @@ export const PlateEditorComponent = ({
             <PlateEditor initialMarkdown={initialMarkdown} />
             <div className="flex gap-2">
                 <Button onClick={handleSave} disabled={isLoading}>
-                    {isLoading ? (mode === 'edit' ? 'Saving...' : 'Saving...') : (mode === 'edit' ? 'Save Changes' : 'Save')}
+                    {isLoading ? 'Saving...' : 'Save Changes'}
                 </Button>
-                {mode === 'edit' && (
-                    <Button
-                        type="button"
-                        variant="destructive"
-                        onClick={handleDelete}
-                        disabled={isLoading}
-                    >
-                        {isLoading ? 'Deleting...' : 'Delete'}
-                    </Button>
-                )}
+                <Button
+                    type="button"
+                    variant="destructive"
+                    onClick={handleDelete}
+                    disabled={isLoading}
+                >
+                    {isLoading ? 'Deleting...' : 'Delete'}
+                </Button>
             </div>
             {error && <div className="text-red-500">{error}</div>}
         </div>
