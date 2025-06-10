@@ -1,5 +1,6 @@
 import DevPostClient from './DevPostClient';
 
-export default function DevPostPage({ params }: { params: { slug: string } }) {
-  return <DevPostClient category="dev" slug={params.slug} />;
+export default async function DevPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const {slug} = await params
+  return <DevPostClient category="dev" slug={slug} />;
 }
