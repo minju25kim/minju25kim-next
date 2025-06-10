@@ -27,7 +27,6 @@ export const PlateEditorEdit = ({ slug, category }: { slug: string, category: st
     if (!data) {
         return <div className="max-w-3xl mx-auto pt-16">No content found.</div>;
     }
-    console.log(data)
 
     return (
         <div className="max-w-3xl mx-auto flex flex-col gap-4">

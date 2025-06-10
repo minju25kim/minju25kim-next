@@ -23,7 +23,7 @@ export async function GET(request: Request) {
   
     const { data, error } = await supabase
       .from(category)
-      .select('*')
+      .select('')
       .eq('slug', slug)
       .eq('published', true)
       .single();

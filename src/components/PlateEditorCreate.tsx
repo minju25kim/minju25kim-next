@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { PlateEditor } from './PlateEditor';
 import { Button } from '@/components/ui/button';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Value } from '@udecode/plate';
 
 function toKebabCase(str: string) {
@@ -25,6 +25,8 @@ export const PlateEditorCreate = () => {
     const [published, setPublished] = useState(false);
     const [value, setValue] = useState<Value>([]);
 
+    const queryClient = useQueryClient()
+    ;
     const mutation = useMutation({
         mutationFn: async (payload: { category: string; title: string; slug: string; published: boolean; value: Value }) => {
             const res = await fetch('/api/create-content', {
@@ -39,11 +41,12 @@ export const PlateEditorCreate = () => {
             return res.json();
         },
         onSuccess: (data) => {
+            queryClient.invalidateQueries({ queryKey: ["editor-contents", category] });
             alert('Content created! Moving to the new page.');
             if (published) {
                 router.push(`/${category}/${slug}`);
             } else {
-                router.refresh();
+                router.push(`/composer`);
             }
         },
         onError: (error: any) => {

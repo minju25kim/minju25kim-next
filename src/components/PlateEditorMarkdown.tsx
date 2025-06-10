@@ -56,6 +56,8 @@ export const PlateEditorMarkdown = ({ markdown, data, category, slug: oldSlug }:
             setSaved(true);
             if (published) {
                 router.push(`/${category}/${slug}`);
+            } else {
+                router.push(`/composer`);
             }
         },
         onError: () => {

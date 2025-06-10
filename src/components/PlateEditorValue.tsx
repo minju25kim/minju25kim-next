@@ -53,6 +53,8 @@ export const PlateEditorValue = ({ value: initialValue, data, category, slug:old
             setSaved(true);
             if (published) {
                 router.push(`/${category}/${slug}`);
+            } else {
+                router.push(`/composer`);
             }
         },
         onError: () => {
