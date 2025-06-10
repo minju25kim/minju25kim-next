@@ -13,7 +13,7 @@ export async function POST(request: Request) {
  }
 
   const body = await request.json();
-  const { category, title, slug, markdown } = body;
+  const { category, title, slug, markdown,published } = body;
 
   if (!category || !title || !slug || !markdown) {
     return new Response(JSON.stringify({ error: "Missing required fields" }), {
@@ -39,6 +39,7 @@ export async function POST(request: Request) {
         title,
         slug,
         content: markdown,
+        published,
         updated_at: new Date().toISOString(),
         created_at: new Date().toISOString(),
       },
