@@ -81,6 +81,8 @@ export default function RootLayout({
     { href: "/meta", label: "meta" },
   ];
 
+  console.log('no hidden useful information here, close this side panel.')
+
   return (
     <html suppressHydrationWarning lang="en" className={inter.className}>
       <head>
@@ -93,6 +95,11 @@ export default function RootLayout({
         <link rel="canonical" href="https://minju25kim.fly.dev" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="theme-color" content="#ffffff" />
+        {/* Open Graph meta tags for LinkedIn sharing */}
+        <meta property="og:title" content="minju25kim" key="og:title" />
+        <meta property="og:description" content="The official minju25kim website." key="og:description" />
+        <meta property="og:image" content="https://minju25kim.fly.dev/opengraph-image.webp" key="og:image" />
+        <meta property="og:url" content="https://minju25kim.fly.dev" key="og:url" />
       </head>
       <body className="flex flex-col min-h-screen">
         <Providers>
