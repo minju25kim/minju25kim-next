@@ -51,7 +51,9 @@ export default async function DevPage({ searchParams }: PageProps) {
         >
           ← Back to home
         </Link>
-
+        <div className="text-gray-600 dark:text-gray-400">
+            There is no useful contents you are looking for.
+          </div>
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-200">
             Dev Posts

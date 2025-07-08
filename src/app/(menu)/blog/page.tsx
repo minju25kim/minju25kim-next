@@ -52,6 +52,9 @@ export default async function BlogPage({ searchParams }: PageProps) {
           ← Back to home
         </Link>
 
+        <div className="text-gray-600 dark:text-gray-400">
+            Diary (๑ &gt; ᴗ &lt; ๑)
+        </div>
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-200">
             Blog Posts
@@ -61,8 +64,8 @@ export default async function BlogPage({ searchParams }: PageProps) {
             <Link
               href={`/blog?sort=latest&page=${page}`}
               className={`px-3 py-1.5 rounded-md transition-colors ${sort === "latest"
-                  ? "bg-white dark:bg-gray-700 shadow-sm"
-                  : "hover:bg-gray-200 dark:hover:bg-gray-600"
+                ? "bg-white dark:bg-gray-700 shadow-sm"
+                : "hover:bg-gray-200 dark:hover:bg-gray-600"
                 }`}
             >
               Latest
@@ -70,8 +73,8 @@ export default async function BlogPage({ searchParams }: PageProps) {
             <Link
               href={`/blog?sort=oldest&page=${page}`}
               className={`px-3 py-1.5 rounded-md transition-colors ${sort === "oldest"
-                  ? "bg-white dark:bg-gray-700 shadow-sm"
-                  : "hover:bg-gray-200 dark:hover:bg-gray-600"
+                ? "bg-white dark:bg-gray-700 shadow-sm"
+                : "hover:bg-gray-200 dark:hover:bg-gray-600"
                 }`}
             >
               Oldest
@@ -129,8 +132,8 @@ export default async function BlogPage({ searchParams }: PageProps) {
             <Link
               href={`/blog?sort=${sort}&page=${Math.max(1, page - 1)}`}
               className={`inline-flex items-center justify-center rounded-md transition-colors h-10 w-10 ${page === 1
-                  ? "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed"
-                  : "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
+                ? "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed"
+                : "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
                 }`}
             >
               <ArrowLeft className="h-5 w-5" />
@@ -142,8 +145,8 @@ export default async function BlogPage({ searchParams }: PageProps) {
             <Link
               href={`/blog?sort=${sort}&page=${Math.min(totalPages, page + 1)}`}
               className={`inline-flex items-center justify-center rounded-md transition-colors h-10 w-10 ${page === totalPages
-                  ? "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed"
-                  : "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
+                ? "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed"
+                : "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
                 }`}
             >
               <ArrowRight className="h-5 w-5" />
